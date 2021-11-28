@@ -1,5 +1,11 @@
+import { RecoilRoot } from 'recoil';
+
+import Main from './components/Main';
+
 export default function App() {
   return (
-    <p>Hello, world!!!!!</p>
+    <RecoilRoot>
+      <Main />
+    </RecoilRoot>
   );
 }
