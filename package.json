@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "npm run build && concurrently 'npm:serve' 'npm:watch-js'",
-        "build": "mkdir -p dist && cp index.html dist/ && npm run build-js",
+        "build": "mkdir -p dist && mkdir -p dist/css && cp index.html dist/ && cp style.css dist/css/ && npm run build-js",
         "build-js": "esbuild ./src --bundle --inject:./react-shim.js --outfile=dist/bundle.js",
         "serve": "servor dist index.html 8080 --reload",
         "watch": "npm test -- --watchAll",
@@ -32,6 +32,7 @@
         "@types/react": "^17.0.31",
         "@types/react-dom": "^17.0.10",
         "@types/recoil": "^0.0.9",
+        "@types/styled-components": "^5.1.18",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
         "codeceptjs": "^3.2.2",
@@ -53,6 +54,7 @@
         "axios": "^0.24.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "recoil": "^0.5.2"
+        "recoil": "^0.5.2",
+        "styled-components": "^5.3.3"
     }
 }
