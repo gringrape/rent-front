@@ -1,20 +1,27 @@
-import { useEffect } from 'react';
+import styled from 'styled-components';
 
-import { useProducts } from '../hooks';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Products from './Products';
+import ProductListPage from './ProductListPage';
+import ProductItemPage from './ProductItemPage';
+
+const Layout = styled.div`
+  max-width: 768px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default function Main() {
-  const { loadProducts } = useProducts();
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
   return (
-    <>
-      <h1>상품 목록</h1>
-      <Products />
-    </>
+    <Layout>
+      <Router basename="/rent-front">
+        <Routes>
+          <Route path="/" element={<ProductListPage />} />
+          <Route path="/:id" element={<ProductItemPage />} />
+        </Routes>
+      </Router>
+    </Layout>
   );
 }

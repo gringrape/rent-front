@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { fetchProducts } from './services/api';
+import { fetchProducts, fetchProduct } from './services/api';
 
-import { productsState } from './state';
+import { productsState, productState } from './state';
 
 export function useProducts() {
   const products = useRecoilValue(productsState);
@@ -16,4 +16,14 @@ export function useProducts() {
 }
 
 // TODO: delete this
-export default {};
+export function useProduct() {
+  const product = useRecoilValue(productState);
+  const setProduct = useSetRecoilState(productState);
+
+  const loadProduct = async (id: string) => {
+    const data = await fetchProduct(id);
+    setProduct(data);
+  };
+
+  return { product, loadProduct };
+}

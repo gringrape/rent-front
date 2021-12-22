@@ -1,12 +1,17 @@
 import axios from 'axios';
 
 export async function fetchProducts() {
-  const url = 'http://3.35.70.80:8080/rent/products/';
+  const url = 'https://rentproject.xyz/rent/products/';
 
   const { data } = await axios.get(url);
 
   return data.content;
 }
 
-// TODO: delete below
-export default {};
+export async function fetchProduct(id: string) {
+  const url = `https://rentproject.xyz/rent/products/${id}`;
+
+  const { data } = await axios.get(url);
+
+  return data;
+}
