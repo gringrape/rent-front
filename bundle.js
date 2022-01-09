@@ -1081,11 +1081,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect4(create, deps) {
+          function useEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
-          function useLayoutEffect4(create, deps) {
+          function useLayoutEffect5(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
@@ -1651,9 +1651,9 @@
           exports.useCallback = useCallback4;
           exports.useContext = useContext3;
           exports.useDebugValue = useDebugValue;
-          exports.useEffect = useEffect4;
+          exports.useEffect = useEffect3;
           exports.useImperativeHandle = useImperativeHandle;
-          exports.useLayoutEffect = useLayoutEffect4;
+          exports.useLayoutEffect = useLayoutEffect5;
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
           exports.useRef = useRef4;
@@ -29448,6 +29448,13 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       return data.content;
     });
   }
+  function fetchTopProducts() {
+    return __async(this, null, function* () {
+      const url = "https://rentproject.xyz/rent/products/best10";
+      const { data } = yield import_axios.default.get(url);
+      return data;
+    });
+  }
   function fetchProduct(id) {
     return __async(this, null, function* () {
       const url = `https://rentproject.xyz/rent/products/${id}`;
@@ -29460,6 +29467,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   init_react_shim();
   var productsState = Recoil_index_6({
     key: "productsState",
+    default: []
+  });
+  var topProductsState = Recoil_index_6({
+    key: "topProductsState",
     default: []
   });
   var productState = Recoil_index_6({
@@ -29476,6 +29487,15 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       setProducts(data);
     });
     return { products, loadProducts };
+  }
+  function useTopProducts() {
+    const topProducts = Recoil_index_18(topProductsState);
+    const setTopProducts = Recoil_index_22(topProductsState);
+    const loadTopProducts = () => __async(this, null, function* () {
+      const data = yield fetchTopProducts();
+      setTopProducts(data);
+    });
+    return { topProducts, loadTopProducts };
   }
   function useProduct() {
     const product = Recoil_index_18(productState);
@@ -29553,6 +29573,47 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     })), /* @__PURE__ */ React.createElement(SubBlock, null, /* @__PURE__ */ React.createElement(Category, null, "[\uCC45]"), /* @__PURE__ */ React.createElement(Price, null, price, "\uC6D0/\uC77C")), /* @__PURE__ */ React.createElement(Title, null, name.trim()), /* @__PURE__ */ React.createElement(City, null, city))));
   }
 
+  // src/components/TopProduct.tsx
+  init_react_shim();
+  var List2 = styled_components_browser_esm_default.ul`
+  display: flex;
+  overflow: scroll;
+  list-style: none;
+  gap: 6px;
+  
+  ::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+  }
+  `;
+  var Item = styled_components_browser_esm_default.li`
+  & img {
+    max-width: 213px;
+    width: 38vw;
+    aspect-ratio: 1;
+    border-radius: 6px;
+  }
+
+  & p {
+    margin-top: 11px;
+    padding-left: 6px;
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: bold;
+  }
+`;
+  function TopProducts({ className = "" }) {
+    const { topProducts } = useTopProducts();
+    return /* @__PURE__ */ React.createElement(List2, {
+      className
+    }, topProducts.map(({ id, thumbnailImage, name }) => /* @__PURE__ */ React.createElement(Item, {
+      key: id
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: thumbnailImage,
+      alt: name
+    }), /* @__PURE__ */ React.createElement("p", null, name))));
+  }
+
   // src/components/ProductListPage.tsx
   var Container = styled_components_browser_esm_default.div`
   padding: 0 14px;
@@ -29562,12 +29623,17 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   font-size: 18px;
   line-height: 21px;
 `;
+  var TopProductsWithStyle = styled_components_browser_esm_default(TopProducts)`
+  margin-bottom: 39px;
+`;
   function ProductListPage() {
     const { loadProducts } = useProducts();
-    (0, import_react5.useEffect)(() => {
+    const { loadTopProducts } = useTopProducts();
+    (0, import_react5.useLayoutEffect)(() => {
       loadProducts();
+      loadTopProducts();
     }, []);
-    return /* @__PURE__ */ React.createElement(Container, null, /* @__PURE__ */ React.createElement(Title2, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
+    return /* @__PURE__ */ React.createElement(Container, null, /* @__PURE__ */ React.createElement(Title2, null, "BEST TOP 10"), /* @__PURE__ */ React.createElement(TopProductsWithStyle, null), /* @__PURE__ */ React.createElement(Title2, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
   }
 
   // src/components/ProductItemPage.tsx
