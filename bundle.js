@@ -29677,6 +29677,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   // src/components/ProductListPage.tsx
   var Container2 = styled_components_browser_esm_default.div`
   padding: 0 14px;
+  max-height: 800px;
 `;
   var NavigationWithStyle = styled_components_browser_esm_default(Navigation)`
   position: fixed;
@@ -29687,8 +29688,13 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   max-width: 600px;
   background-color: white;
 `;
-  var Title3 = styled_components_browser_esm_default.h1`
+  var TopTitle = styled_components_browser_esm_default.h1`\
   margin-top: 93px;
+  margin-bottom: 21px;
+  font-size: 18px;
+  line-height: 21px;
+`;
+  var Title3 = styled_components_browser_esm_default.h1`
   margin-bottom: 21px;
   font-size: 18px;
   line-height: 21px;
@@ -29703,7 +29709,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       loadProducts();
       loadTopProducts();
     }, []);
-    return /* @__PURE__ */ React.createElement(Container2, null, /* @__PURE__ */ React.createElement(NavigationWithStyle, null), /* @__PURE__ */ React.createElement(Title3, null, "BEST TOP 10"), /* @__PURE__ */ React.createElement(TopProductsWithStyle, null), /* @__PURE__ */ React.createElement(Title3, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
+    return /* @__PURE__ */ React.createElement(Container2, null, /* @__PURE__ */ React.createElement(NavigationWithStyle, null), /* @__PURE__ */ React.createElement(TopTitle, null, "BEST TOP 10"), /* @__PURE__ */ React.createElement(TopProductsWithStyle, null), /* @__PURE__ */ React.createElement(Title3, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
   }
 
   // src/components/ProductItemPage.tsx
