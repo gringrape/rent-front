@@ -6,11 +6,10 @@ import ProductListPage from './ProductListPage';
 import ProductItemPage from './ProductItemPage';
 
 const Layout = styled.div`
-  max-width: 768px;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 export default function Main() {

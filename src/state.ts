@@ -6,6 +6,7 @@ export interface Product {
   price: number;
   deposit: number;
   thumbnailImage: string;
+  city: string;
 }
 
 export const productsState = atom<Product[]>({
