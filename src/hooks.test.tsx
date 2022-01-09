@@ -4,13 +4,14 @@ import { act } from 'react-dom/test-utils';
 
 import { RecoilRoot } from 'recoil';
 
-import { useProducts } from './hooks';
+import { useProducts, useTopProducts } from './hooks';
 
-import { fetchProducts } from './services/api';
+import { fetchProducts, fetchTopProducts } from './services/api';
 
 jest.mock('./services/api');
 
 const mockedFetchProducts = fetchProducts as jest.Mock;
+const mockedFetchTopProducts = fetchTopProducts as jest.Mock;
 
 describe('useProducts', () => {
   const products = [
@@ -44,5 +45,34 @@ describe('useProducts', () => {
     });
 
     expect(result.current.products).toEqual(products);
+  });
+});
+
+describe('should return top products', () => {
+  const topProducts = [
+    { id: 6, name: 'Macbook Pro', thumbnailImage: '' },
+  ];
+
+  const wrapper = RecoilRoot;
+  const render = () => renderHook(() => useTopProducts(), { wrapper });
+
+  beforeEach(() => {
+    mockedFetchTopProducts.mockResolvedValue(topProducts);
+  });
+
+  it('should return products', () => {
+    const { result } = render();
+
+    expect(result.current.topProducts).toHaveLength(0);
+  });
+
+  it('loads top products', async () => {
+    const { result } = render();
+
+    await act(async () => {
+      await result.current.loadTopProducts();
+    });
+
+    expect(result.current.topProducts).toEqual(topProducts);
   });
 });

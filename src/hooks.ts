@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { fetchProducts, fetchProduct } from './services/api';
+import { fetchProducts, fetchProduct, fetchTopProducts } from './services/api';
 
-import { productsState, productState } from './state';
+import { productsState, productState, topProductsState } from './state';
 
 export function useProducts() {
   const products = useRecoilValue(productsState);
@@ -13,6 +13,19 @@ export function useProducts() {
   };
 
   return { products, loadProducts };
+}
+
+export function useTopProducts() {
+  const topProducts = useRecoilValue(topProductsState);
+  const setTopProducts = useSetRecoilState(topProductsState);
+
+  const loadTopProducts = async () => {
+    const data = await fetchTopProducts();
+
+    setTopProducts(data);
+  };
+
+  return { topProducts, loadTopProducts };
 }
 
 // TODO: delete this

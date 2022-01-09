@@ -9,8 +9,19 @@ export interface Product {
   city: string;
 }
 
+export interface TopProduct {
+  id: number;
+  thumbnailImage: string;
+  name: string;
+}
+
 export const productsState = atom<Product[]>({
   key: 'productsState',
+  default: [],
+});
+
+export const topProductsState = atom<TopProduct[]>({
+  key: 'topProductsState',
   default: [],
 });
 
