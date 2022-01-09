@@ -2542,7 +2542,7 @@
           var SuspenseListComponent = 19;
           var FundamentalComponent = 20;
           var ScopeComponent = 21;
-          var Block = 22;
+          var Block2 = 22;
           var OffscreenComponent = 23;
           var LegacyHiddenComponent = 24;
           var enableProfilerTimer = true;
@@ -3313,7 +3313,7 @@
                 return describeFunctionComponentFrame(fiber.type);
               case ForwardRef:
                 return describeFunctionComponentFrame(fiber.type.render);
-              case Block:
+              case Block2:
                 return describeFunctionComponentFrame(fiber.type._render);
               case ClassComponent:
                 return describeClassComponentFrame(fiber.type);
@@ -12092,7 +12092,7 @@
                       }
                       break;
                     }
-                    case Block:
+                    case Block2:
                     default: {
                       if (child.elementType === element.type || isCompatibleFamilyForHotReloading(child, element)) {
                         deleteRemainingChildren(returnFiber, child.sibling);
@@ -12190,7 +12190,7 @@
                       }
                     }
                   }
-                  case Block:
+                  case Block2:
                   case FunctionComponent:
                   case ForwardRef:
                   case SimpleMemoComponent: {
@@ -15726,7 +15726,7 @@
               case ScopeComponent: {
                 break;
               }
-              case Block: {
+              case Block2: {
                 break;
               }
               case OffscreenComponent: {
@@ -16114,7 +16114,7 @@
               case ScopeComponent: {
                 break;
               }
-              case Block:
+              case Block2:
                 break;
               case OffscreenComponent:
               case LegacyHiddenComponent: {
@@ -16496,7 +16496,7 @@
               case FunctionComponent:
               case ForwardRef:
               case SimpleMemoComponent:
-              case Block: {
+              case Block2: {
                 return;
               }
               case ClassComponent: {
@@ -16617,7 +16617,7 @@
               case FunctionComponent:
               case ForwardRef:
               case SimpleMemoComponent:
-              case Block: {
+              case Block2: {
                 {
                   commitHookEffectListMount(Layout2 | HasEffect, finishedWork);
                 }
@@ -16819,7 +16819,7 @@
               case ForwardRef:
               case MemoComponent:
               case SimpleMemoComponent:
-              case Block: {
+              case Block2: {
                 var updateQueue = current2.updateQueue;
                 if (updateQueue !== null) {
                   var lastEffect = updateQueue.lastEffect;
@@ -17127,7 +17127,7 @@
               case ForwardRef:
               case MemoComponent:
               case SimpleMemoComponent:
-              case Block: {
+              case Block2: {
                 {
                   commitHookEffectListUnmount(Layout2 | HasEffect, finishedWork);
                 }
@@ -18679,7 +18679,7 @@
                 return;
               }
               var tag = fiber.tag;
-              if (tag !== IndeterminateComponent && tag !== HostRoot && tag !== ClassComponent && tag !== FunctionComponent && tag !== ForwardRef && tag !== MemoComponent && tag !== SimpleMemoComponent && tag !== Block) {
+              if (tag !== IndeterminateComponent && tag !== HostRoot && tag !== ClassComponent && tag !== FunctionComponent && tag !== ForwardRef && tag !== MemoComponent && tag !== SimpleMemoComponent && tag !== Block2) {
                 return;
               }
               var componentName = getComponentName(fiber.type) || "ReactComponent";
@@ -18708,7 +18708,7 @@
           function warnAboutUpdateOnUnmountedFiberInDEV(fiber) {
             {
               var tag = fiber.tag;
-              if (tag !== HostRoot && tag !== ClassComponent && tag !== FunctionComponent && tag !== ForwardRef && tag !== MemoComponent && tag !== SimpleMemoComponent && tag !== Block) {
+              if (tag !== HostRoot && tag !== ClassComponent && tag !== FunctionComponent && tag !== ForwardRef && tag !== MemoComponent && tag !== SimpleMemoComponent && tag !== Block2) {
                 return;
               }
               if ((fiber.flags & PassiveUnmountPendingDev) !== NoFlags) {
@@ -19507,7 +19507,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
                           resolvedType = null;
                           break getTag;
                         case REACT_BLOCK_TYPE:
-                          fiberTag = Block;
+                          fiberTag = Block2;
                           break getTag;
                       }
                     }
@@ -29507,6 +29507,66 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     return { product, loadProduct };
   }
 
+  // src/components/Navigation.tsx
+  init_react_shim();
+
+  // assets/index.ts
+  init_react_shim();
+  var SCOPE_ICON = "assets/icons/scope.svg";
+  var HAMBURGER_ICON = "assets/icons/hamburger.svg";
+  var BELL_ICON = "assets/icons/bell.svg";
+
+  // src/components/Navigation.tsx
+  var Container = styled_components_browser_esm_default.div``;
+  var Block = styled_components_browser_esm_default.div`
+  position: relative;
+  padding: 19px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+  var Title = styled_components_browser_esm_default.span`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #FF5800;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+`;
+  var SearchIcon = styled_components_browser_esm_default.img`
+  width: 21px;
+  height: 21px;
+`;
+  var HamburgerIcon = styled_components_browser_esm_default.img`
+  width: 20px;
+  height: 14px;
+`;
+  var BellIcon = styled_components_browser_esm_default.img`
+  width: 18px;
+  height: 21px;
+`;
+  var RightSideBlock = styled_components_browser_esm_default.span`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+  function Navigation({ className }) {
+    return /* @__PURE__ */ React.createElement(Container, {
+      className
+    }, /* @__PURE__ */ React.createElement(Block, null, /* @__PURE__ */ React.createElement(SearchIcon, {
+      src: SCOPE_ICON,
+      alt: "scope"
+    }), /* @__PURE__ */ React.createElement(Title, null, "VILLIAR"), /* @__PURE__ */ React.createElement(RightSideBlock, null, /* @__PURE__ */ React.createElement(HamburgerIcon, {
+      src: HAMBURGER_ICON,
+      alt: "hamburger"
+    }), /* @__PURE__ */ React.createElement(BellIcon, {
+      src: BELL_ICON,
+      alt: "bell"
+    }))));
+  }
+
   // src/components/Products.tsx
   init_react_shim();
   var ThumbnailImage = styled_components_browser_esm_default.img`
@@ -29526,7 +29586,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   var ListItem = styled_components_browser_esm_default.li`
   list-style: none;
 `;
-  var Title = styled_components_browser_esm_default.p`
+  var Title2 = styled_components_browser_esm_default.p`
   margin-top: 8px;
   font-size: 13px;
   line-height: 15px;
@@ -29570,7 +29630,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       onClick: () => handleClickItem(id),
       src: `${thumbnailImage}`,
       alt: "\uC0C1\uD488 \uC378\uB124\uC77C"
-    })), /* @__PURE__ */ React.createElement(SubBlock, null, /* @__PURE__ */ React.createElement(Category, null, "[\uCC45]"), /* @__PURE__ */ React.createElement(Price, null, price, "\uC6D0/\uC77C")), /* @__PURE__ */ React.createElement(Title, null, name.trim()), /* @__PURE__ */ React.createElement(City, null, city))));
+    })), /* @__PURE__ */ React.createElement(SubBlock, null, /* @__PURE__ */ React.createElement(Category, null, "[\uCC45]"), /* @__PURE__ */ React.createElement(Price, null, price, "\uC6D0/\uC77C")), /* @__PURE__ */ React.createElement(Title2, null, name.trim()), /* @__PURE__ */ React.createElement(City, null, city))));
   }
 
   // src/components/TopProduct.tsx
@@ -29615,10 +29675,20 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
 
   // src/components/ProductListPage.tsx
-  var Container = styled_components_browser_esm_default.div`
+  var Container2 = styled_components_browser_esm_default.div`
   padding: 0 14px;
 `;
-  var Title2 = styled_components_browser_esm_default.h1`
+  var NavigationWithStyle = styled_components_browser_esm_default(Navigation)`
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+`;
+  var Title3 = styled_components_browser_esm_default.h1`
+  margin-top: 93px;
   margin-bottom: 21px;
   font-size: 18px;
   line-height: 21px;
@@ -29633,7 +29703,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       loadProducts();
       loadTopProducts();
     }, []);
-    return /* @__PURE__ */ React.createElement(Container, null, /* @__PURE__ */ React.createElement(Title2, null, "BEST TOP 10"), /* @__PURE__ */ React.createElement(TopProductsWithStyle, null), /* @__PURE__ */ React.createElement(Title2, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
+    return /* @__PURE__ */ React.createElement(Container2, null, /* @__PURE__ */ React.createElement(NavigationWithStyle, null), /* @__PURE__ */ React.createElement(Title3, null, "BEST TOP 10"), /* @__PURE__ */ React.createElement(TopProductsWithStyle, null), /* @__PURE__ */ React.createElement(Title3, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
   }
 
   // src/components/ProductItemPage.tsx
@@ -29659,7 +29729,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
 `;
   function Main2() {
     return /* @__PURE__ */ React.createElement(Layout, null, /* @__PURE__ */ React.createElement(BrowserRouter, {
-      basename: "/rent-front"
+      basename: "/"
     }, /* @__PURE__ */ React.createElement(Routes, null, /* @__PURE__ */ React.createElement(Route, {
       path: "/",
       element: /* @__PURE__ */ React.createElement(ProductListPage, null)
