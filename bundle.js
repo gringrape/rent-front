@@ -29490,38 +29490,47 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   // src/components/Products.tsx
   init_react_shim();
   var ThumbnailImage = styled_components_browser_esm_default.img`
-  width: 300px;
-  height: 300px;
+  aspect-ratio: 1;
+  width: 100%;
   object-fit: cover;
   object-position: center top;
-  border-radius: 12px;
+  border-radius: 6px;
   cursor: pointer;
 `;
   var List = styled_components_browser_esm_default.ul`
   display: grid;
   grid: auto-flow / 1fr 1fr 1fr;
-  gap: 1.5rem;
-
-  @media (max-width: 660px) {
-    grid: auto-flow / 320px 320px;
-
-    & > li {
-      max-width: 320px;
-    }
-  }
-
-  @media (max-width: 450px) {
-    grid: auto-flow / 320px;
-
-    & > li {
-      max-width: 320px;
-    }
-  }
+  column-gap: 15px;
+  row-gap: 18px;
 `;
   var ListItem = styled_components_browser_esm_default.li`
   list-style: none;
 `;
   var Title = styled_components_browser_esm_default.p`
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 15px;
+  font-weight: bold;
+`;
+  var Price = styled_components_browser_esm_default.p`
+  color: #FF5800;
+  font-size: 12px;
+  line-height: 14px;
+`;
+  var SubBlock = styled_components_browser_esm_default.div`
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+  var Category = styled_components_browser_esm_default.p`
+  font-size: 9px;
+  line-height: 11px;
+`;
+  var City = styled_components_browser_esm_default.p`
+  margin-top: 8px;
+  font-size: 10px;
+  line-height: 12px;
 `;
   function Products() {
     const { products } = useProducts();
@@ -29533,24 +29542,32 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       id,
       name,
       price,
-      deposit,
-      thumbnailImage
+      thumbnailImage,
+      city
     }) => /* @__PURE__ */ React.createElement(ListItem, {
       key: id
     }, /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement(ThumbnailImage, {
       onClick: () => handleClickItem(id),
       src: `${thumbnailImage}`,
       alt: "\uC0C1\uD488 \uC378\uB124\uC77C"
-    })), /* @__PURE__ */ React.createElement(Title, null, name), /* @__PURE__ */ React.createElement("p", null, "\uC77C\uB2F9:", " ", price), /* @__PURE__ */ React.createElement("p", null, "\uBCF4\uC99D\uAE08:", " ", deposit))));
+    })), /* @__PURE__ */ React.createElement(SubBlock, null, /* @__PURE__ */ React.createElement(Category, null, "[\uCC45]"), /* @__PURE__ */ React.createElement(Price, null, price, "\uC6D0/\uC77C")), /* @__PURE__ */ React.createElement(Title, null, name.trim()), /* @__PURE__ */ React.createElement(City, null, city))));
   }
 
   // src/components/ProductListPage.tsx
+  var Container = styled_components_browser_esm_default.div`
+  padding: 0 14px;
+`;
+  var Title2 = styled_components_browser_esm_default.h1`
+  margin-bottom: 21px;
+  font-size: 18px;
+  line-height: 21px;
+`;
   function ProductListPage() {
     const { loadProducts } = useProducts();
     (0, import_react5.useEffect)(() => {
       loadProducts();
     }, []);
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "\uC0C1\uD488 \uBAA9\uB85D"), /* @__PURE__ */ React.createElement(Products, null));
+    return /* @__PURE__ */ React.createElement(Container, null, /* @__PURE__ */ React.createElement(Title2, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
   }
 
   // src/components/ProductItemPage.tsx
@@ -29569,11 +29586,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
 
   // src/components/Main.tsx
   var Layout = styled_components_browser_esm_default.div`
-  max-width: 768px;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
   function Main2() {
     return /* @__PURE__ */ React.createElement(Layout, null, /* @__PURE__ */ React.createElement(BrowserRouter, {
