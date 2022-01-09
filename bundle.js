@@ -1069,7 +1069,7 @@
             }
             return dispatcher.useContext(Context, unstable_observedBits);
           }
-          function useState4(initialState) {
+          function useState5(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1657,7 +1657,7 @@
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
           exports.useRef = useRef4;
-          exports.useState = useState4;
+          exports.useState = useState5;
           exports.version = ReactVersion;
         })();
       }
@@ -29433,7 +29433,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
 
   // src/components/ProductListPage.tsx
   init_react_shim();
-  var import_react5 = __toModule(require_react());
+  var import_react6 = __toModule(require_react());
 
   // src/hooks.ts
   init_react_shim();
@@ -29507,17 +29507,84 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     return { product, loadProduct };
   }
 
-  // src/components/Navigation.tsx
+  // src/components/Footer.tsx
   init_react_shim();
+  var import_react5 = __toModule(require_react());
 
   // assets/index.ts
   init_react_shim();
   var SCOPE_ICON = "assets/icons/scope.svg";
   var HAMBURGER_ICON = "assets/icons/hamburger.svg";
   var BELL_ICON = "assets/icons/bell.svg";
+  var HOME_ICON = "assets/icons/home.svg";
+  var TALK_ICON = "assets/icons/talk-balloon.svg";
+  var PERSON_ICON = "assets/icons/person.svg";
+
+  // src/components/Footer.tsx
+  var Container = styled_components_browser_esm_default.div`
+  padding: 0 33px;
+  padding-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 0.7px solid #E1E1E1;
+`;
+  var LeftBlock = styled_components_browser_esm_default.div`
+  display: flex;
+  gap: 58px;
+`;
+  var RightBlock = styled_components_browser_esm_default.div`
+  display: flex;
+  gap: 58px;
+`;
+  var IconBlock = styled_components_browser_esm_default.div`
+  border-top: ${({ selected }) => selected ? "2px solid #FF5800" : "2px solid transparent"};
+  padding-top: 13px;
+  margin-top: -1.5px;
+`;
+  var HeartIcon = () => /* @__PURE__ */ React.createElement("svg", {
+    width: "18",
+    height: "16",
+    viewBox: "0 0 18 16",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /* @__PURE__ */ React.createElement("path", {
+    d: "M8.8908 2.7214L8.57353 2.35913L8.38419 2.14293L8.38049 2.1387L8.38052 2.13868C7.14149 0.691426 5.28871 0.166569 3.64641 0.724944L8.8908 2.7214ZM8.8908 2.7214L9.26474 2.41796M8.8908 2.7214L9.26474 2.41796M9.26474 2.41796C9.46763 2.25332 9.66262 2.08292 9.84574 1.9229C9.91549 1.86195 9.98351 1.8025 10.0496 1.74546C10.2957 1.53303 10.5264 1.34332 10.7697 1.17991C13.2744 -0.501209 16.746 1.15499 17.3613 3.87571C17.7814 5.73983 17.2229 7.35965 15.9978 8.78039C14.9191 9.99632 13.7775 11.1584 12.5776 12.2621L12.5775 12.2621L12.5693 12.2699C11.8402 12.9717 11.0904 13.6429 10.3328 14.3211C9.95024 14.6635 9.56572 15.0077 9.18089 15.3585L9.17924 15.36C9.06998 15.4605 9.01143 15.4896 8.99127 15.4976C8.97302 15.4898 8.93074 15.4664 8.85819 15.4006C8.30129 14.8893 7.74382 14.384 7.18799 13.8802C5.98073 12.786 4.7812 11.6988 3.61199 10.5719C2.83549 9.80267 2.12938 8.96949 1.50155 8.08187L1.50167 8.08178M9.26474 2.41796L1.50167 8.08178M1.50167 8.08178L1.49434 8.07194M1.50167 8.08178L1.49434 8.07194M1.49434 8.07194C0.809366 7.15225 0.461489 6.03872 0.503387 4.90797C0.579018 3.0057 1.57381 1.43134 3.64611 0.725044L1.49434 8.07194ZM9.00203 15.5012C9.00207 15.5013 9.00094 15.5012 8.99856 15.5004C9.00082 15.5007 9.002 15.5011 9.00203 15.5012Z",
+    stroke: "white"
+  }), /* @__PURE__ */ React.createElement("path", {
+    d: "M8.8908 2.7214L8.57353 2.35913L8.38419 2.14293L8.38049 2.1387L8.38052 2.13868C7.14149 0.691426 5.28871 0.166569 3.64641 0.724944L8.8908 2.7214ZM8.8908 2.7214L9.26474 2.41796M8.8908 2.7214L9.26474 2.41796M9.26474 2.41796C9.46763 2.25332 9.66262 2.08292 9.84574 1.9229C9.91549 1.86195 9.98351 1.8025 10.0496 1.74546C10.2957 1.53303 10.5264 1.34332 10.7697 1.17991C13.2744 -0.501209 16.746 1.15499 17.3613 3.87571C17.7814 5.73983 17.2229 7.35965 15.9978 8.78039C14.9191 9.99632 13.7775 11.1584 12.5776 12.2621L12.5775 12.2621L12.5693 12.2699C11.8402 12.9717 11.0904 13.6429 10.3328 14.3211C9.95024 14.6635 9.56572 15.0077 9.18089 15.3585L9.17924 15.36C9.06998 15.4605 9.01143 15.4896 8.99127 15.4976C8.97302 15.4898 8.93074 15.4664 8.85819 15.4006C8.30129 14.8893 7.74382 14.384 7.18799 13.8802C5.98073 12.786 4.7812 11.6988 3.61199 10.5719C2.83549 9.80267 2.12938 8.96949 1.50155 8.08187L1.50167 8.08178M9.26474 2.41796L1.50167 8.08178M1.50167 8.08178L1.49434 8.07194M1.50167 8.08178L1.49434 8.07194M1.49434 8.07194C0.809366 7.15225 0.461489 6.03872 0.503387 4.90797C0.579018 3.0057 1.57381 1.43134 3.64611 0.725044L1.49434 8.07194ZM9.00203 15.5012C9.00207 15.5013 9.00094 15.5012 8.99856 15.5004C9.00082 15.5007 9.002 15.5011 9.00203 15.5012Z",
+    stroke: "black"
+  }));
+  function Footer({ className }) {
+    const [selectedItem, select] = (0, import_react5.useState)("home");
+    return /* @__PURE__ */ React.createElement(Container, {
+      className
+    }, /* @__PURE__ */ React.createElement(LeftBlock, null, /* @__PURE__ */ React.createElement(IconBlock, {
+      onClick: () => select("home"),
+      selected: selectedItem === "home"
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: HOME_ICON,
+      alt: "home"
+    })), /* @__PURE__ */ React.createElement(IconBlock, {
+      onClick: () => select("heart"),
+      selected: selectedItem === "heart"
+    }, /* @__PURE__ */ React.createElement(HeartIcon, null))), /* @__PURE__ */ React.createElement(RightBlock, null, /* @__PURE__ */ React.createElement(IconBlock, {
+      onClick: () => select("talk"),
+      selected: selectedItem === "talk"
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: TALK_ICON,
+      alt: "talk"
+    })), /* @__PURE__ */ React.createElement(IconBlock, {
+      onClick: () => select("person"),
+      selected: selectedItem === "person"
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: PERSON_ICON,
+      alt: "person"
+    }))));
+  }
 
   // src/components/Navigation.tsx
-  var Container = styled_components_browser_esm_default.div``;
+  init_react_shim();
+  var Container2 = styled_components_browser_esm_default.div``;
   var Block = styled_components_browser_esm_default.div`
   position: relative;
   padding: 19px 15px;
@@ -29553,7 +29620,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   gap: 20px;
 `;
   function Navigation({ className }) {
-    return /* @__PURE__ */ React.createElement(Container, {
+    return /* @__PURE__ */ React.createElement(Container2, {
       className
     }, /* @__PURE__ */ React.createElement(Block, null, /* @__PURE__ */ React.createElement(SearchIcon, {
       src: SCOPE_ICON,
@@ -29675,7 +29742,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
 
   // src/components/ProductListPage.tsx
-  var Container2 = styled_components_browser_esm_default.div`
+  var Container3 = styled_components_browser_esm_default.div`
   padding: 0 14px;
   max-height: 800px;
 `;
@@ -29702,23 +29769,32 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   var TopProductsWithStyle = styled_components_browser_esm_default(TopProducts)`
   margin-bottom: 39px;
 `;
+  var FooterWithStyle = styled_components_browser_esm_default(Footer)`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  width: 100%;
+  max-width: 600px;
+`;
   function ProductListPage() {
     const { loadProducts } = useProducts();
     const { loadTopProducts } = useTopProducts();
-    (0, import_react5.useLayoutEffect)(() => {
+    (0, import_react6.useLayoutEffect)(() => {
       loadProducts();
       loadTopProducts();
     }, []);
-    return /* @__PURE__ */ React.createElement(Container2, null, /* @__PURE__ */ React.createElement(NavigationWithStyle, null), /* @__PURE__ */ React.createElement(TopTitle, null, "BEST TOP 10"), /* @__PURE__ */ React.createElement(TopProductsWithStyle, null), /* @__PURE__ */ React.createElement(Title3, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null));
+    return /* @__PURE__ */ React.createElement(Container3, null, /* @__PURE__ */ React.createElement(NavigationWithStyle, null), /* @__PURE__ */ React.createElement(TopTitle, null, "BEST TOP 10"), /* @__PURE__ */ React.createElement(TopProductsWithStyle, null), /* @__PURE__ */ React.createElement(Title3, null, "NOW \uC2E4\uC2DC\uAC04 \uC0C8\uB85C\uC6B4 \uB4F1\uB85D \uC544\uC774\uD15C"), /* @__PURE__ */ React.createElement(Products, null), /* @__PURE__ */ React.createElement(FooterWithStyle, null));
   }
 
   // src/components/ProductItemPage.tsx
   init_react_shim();
-  var import_react6 = __toModule(require_react());
+  var import_react7 = __toModule(require_react());
   function Main() {
     const { id } = useParams();
     const { product, loadProduct } = useProduct();
-    (0, import_react6.useLayoutEffect)(() => {
+    (0, import_react7.useLayoutEffect)(() => {
       if (id) {
         loadProduct(id);
       }
