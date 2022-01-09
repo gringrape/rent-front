@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "npm run build && concurrently 'npm:serve' 'npm:watch-js'",
-        "build": "mkdir -p dist && mkdir -p dist/css && cp index.html dist/ && cp style.css dist/css/ && npm run build-js",
+        "build": "mkdir -p dist && mkdir -p dist/css && mkdir -p dist/assets && cp index.html dist/ && cp -R assets dist && npm run build-js",
         "build-js": "esbuild ./src --bundle --inject:./react-shim.js --outfile=dist/bundle.js",
         "serve": "servor dist index.html 8080 --reload",
         "watch": "npm test -- --watchAll",

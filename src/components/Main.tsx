@@ -15,7 +15,7 @@ const Layout = styled.div`
 export default function Main() {
   return (
     <Layout>
-      <Router basename="/rent-front">
+      <Router basename="/">
         <Routes>
           <Route path="/" element={<ProductListPage />} />
           <Route path="/:id" element={<ProductItemPage />} />
