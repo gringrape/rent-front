@@ -2,6 +2,7 @@ import { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 
 import { useProducts, useTopProducts } from '../hooks';
+import Footer from './Footer';
 import Navigation from './Navigation';
 
 import Products from './Products';
@@ -39,6 +40,16 @@ const TopProductsWithStyle = styled(TopProducts)`
   margin-bottom: 39px;
 `;
 
+const FooterWithStyle = styled(Footer)`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  width: 100%;
+  max-width: 600px;
+`;
+
 export default function ProductListPage() {
   const { loadProducts } = useProducts();
   const { loadTopProducts } = useTopProducts();
@@ -57,6 +68,7 @@ export default function ProductListPage() {
       <TopProductsWithStyle />
       <Title>NOW 실시간 새로운 등록 아이템</Title>
       <Products />
+      <FooterWithStyle />
     </Container>
   );
 }
