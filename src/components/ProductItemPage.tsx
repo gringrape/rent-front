@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -139,10 +139,37 @@ const FloatButtonContainer = styled.div`
     }
   `;
 
+const Shade = styled.div<{ active: boolean }>`
+  visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 560px;
+    object-fit: cover;
+    object-position: top;
+  }
+`;
+
 export default function ProductItemPage() {
   const { id } = useParams<{ id: string }>();
   const { product, loadProduct } = useProduct();
   const navigate = useNavigate();
+
+  const [popupOpen, setPopupOpen] = useState(false);
 
   useLayoutEffect(() => {
     if (id) {
@@ -165,6 +192,16 @@ export default function ProductItemPage() {
 
   const handleClickHome = () => {
     navigate('/');
+  };
+
+  const handleClickPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const handleClickClosePopup = (e) => {
+    if (e.currentTarget === e.target) {
+      setPopupOpen(false);
+    }
   };
 
   if (!product.images) {
@@ -191,7 +228,7 @@ export default function ProductItemPage() {
         </Navigation>
       </NavigationContainer>
       <Container>
-        <MainImage src={images[0]} />
+        <MainImage src={images[0]} onClick={handleClickPopup} />
         <TitleBlock>
           <Title>{name}</Title>
           <Likes>
@@ -228,6 +265,9 @@ export default function ProductItemPage() {
           </button>
         </FloatButtonContainer>
       </Container>
+      <Shade active={popupOpen} onClick={handleClickClosePopup}>
+        <img src={product.images[0]} alt="shade" />
+      </Shade>
     </>
   );
 }
