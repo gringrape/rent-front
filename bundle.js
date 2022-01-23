@@ -1086,7 +1086,7 @@
             }
             return dispatcher.useContext(Context, unstable_observedBits);
           }
-          function useState5(initialState) {
+          function useState6(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1674,7 +1674,7 @@
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
           exports.useRef = useRef4;
-          exports.useState = useState5;
+          exports.useState = useState6;
           exports.version = ReactVersion;
         })();
       }
@@ -29932,10 +29932,35 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       font-weight: bold;
     }
   `;
+  var Shade = styled_components_browser_esm_default.div`
+  visibility: ${({ active }) => active ? "visible" : "hidden"};
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 560px;
+    object-fit: cover;
+    object-position: top;
+  }
+`;
   function ProductItemPage() {
     const { id } = useParams();
     const { product, loadProduct } = useProduct();
     const navigate = useNavigate();
+    const [popupOpen, setPopupOpen] = (0, import_react7.useState)(false);
     (0, import_react7.useLayoutEffect)(() => {
       if (id) {
         loadProduct(id);
@@ -29954,6 +29979,14 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     };
     const handleClickHome = () => {
       navigate("/");
+    };
+    const handleClickPopup = () => {
+      setPopupOpen(true);
+    };
+    const handleClickClosePopup = (e2) => {
+      if (e2.currentTarget === e2.target) {
+        setPopupOpen(false);
+      }
     };
     if (!product.images) {
       return /* @__PURE__ */ React.createElement("p", null, "loading...");
@@ -29977,7 +30010,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       src: THREE_DOT_ICON,
       alt: "three-dot"
     })))), /* @__PURE__ */ React.createElement(Container4, null, /* @__PURE__ */ React.createElement(MainImage, {
-      src: images[0]
+      src: images[0],
+      onClick: handleClickPopup
     }), /* @__PURE__ */ React.createElement(TitleBlock, null, /* @__PURE__ */ React.createElement(Title4, null, name), /* @__PURE__ */ React.createElement(Likes, null, /* @__PURE__ */ React.createElement("img", {
       src: HEART_INACTIVE,
       alt: "heart"
@@ -29991,7 +30025,13 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       key: tag
     }, tag)))), /* @__PURE__ */ React.createElement(Description, null, description), /* @__PURE__ */ React.createElement(FloatButtonContainer, null, /* @__PURE__ */ React.createElement("button", {
       type: "button"
-    }, "\uBE4C\uB9AC\uC5B4 \uD558\uAE30"))));
+    }, "\uBE4C\uB9AC\uC5B4 \uD558\uAE30"))), /* @__PURE__ */ React.createElement(Shade, {
+      active: popupOpen,
+      onClick: handleClickClosePopup
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: product.images[0],
+      alt: "shade"
+    })));
   }
 
   // src/components/Main.tsx
@@ -30003,7 +30043,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
 `;
   function Main() {
     return /* @__PURE__ */ React.createElement(Layout, null, /* @__PURE__ */ React.createElement(BrowserRouter, {
-      basename: "/villiar-front"
+      basename: "/"
     }, /* @__PURE__ */ React.createElement(Routes, null, /* @__PURE__ */ React.createElement(Route, {
       path: "/",
       element: /* @__PURE__ */ React.createElement(ProductListPage, null)
