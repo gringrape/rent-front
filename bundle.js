@@ -1,10 +1,27 @@
 (() => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
+  var __defProps = Object.defineProperties;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
   var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __propIsEnum = Object.prototype.propertyIsEnumerable;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __spreadValues = (a2, b2) => {
+    for (var prop in b2 || (b2 = {}))
+      if (__hasOwnProp.call(b2, prop))
+        __defNormalProp(a2, prop, b2[prop]);
+    if (__getOwnPropSymbols)
+      for (var prop of __getOwnPropSymbols(b2)) {
+        if (__propIsEnum.call(b2, prop))
+          __defNormalProp(a2, prop, b2[prop]);
+      }
+    return a2;
+  };
+  var __spreadProps = (a2, b2) => __defProps(a2, __getOwnPropDescs(b2));
   var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
   var __esm = (fn, res) => function __init() {
     return fn && (res = (0, fn[Object.keys(fn)[0]])(fn = 0)), res;
@@ -29459,7 +29476,9 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     return __async(this, null, function* () {
       const url = `https://rentproject.xyz/rent/products/${id}`;
       const { data } = yield import_axios.default.get(url);
-      return data;
+      return __spreadProps(__spreadValues({}, data), {
+        images: data.images.map((image) => image.serverFileName)
+      });
     });
   }
 
@@ -29516,9 +29535,14 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   var SCOPE_ICON = "assets/icons/scope.svg";
   var HAMBURGER_ICON = "assets/icons/hamburger.svg";
   var BELL_ICON = "assets/icons/bell.svg";
+  var HEART_INACTIVE = "assets/icons/heart-inactive.svg";
   var HOME_ICON = "assets/icons/home.svg";
+  var HOME_ICON_INACTIVE = "assets/icons/home-inactive.svg";
   var TALK_ICON = "assets/icons/talk-balloon.svg";
   var PERSON_ICON = "assets/icons/person.svg";
+  var LEFT_ARROW_ICON = "assets/icons/left-arrow.svg";
+  var UPLOAD_ICON = "assets/icons/upload.svg";
+  var THREE_DOT_ICON = "assets/icons/three-dot.svg";
 
   // src/components/Footer.tsx
   var Container = styled_components_browser_esm_default.div`
@@ -29791,15 +29815,183 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   // src/components/ProductItemPage.tsx
   init_react_shim();
   var import_react7 = __toModule(require_react());
-  function Main() {
+  var NavigationContainer = styled_components_browser_esm_default.div`
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+`;
+  var Navigation2 = styled_components_browser_esm_default.nav`
+  padding: 19px 16px;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    background: none;
+    border: none;
+  }
+`;
+  var RightIcons = styled_components_browser_esm_default.div`
+  display: flex;
+  gap: 29px;
+`;
+  var Container4 = styled_components_browser_esm_default.div`
+  margin-top: 59px;
+  padding: 0 16px;
+  padding-top: 3px;
+  padding-bottom: 60px;
+`;
+  var MainImage = styled_components_browser_esm_default.img`
+  width: 100%;
+  border-radius: 10px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: top;
+`;
+  var TitleBlock = styled_components_browser_esm_default.div`
+  margin-top: 31px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+  var Title4 = styled_components_browser_esm_default.h1`
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  line-height: 21px;
+`;
+  var Likes = styled_components_browser_esm_default.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  & > span {
+    font-size: 12px;
+    line-height: 14px;
+  }
+`;
+  var SubBlock2 = styled_components_browser_esm_default.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+
+  .price-block {
+    display: inline-block;
+    padding: 3px;
+    color: white;
+    background-color: #ff5800;
+    border-radius: 3px;
+
+    .deposit {
+      margin-right: 12px;
+    }
+
+    .price {
+      margin-left: 12px;
+      font-weight: bold;
+    }
+  }
+`;
+  var Tags = styled_components_browser_esm_default.div`
+  display: flex;
+  gap: 5px;
+  border-bottom: 1px solid black;
+
+  span {
+    font-size: 10px;
+    line-height: 18px;
+  }
+`;
+  var Description = styled_components_browser_esm_default.p`
+  margin-top: 40px;
+`;
+  var FloatButtonContainer = styled_components_browser_esm_default.div`
+    padding: 0 16px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+  
+    button {
+      width: 100%;
+      padding: 14px 0;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border: none;
+      background-color: #FF5800;
+      color: white;
+      font-size: 18px;
+      line-height: 21px;
+      font-weight: bold;
+    }
+  `;
+  function ProductItemPage() {
     const { id } = useParams();
     const { product, loadProduct } = useProduct();
+    const navigate = useNavigate();
     (0, import_react7.useLayoutEffect)(() => {
       if (id) {
         loadProduct(id);
       }
     }, []);
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "\uC0C1\uD488 \uC0C1\uC138"), /* @__PURE__ */ React.createElement("p", null, product.name), /* @__PURE__ */ React.createElement("p", null, product.deposit), /* @__PURE__ */ React.createElement("p", null, product.description), /* @__PURE__ */ React.createElement("p", null, product.price));
+    const {
+      name,
+      description,
+      deposit,
+      price,
+      images,
+      tags
+    } = product;
+    const handleClickGoBack = () => {
+      navigate(-1);
+    };
+    const handleClickHome = () => {
+      navigate("/");
+    };
+    if (!product.images) {
+      return /* @__PURE__ */ React.createElement("p", null, "loading...");
+    }
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(NavigationContainer, null, /* @__PURE__ */ React.createElement(Navigation2, null, /* @__PURE__ */ React.createElement("button", {
+      type: "button",
+      onClick: handleClickGoBack
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: LEFT_ARROW_ICON,
+      alt: "goback"
+    })), /* @__PURE__ */ React.createElement(RightIcons, null, /* @__PURE__ */ React.createElement("button", {
+      type: "button",
+      onClick: handleClickHome
+    }, /* @__PURE__ */ React.createElement("img", {
+      src: HOME_ICON_INACTIVE,
+      alt: "home"
+    })), /* @__PURE__ */ React.createElement("img", {
+      src: UPLOAD_ICON,
+      alt: "upload"
+    }), /* @__PURE__ */ React.createElement("img", {
+      src: THREE_DOT_ICON,
+      alt: "three-dot"
+    })))), /* @__PURE__ */ React.createElement(Container4, null, /* @__PURE__ */ React.createElement(MainImage, {
+      src: images[0]
+    }), /* @__PURE__ */ React.createElement(TitleBlock, null, /* @__PURE__ */ React.createElement(Title4, null, name), /* @__PURE__ */ React.createElement(Likes, null, /* @__PURE__ */ React.createElement("img", {
+      src: HEART_INACTIVE,
+      alt: "heart"
+    }), /* @__PURE__ */ React.createElement("span", null, 50))), /* @__PURE__ */ React.createElement(SubBlock2, null, /* @__PURE__ */ React.createElement("p", {
+      className: "price-block"
+    }, /* @__PURE__ */ React.createElement("span", {
+      className: "deposit"
+    }, "\uBCF4\uC99D\uAE08", " ", deposit, "\uC6D0"), /* @__PURE__ */ React.createElement("span", null, "|"), /* @__PURE__ */ React.createElement("span", {
+      className: "price"
+    }, price, "\uC6D0/\uC77C")), /* @__PURE__ */ React.createElement(Tags, null, tags.map((tag) => /* @__PURE__ */ React.createElement("span", {
+      key: tag
+    }, tag)))), /* @__PURE__ */ React.createElement(Description, null, description), /* @__PURE__ */ React.createElement(FloatButtonContainer, null, /* @__PURE__ */ React.createElement("button", {
+      type: "button"
+    }, "\uBE4C\uB9AC\uC5B4 \uD558\uAE30"))));
   }
 
   // src/components/Main.tsx
@@ -29809,21 +30001,21 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   display: flex;
   flex-direction: column;
 `;
-  function Main2() {
+  function Main() {
     return /* @__PURE__ */ React.createElement(Layout, null, /* @__PURE__ */ React.createElement(BrowserRouter, {
-      basename: "/rent-front"
+      basename: "/villiar-front"
     }, /* @__PURE__ */ React.createElement(Routes, null, /* @__PURE__ */ React.createElement(Route, {
       path: "/",
       element: /* @__PURE__ */ React.createElement(ProductListPage, null)
     }), /* @__PURE__ */ React.createElement(Route, {
       path: "/:id",
-      element: /* @__PURE__ */ React.createElement(Main, null)
+      element: /* @__PURE__ */ React.createElement(ProductItemPage, null)
     }))));
   }
 
   // src/App.tsx
   function App() {
-    return /* @__PURE__ */ React.createElement(Recoil_index_4, null, /* @__PURE__ */ React.createElement(Main2, null));
+    return /* @__PURE__ */ React.createElement(Recoil_index_4, null, /* @__PURE__ */ React.createElement(Main, null));
   }
 
   // src/index.tsx
