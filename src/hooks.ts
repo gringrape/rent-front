@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { fetchProducts, fetchProduct, fetchTopProducts } from './services/api';
 
-import { productsState, productState, topProductsState } from './state';
+import {
+  ProductItem, productsState, productState, topProductsState,
+} from './state';
 
 export function useProducts() {
   const products = useRecoilValue(productsState);
@@ -28,13 +31,16 @@ export function useTopProducts() {
   return { topProducts, loadTopProducts };
 }
 
-// TODO: delete this
-export function useProduct() {
+export function useProduct(): {
+   product: ProductItem;
+   loadProduct: (id: string) => Promise<void>
+   } {
   const product = useRecoilValue(productState);
   const setProduct = useSetRecoilState(productState);
 
   const loadProduct = async (id: string) => {
     const data = await fetchProduct(id);
+
     setProduct(data);
   };
 

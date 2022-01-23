@@ -21,5 +21,8 @@ export async function fetchProduct(id: string) {
 
   const { data } = await axios.get(url);
 
-  return data;
+  return {
+    ...data,
+    images: data.images.map((image: any) => image.serverFileName),
+  };
 }

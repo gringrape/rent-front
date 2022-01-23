@@ -26,17 +26,13 @@ export const topProductsState = atom<TopProduct[]>({
 });
 
 export interface ProductItem {
-  deposit: number;
-  description: string;
   id: number;
-  images: [
-    {
-      originalFileName: string;
-      serverFileName: string;
-    }
-  ],
   name: string;
   price: number;
+  deposit: number;
+  description: string;
+  tags: string[];
+  images: string[],
 }
 
 export const productState = atom<ProductItem>({
