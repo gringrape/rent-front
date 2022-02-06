@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -198,10 +198,14 @@ export default function ProductItemPage() {
     setPopupOpen(true);
   };
 
-  const handleClickClosePopup = (e) => {
+  const handleClickClosePopup = (e: React.SyntheticEvent) => {
     if (e.currentTarget === e.target) {
       setPopupOpen(false);
     }
+  };
+
+  const handleClickReserve = () => {
+    navigate(`/${id}/reserve`);
   };
 
   if (!product.images) {
@@ -260,7 +264,7 @@ export default function ProductItemPage() {
         </SubBlock>
         <Description>{description}</Description>
         <FloatButtonContainer>
-          <button type="button">
+          <button type="button" onClick={handleClickReserve}>
             빌리어 하기
           </button>
         </FloatButtonContainer>

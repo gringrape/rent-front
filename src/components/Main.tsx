@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import ProductListPage from './ProductListPage';
 import ProductItemPage from './ProductItemPage';
+import ReservePage from './ReservePage';
 
 const Layout = styled.div`
   max-width: 600px;
@@ -18,6 +19,7 @@ export default function Main() {
       <Router basename="/villiar-front">
         <Routes>
           <Route path="/" element={<ProductListPage />} />
+          <Route path="/:id/reserve" element={<ReservePage />} />
           <Route path="/:id" element={<ProductItemPage />} />
         </Routes>
       </Router>
