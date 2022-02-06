@@ -307,14 +307,14 @@
           {
             Object.freeze(emptyObject);
           }
-          function Component(props, context, updater) {
+          function Component3(props, context, updater) {
             this.props = props;
             this.context = context;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
           }
-          Component.prototype.isReactComponent = {};
-          Component.prototype.setState = function(partialState, callback) {
+          Component3.prototype.isReactComponent = {};
+          Component3.prototype.setState = function(partialState, callback) {
             if (!(typeof partialState === "object" || typeof partialState === "function" || partialState == null)) {
               {
                 throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
@@ -322,7 +322,7 @@
             }
             this.updater.enqueueSetState(this, partialState, callback, "setState");
           };
-          Component.prototype.forceUpdate = function(callback) {
+          Component3.prototype.forceUpdate = function(callback) {
             this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
           };
           {
@@ -331,7 +331,7 @@
               replaceState: ["replaceState", "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."]
             };
             var defineDeprecationWarning = function(methodName, info) {
-              Object.defineProperty(Component.prototype, methodName, {
+              Object.defineProperty(Component3.prototype, methodName, {
                 get: function() {
                   warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
                   return void 0;
@@ -346,7 +346,7 @@
           }
           function ComponentDummy() {
           }
-          ComponentDummy.prototype = Component.prototype;
+          ComponentDummy.prototype = Component3.prototype;
           function PureComponent(props, context, updater) {
             this.props = props;
             this.context = context;
@@ -355,7 +355,7 @@
           }
           var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
           pureComponentPrototype.constructor = PureComponent;
-          _assign(pureComponentPrototype, Component.prototype);
+          _assign(pureComponentPrototype, Component3.prototype);
           pureComponentPrototype.isPureReactComponent = true;
           function createRef() {
             var refObject = {
@@ -1086,7 +1086,7 @@
             }
             return dispatcher.useContext(Context, unstable_observedBits);
           }
-          function useState6(initialState) {
+          function useState7(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1328,8 +1328,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component2) {
-            var prototype = Component2.prototype;
+          function shouldConstruct(Component4) {
+            var prototype = Component4.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -1653,7 +1653,7 @@
             only: onlyChild
           };
           exports.Children = Children2;
-          exports.Component = Component;
+          exports.Component = Component3;
           exports.PureComponent = PureComponent;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
@@ -1674,7 +1674,7 @@
           exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
           exports.useRef = useRef4;
-          exports.useState = useState6;
+          exports.useState = useState7;
           exports.version = ReactVersion;
         })();
       }
@@ -2496,11 +2496,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React2 = require_react();
+          var React23 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React23.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2532,7 +2532,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React2) {
+          if (!React23) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -3269,8 +3269,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component) {
-            var prototype = Component.prototype;
+          function shouldConstruct(Component3) {
+            var prototype = Component3.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -3748,7 +3748,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React2.Children.forEach(children, function(child) {
+            React23.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3759,7 +3759,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React2.Children.forEach(props.children, function(child) {
+                React23.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -9860,9 +9860,9 @@
           var contextStackCursor = createCursor(emptyContextObject);
           var didPerformWorkStackCursor = createCursor(false);
           var previousContext = emptyContextObject;
-          function getUnmaskedContext(workInProgress2, Component, didPushOwnContextIfProvider) {
+          function getUnmaskedContext(workInProgress2, Component3, didPushOwnContextIfProvider) {
             {
-              if (didPushOwnContextIfProvider && isContextProvider(Component)) {
+              if (didPushOwnContextIfProvider && isContextProvider(Component3)) {
                 return previousContext;
               }
               return contextStackCursor.current;
@@ -10007,8 +10007,8 @@
                   case HostRoot:
                     return node.stateNode.context;
                   case ClassComponent: {
-                    var Component = node.type;
-                    if (isContextProvider(Component)) {
+                    var Component3 = node.type;
+                    if (isContextProvider(Component3)) {
                       return node.stateNode.__reactInternalMemoizedMergedChildContext;
                     }
                     break;
@@ -10420,10 +10420,10 @@
               pendingLegacyContextWarning = new Map();
             };
           }
-          function resolveDefaultProps(Component, baseProps) {
-            if (Component && Component.defaultProps) {
+          function resolveDefaultProps(Component3, baseProps) {
+            if (Component3 && Component3.defaultProps) {
               var props = _assign({}, baseProps);
-              var defaultProps = Component.defaultProps;
+              var defaultProps = Component3.defaultProps;
               for (var propName in defaultProps) {
                 if (props[propName] === void 0) {
                   props[propName] = defaultProps[propName];
@@ -10952,7 +10952,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React2.Component().refs;
+          var emptyRefsObject = new React23.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -12739,7 +12739,7 @@
             }
             return true;
           }
-          function renderWithHooks(current2, workInProgress2, Component, props, secondArg, nextRenderLanes) {
+          function renderWithHooks(current2, workInProgress2, Component3, props, secondArg, nextRenderLanes) {
             renderLanes = nextRenderLanes;
             currentlyRenderingFiber$1 = workInProgress2;
             {
@@ -12759,7 +12759,7 @@
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
               }
             }
-            var children = Component(props, secondArg);
+            var children = Component3(props, secondArg);
             if (didScheduleRenderPhaseUpdateDuringThisPass) {
               var numberOfReRenders = 0;
               do {
@@ -12780,7 +12780,7 @@
                   hookTypesUpdateIndexDev = -1;
                 }
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-                children = Component(props, secondArg);
+                children = Component3(props, secondArg);
               } while (didScheduleRenderPhaseUpdateDuringThisPass);
             }
             ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -14367,16 +14367,16 @@
             workInProgress2.child = reconcileChildFibers(workInProgress2, current2.child, null, renderLanes2);
             workInProgress2.child = reconcileChildFibers(workInProgress2, null, nextChildren, renderLanes2);
           }
-          function updateForwardRef(current2, workInProgress2, Component, nextProps, renderLanes2) {
+          function updateForwardRef(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component.propTypes;
+                var innerPropTypes = Component3.propTypes;
                 if (innerPropTypes) {
-                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentName(Component));
+                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentName(Component3));
                 }
               }
             }
-            var render3 = Component.render;
+            var render3 = Component3.render;
             var ref = workInProgress2.ref;
             var nextChildren;
             prepareToReadContext(workInProgress2, renderLanes2);
@@ -14402,10 +14402,10 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateMemoComponent(current2, workInProgress2, Component, nextProps, updateLanes, renderLanes2) {
+          function updateMemoComponent(current2, workInProgress2, Component3, nextProps, updateLanes, renderLanes2) {
             if (current2 === null) {
-              var type = Component.type;
-              if (isSimpleFunctionComponent(type) && Component.compare === null && Component.defaultProps === void 0) {
+              var type = Component3.type;
+              if (isSimpleFunctionComponent(type) && Component3.compare === null && Component3.defaultProps === void 0) {
                 var resolvedType = type;
                 {
                   resolvedType = resolveFunctionForHotReloading(type);
@@ -14423,14 +14423,14 @@
                   checkPropTypes(innerPropTypes, nextProps, "prop", getComponentName(type));
                 }
               }
-              var child = createFiberFromTypeAndProps(Component.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
+              var child = createFiberFromTypeAndProps(Component3.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
               child.ref = workInProgress2.ref;
               child.return = workInProgress2;
               workInProgress2.child = child;
               return child;
             }
             {
-              var _type = Component.type;
+              var _type = Component3.type;
               var _innerPropTypes = _type.propTypes;
               if (_innerPropTypes) {
                 checkPropTypes(_innerPropTypes, nextProps, "prop", getComponentName(_type));
@@ -14439,7 +14439,7 @@
             var currentChild = current2.child;
             if (!includesSomeLane(updateLanes, renderLanes2)) {
               var prevProps = currentChild.memoizedProps;
-              var compare = Component.compare;
+              var compare = Component3.compare;
               compare = compare !== null ? compare : shallowEqual;
               if (compare(prevProps, nextProps) && current2.ref === workInProgress2.ref) {
                 return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
@@ -14452,7 +14452,7 @@
             workInProgress2.child = newChild;
             return newChild;
           }
-          function updateSimpleMemoComponent(current2, workInProgress2, Component, nextProps, updateLanes, renderLanes2) {
+          function updateSimpleMemoComponent(current2, workInProgress2, Component3, nextProps, updateLanes, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var outerMemoType = workInProgress2.elementType;
@@ -14484,7 +14484,7 @@
                 }
               }
             }
-            return updateFunctionComponent(current2, workInProgress2, Component, nextProps, renderLanes2);
+            return updateFunctionComponent(current2, workInProgress2, Component3, nextProps, renderLanes2);
           }
           function updateOffscreenComponent(current2, workInProgress2, renderLanes2) {
             var nextProps = workInProgress2.pendingProps;
@@ -14565,18 +14565,18 @@
               workInProgress2.flags |= Ref;
             }
           }
-          function updateFunctionComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
+          function updateFunctionComponent(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component.propTypes;
+                var innerPropTypes = Component3.propTypes;
                 if (innerPropTypes) {
-                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentName(Component));
+                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentName(Component3));
                 }
               }
             }
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component, true);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component3, true);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             var nextChildren;
@@ -14584,11 +14584,11 @@
             {
               ReactCurrentOwner$1.current = workInProgress2;
               setIsRendering(true);
-              nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context, renderLanes2);
+              nextChildren = renderWithHooks(current2, workInProgress2, Component3, nextProps, context, renderLanes2);
               if (workInProgress2.mode & StrictMode) {
                 disableLogs();
                 try {
-                  nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context, renderLanes2);
+                  nextChildren = renderWithHooks(current2, workInProgress2, Component3, nextProps, context, renderLanes2);
                 } finally {
                   reenableLogs();
                 }
@@ -14603,17 +14603,17 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateClassComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
+          function updateClassComponent(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component.propTypes;
+                var innerPropTypes = Component3.propTypes;
                 if (innerPropTypes) {
-                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentName(Component));
+                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentName(Component3));
                 }
               }
             }
             var hasContext;
-            if (isContextProvider(Component)) {
+            if (isContextProvider(Component3)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
@@ -14628,15 +14628,15 @@
                 workInProgress2.alternate = null;
                 workInProgress2.flags |= Placement;
               }
-              constructClassInstance(workInProgress2, Component, nextProps);
-              mountClassInstance(workInProgress2, Component, nextProps, renderLanes2);
+              constructClassInstance(workInProgress2, Component3, nextProps);
+              mountClassInstance(workInProgress2, Component3, nextProps, renderLanes2);
               shouldUpdate = true;
             } else if (current2 === null) {
-              shouldUpdate = resumeMountClassInstance(workInProgress2, Component, nextProps, renderLanes2);
+              shouldUpdate = resumeMountClassInstance(workInProgress2, Component3, nextProps, renderLanes2);
             } else {
-              shouldUpdate = updateClassInstance(current2, workInProgress2, Component, nextProps, renderLanes2);
+              shouldUpdate = updateClassInstance(current2, workInProgress2, Component3, nextProps, renderLanes2);
             }
-            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component, shouldUpdate, hasContext, renderLanes2);
+            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component3, shouldUpdate, hasContext, renderLanes2);
             {
               var inst = workInProgress2.stateNode;
               if (shouldUpdate && inst.props !== nextProps) {
@@ -14648,19 +14648,19 @@
             }
             return nextUnitOfWork;
           }
-          function finishClassComponent(current2, workInProgress2, Component, shouldUpdate, hasContext, renderLanes2) {
+          function finishClassComponent(current2, workInProgress2, Component3, shouldUpdate, hasContext, renderLanes2) {
             markRef(current2, workInProgress2);
             var didCaptureError = (workInProgress2.flags & DidCapture) !== NoFlags;
             if (!shouldUpdate && !didCaptureError) {
               if (hasContext) {
-                invalidateContextProvider(workInProgress2, Component, false);
+                invalidateContextProvider(workInProgress2, Component3, false);
               }
               return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
             }
             var instance = workInProgress2.stateNode;
             ReactCurrentOwner$1.current = workInProgress2;
             var nextChildren;
-            if (didCaptureError && typeof Component.getDerivedStateFromError !== "function") {
+            if (didCaptureError && typeof Component3.getDerivedStateFromError !== "function") {
               nextChildren = null;
               {
                 stopProfilerTimerIfRunning();
@@ -14688,7 +14688,7 @@
             }
             workInProgress2.memoizedState = instance.state;
             if (hasContext) {
-              invalidateContextProvider(workInProgress2, Component, true);
+              invalidateContextProvider(workInProgress2, Component3, true);
             }
             return workInProgress2.child;
           }
@@ -14780,60 +14780,60 @@
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
             var init = lazyComponent._init;
-            var Component = init(payload);
-            workInProgress2.type = Component;
-            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component);
-            var resolvedProps = resolveDefaultProps(Component, props);
+            var Component3 = init(payload);
+            workInProgress2.type = Component3;
+            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component3);
+            var resolvedProps = resolveDefaultProps(Component3, props);
             var child;
             switch (resolvedTag) {
               case FunctionComponent: {
                 {
-                  validateFunctionComponentInDev(workInProgress2, Component);
-                  workInProgress2.type = Component = resolveFunctionForHotReloading(Component);
+                  validateFunctionComponentInDev(workInProgress2, Component3);
+                  workInProgress2.type = Component3 = resolveFunctionForHotReloading(Component3);
                 }
-                child = updateFunctionComponent(null, workInProgress2, Component, resolvedProps, renderLanes2);
+                child = updateFunctionComponent(null, workInProgress2, Component3, resolvedProps, renderLanes2);
                 return child;
               }
               case ClassComponent: {
                 {
-                  workInProgress2.type = Component = resolveClassForHotReloading(Component);
+                  workInProgress2.type = Component3 = resolveClassForHotReloading(Component3);
                 }
-                child = updateClassComponent(null, workInProgress2, Component, resolvedProps, renderLanes2);
+                child = updateClassComponent(null, workInProgress2, Component3, resolvedProps, renderLanes2);
                 return child;
               }
               case ForwardRef: {
                 {
-                  workInProgress2.type = Component = resolveForwardRefForHotReloading(Component);
+                  workInProgress2.type = Component3 = resolveForwardRefForHotReloading(Component3);
                 }
-                child = updateForwardRef(null, workInProgress2, Component, resolvedProps, renderLanes2);
+                child = updateForwardRef(null, workInProgress2, Component3, resolvedProps, renderLanes2);
                 return child;
               }
               case MemoComponent: {
                 {
                   if (workInProgress2.type !== workInProgress2.elementType) {
-                    var outerPropTypes = Component.propTypes;
+                    var outerPropTypes = Component3.propTypes;
                     if (outerPropTypes) {
-                      checkPropTypes(outerPropTypes, resolvedProps, "prop", getComponentName(Component));
+                      checkPropTypes(outerPropTypes, resolvedProps, "prop", getComponentName(Component3));
                     }
                   }
                 }
-                child = updateMemoComponent(null, workInProgress2, Component, resolveDefaultProps(Component.type, resolvedProps), updateLanes, renderLanes2);
+                child = updateMemoComponent(null, workInProgress2, Component3, resolveDefaultProps(Component3.type, resolvedProps), updateLanes, renderLanes2);
                 return child;
               }
             }
             var hint = "";
             {
-              if (Component !== null && typeof Component === "object" && Component.$$typeof === REACT_LAZY_TYPE) {
+              if (Component3 !== null && typeof Component3 === "object" && Component3.$$typeof === REACT_LAZY_TYPE) {
                 hint = " Did you wrap a component in React.lazy() more than once?";
               }
             }
             {
               {
-                throw Error("Element type is invalid. Received a promise that resolves to: " + Component + ". Lazy element type must resolve to a class or function." + hint);
+                throw Error("Element type is invalid. Received a promise that resolves to: " + Component3 + ". Lazy element type must resolve to a class or function." + hint);
               }
             }
           }
-          function mountIncompleteClassComponent(_current, workInProgress2, Component, nextProps, renderLanes2) {
+          function mountIncompleteClassComponent(_current, workInProgress2, Component3, nextProps, renderLanes2) {
             if (_current !== null) {
               _current.alternate = null;
               workInProgress2.alternate = null;
@@ -14841,18 +14841,18 @@
             }
             workInProgress2.tag = ClassComponent;
             var hasContext;
-            if (isContextProvider(Component)) {
+            if (isContextProvider(Component3)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
               hasContext = false;
             }
             prepareToReadContext(workInProgress2, renderLanes2);
-            constructClassInstance(workInProgress2, Component, nextProps);
-            mountClassInstance(workInProgress2, Component, nextProps, renderLanes2);
-            return finishClassComponent(null, workInProgress2, Component, true, hasContext, renderLanes2);
+            constructClassInstance(workInProgress2, Component3, nextProps);
+            mountClassInstance(workInProgress2, Component3, nextProps, renderLanes2);
+            return finishClassComponent(null, workInProgress2, Component3, true, hasContext, renderLanes2);
           }
-          function mountIndeterminateComponent(_current, workInProgress2, Component, renderLanes2) {
+          function mountIndeterminateComponent(_current, workInProgress2, Component3, renderLanes2) {
             if (_current !== null) {
               _current.alternate = null;
               workInProgress2.alternate = null;
@@ -14861,14 +14861,14 @@
             var props = workInProgress2.pendingProps;
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component, false);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component3, false);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             prepareToReadContext(workInProgress2, renderLanes2);
             var value;
             {
-              if (Component.prototype && typeof Component.prototype.render === "function") {
-                var componentName = getComponentName(Component) || "Unknown";
+              if (Component3.prototype && typeof Component3.prototype.render === "function") {
+                var componentName = getComponentName(Component3) || "Unknown";
                 if (!didWarnAboutBadClass[componentName]) {
                   error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", componentName, componentName);
                   didWarnAboutBadClass[componentName] = true;
@@ -14879,13 +14879,13 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component, props, context, renderLanes2);
+              value = renderWithHooks(null, workInProgress2, Component3, props, context, renderLanes2);
               setIsRendering(false);
             }
             workInProgress2.flags |= PerformedWork;
             {
               if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
-                var _componentName = getComponentName(Component) || "Unknown";
+                var _componentName = getComponentName(Component3) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName, _componentName, _componentName);
                   didWarnAboutModulePatternComponent[_componentName] = true;
@@ -14894,7 +14894,7 @@
             }
             if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
               {
-                var _componentName2 = getComponentName(Component) || "Unknown";
+                var _componentName2 = getComponentName(Component3) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName2]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName2, _componentName2, _componentName2);
                   didWarnAboutModulePatternComponent[_componentName2] = true;
@@ -14904,7 +14904,7 @@
               workInProgress2.memoizedState = null;
               workInProgress2.updateQueue = null;
               var hasContext = false;
-              if (isContextProvider(Component)) {
+              if (isContextProvider(Component3)) {
                 hasContext = true;
                 pushContextProvider(workInProgress2);
               } else {
@@ -14912,20 +14912,20 @@
               }
               workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
               initializeUpdateQueue(workInProgress2);
-              var getDerivedStateFromProps = Component.getDerivedStateFromProps;
+              var getDerivedStateFromProps = Component3.getDerivedStateFromProps;
               if (typeof getDerivedStateFromProps === "function") {
-                applyDerivedStateFromProps(workInProgress2, Component, getDerivedStateFromProps, props);
+                applyDerivedStateFromProps(workInProgress2, Component3, getDerivedStateFromProps, props);
               }
               adoptClassInstance(workInProgress2, value);
-              mountClassInstance(workInProgress2, Component, props, renderLanes2);
-              return finishClassComponent(null, workInProgress2, Component, true, hasContext, renderLanes2);
+              mountClassInstance(workInProgress2, Component3, props, renderLanes2);
+              return finishClassComponent(null, workInProgress2, Component3, true, hasContext, renderLanes2);
             } else {
               workInProgress2.tag = FunctionComponent;
               {
                 if (workInProgress2.mode & StrictMode) {
                   disableLogs();
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component, props, context, renderLanes2);
+                    value = renderWithHooks(null, workInProgress2, Component3, props, context, renderLanes2);
                   } finally {
                     reenableLogs();
                   }
@@ -14933,16 +14933,16 @@
               }
               reconcileChildren(null, workInProgress2, value, renderLanes2);
               {
-                validateFunctionComponentInDev(workInProgress2, Component);
+                validateFunctionComponentInDev(workInProgress2, Component3);
               }
               return workInProgress2.child;
             }
           }
-          function validateFunctionComponentInDev(workInProgress2, Component) {
+          function validateFunctionComponentInDev(workInProgress2, Component3) {
             {
-              if (Component) {
-                if (Component.childContextTypes) {
-                  error("%s(...): childContextTypes cannot be defined on a function component.", Component.displayName || Component.name || "Component");
+              if (Component3) {
+                if (Component3.childContextTypes) {
+                  error("%s(...): childContextTypes cannot be defined on a function component.", Component3.displayName || Component3.name || "Component");
                 }
               }
               if (workInProgress2.ref !== null) {
@@ -14961,15 +14961,15 @@
                   error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", info);
                 }
               }
-              if (typeof Component.getDerivedStateFromProps === "function") {
-                var _componentName3 = getComponentName(Component) || "Unknown";
+              if (typeof Component3.getDerivedStateFromProps === "function") {
+                var _componentName3 = getComponentName(Component3) || "Unknown";
                 if (!didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3]) {
                   error("%s: Function components do not support getDerivedStateFromProps.", _componentName3);
                   didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3] = true;
                 }
               }
-              if (typeof Component.contextType === "object" && Component.contextType !== null) {
-                var _componentName4 = getComponentName(Component) || "Unknown";
+              if (typeof Component3.contextType === "object" && Component3.contextType !== null) {
+                var _componentName4 = getComponentName(Component3) || "Unknown";
                 if (!didWarnAboutContextTypeOnFunctionComponent[_componentName4]) {
                   error("%s: Function components do not support contextType.", _componentName4);
                   didWarnAboutContextTypeOnFunctionComponent[_componentName4] = true;
@@ -15578,8 +15578,8 @@
                     pushHostContext(workInProgress2);
                     break;
                   case ClassComponent: {
-                    var Component = workInProgress2.type;
-                    if (isContextProvider(Component)) {
+                    var Component3 = workInProgress2.type;
+                    if (isContextProvider(Component3)) {
                       pushContextProvider(workInProgress2);
                     }
                     break;
@@ -15874,8 +15874,8 @@
               case MemoComponent:
                 return null;
               case ClassComponent: {
-                var Component = workInProgress2.type;
-                if (isContextProvider(Component)) {
+                var Component3 = workInProgress2.type;
+                if (isContextProvider(Component3)) {
                   popContext(workInProgress2);
                 }
                 return null;
@@ -16157,8 +16157,8 @@
           function unwindWork(workInProgress2, renderLanes2) {
             switch (workInProgress2.tag) {
               case ClassComponent: {
-                var Component = workInProgress2.type;
-                if (isContextProvider(Component)) {
+                var Component3 = workInProgress2.type;
+                if (isContextProvider(Component3)) {
                   popContext(workInProgress2);
                 }
                 var flags = workInProgress2.flags;
@@ -19324,18 +19324,18 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           var createFiber = function(tag, pendingProps, key, mode) {
             return new FiberNode(tag, pendingProps, key, mode);
           };
-          function shouldConstruct$1(Component) {
-            var prototype = Component.prototype;
+          function shouldConstruct$1(Component3) {
+            var prototype = Component3.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function isSimpleFunctionComponent(type) {
             return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
           }
-          function resolveLazyComponentTag(Component) {
-            if (typeof Component === "function") {
-              return shouldConstruct$1(Component) ? ClassComponent : FunctionComponent;
-            } else if (Component !== void 0 && Component !== null) {
-              var $$typeof = Component.$$typeof;
+          function resolveLazyComponentTag(Component3) {
+            if (typeof Component3 === "function") {
+              return shouldConstruct$1(Component3) ? ClassComponent : FunctionComponent;
+            } else if (Component3 !== void 0 && Component3 !== null) {
+              var $$typeof = Component3.$$typeof;
               if ($$typeof === REACT_FORWARD_REF_TYPE) {
                 return ForwardRef;
               }
@@ -19774,9 +19774,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             var fiber = get(parentComponent);
             var parentContext = findCurrentUnmaskedContext(fiber);
             if (fiber.tag === ClassComponent) {
-              var Component = fiber.type;
-              if (isContextProvider(Component)) {
-                return processChildContext(fiber, Component, parentContext);
+              var Component3 = fiber.type;
+              if (isContextProvider(Component3)) {
+                return processChildContext(fiber, Component3, parentContext);
               }
             }
             return parentContext;
@@ -22043,6 +22043,589 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
   });
 
+  // node_modules/prop-types/lib/ReactPropTypesSecret.js
+  var require_ReactPropTypesSecret = __commonJS({
+    "node_modules/prop-types/lib/ReactPropTypesSecret.js"(exports, module) {
+      init_react_shim();
+      "use strict";
+      var ReactPropTypesSecret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
+      module.exports = ReactPropTypesSecret;
+    }
+  });
+
+  // node_modules/prop-types/checkPropTypes.js
+  var require_checkPropTypes = __commonJS({
+    "node_modules/prop-types/checkPropTypes.js"(exports, module) {
+      init_react_shim();
+      "use strict";
+      var printWarning = function() {
+      };
+      if (true) {
+        ReactPropTypesSecret = require_ReactPropTypesSecret();
+        loggedTypeFailures = {};
+        has = Function.call.bind(Object.prototype.hasOwnProperty);
+        printWarning = function(text) {
+          var message = "Warning: " + text;
+          if (typeof console !== "undefined") {
+            console.error(message);
+          }
+          try {
+            throw new Error(message);
+          } catch (x2) {
+          }
+        };
+      }
+      var ReactPropTypesSecret;
+      var loggedTypeFailures;
+      var has;
+      function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+        if (true) {
+          for (var typeSpecName in typeSpecs) {
+            if (has(typeSpecs, typeSpecName)) {
+              var error;
+              try {
+                if (typeof typeSpecs[typeSpecName] !== "function") {
+                  var err2 = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.");
+                  err2.name = "Invariant Violation";
+                  throw err2;
+                }
+                error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+              } catch (ex) {
+                error = ex;
+              }
+              if (error && !(error instanceof Error)) {
+                printWarning((componentName || "React class") + ": type specification of " + location + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).");
+              }
+              if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+                loggedTypeFailures[error.message] = true;
+                var stack = getStack ? getStack() : "";
+                printWarning("Failed " + location + " type: " + error.message + (stack != null ? stack : ""));
+              }
+            }
+          }
+        }
+      }
+      checkPropTypes.resetWarningCache = function() {
+        if (true) {
+          loggedTypeFailures = {};
+        }
+      };
+      module.exports = checkPropTypes;
+    }
+  });
+
+  // node_modules/prop-types/factoryWithTypeCheckers.js
+  var require_factoryWithTypeCheckers = __commonJS({
+    "node_modules/prop-types/factoryWithTypeCheckers.js"(exports, module) {
+      init_react_shim();
+      "use strict";
+      var ReactIs = require_react_is();
+      var assign = require_object_assign();
+      var ReactPropTypesSecret = require_ReactPropTypesSecret();
+      var checkPropTypes = require_checkPropTypes();
+      var has = Function.call.bind(Object.prototype.hasOwnProperty);
+      var printWarning = function() {
+      };
+      if (true) {
+        printWarning = function(text) {
+          var message = "Warning: " + text;
+          if (typeof console !== "undefined") {
+            console.error(message);
+          }
+          try {
+            throw new Error(message);
+          } catch (x2) {
+          }
+        };
+      }
+      function emptyFunctionThatReturnsNull() {
+        return null;
+      }
+      module.exports = function(isValidElement2, throwOnDirectAccess) {
+        var ITERATOR_SYMBOL = typeof Symbol === "function" && Symbol.iterator;
+        var FAUX_ITERATOR_SYMBOL = "@@iterator";
+        function getIteratorFn(maybeIterable) {
+          var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+          if (typeof iteratorFn === "function") {
+            return iteratorFn;
+          }
+        }
+        var ANONYMOUS = "<<anonymous>>";
+        var ReactPropTypes = {
+          array: createPrimitiveTypeChecker("array"),
+          bool: createPrimitiveTypeChecker("boolean"),
+          func: createPrimitiveTypeChecker("function"),
+          number: createPrimitiveTypeChecker("number"),
+          object: createPrimitiveTypeChecker("object"),
+          string: createPrimitiveTypeChecker("string"),
+          symbol: createPrimitiveTypeChecker("symbol"),
+          any: createAnyTypeChecker(),
+          arrayOf: createArrayOfTypeChecker,
+          element: createElementTypeChecker(),
+          elementType: createElementTypeTypeChecker(),
+          instanceOf: createInstanceTypeChecker,
+          node: createNodeChecker(),
+          objectOf: createObjectOfTypeChecker,
+          oneOf: createEnumTypeChecker,
+          oneOfType: createUnionTypeChecker,
+          shape: createShapeTypeChecker,
+          exact: createStrictShapeTypeChecker
+        };
+        function is(x2, y2) {
+          if (x2 === y2) {
+            return x2 !== 0 || 1 / x2 === 1 / y2;
+          } else {
+            return x2 !== x2 && y2 !== y2;
+          }
+        }
+        function PropTypeError(message) {
+          this.message = message;
+          this.stack = "";
+        }
+        PropTypeError.prototype = Error.prototype;
+        function createChainableTypeChecker(validate) {
+          if (true) {
+            var manualPropTypeCallCache = {};
+            var manualPropTypeWarningCount = 0;
+          }
+          function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+            componentName = componentName || ANONYMOUS;
+            propFullName = propFullName || propName;
+            if (secret !== ReactPropTypesSecret) {
+              if (throwOnDirectAccess) {
+                var err2 = new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");
+                err2.name = "Invariant Violation";
+                throw err2;
+              } else if (typeof console !== "undefined") {
+                var cacheKey = componentName + ":" + propName;
+                if (!manualPropTypeCallCache[cacheKey] && manualPropTypeWarningCount < 3) {
+                  printWarning("You are manually calling a React.PropTypes validation function for the `" + propFullName + "` prop on `" + componentName + "`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details.");
+                  manualPropTypeCallCache[cacheKey] = true;
+                  manualPropTypeWarningCount++;
+                }
+              }
+            }
+            if (props[propName] == null) {
+              if (isRequired) {
+                if (props[propName] === null) {
+                  return new PropTypeError("The " + location + " `" + propFullName + "` is marked as required " + ("in `" + componentName + "`, but its value is `null`."));
+                }
+                return new PropTypeError("The " + location + " `" + propFullName + "` is marked as required in " + ("`" + componentName + "`, but its value is `undefined`."));
+              }
+              return null;
+            } else {
+              return validate(props, propName, componentName, location, propFullName);
+            }
+          }
+          var chainedCheckType = checkType.bind(null, false);
+          chainedCheckType.isRequired = checkType.bind(null, true);
+          return chainedCheckType;
+        }
+        function createPrimitiveTypeChecker(expectedType) {
+          function validate(props, propName, componentName, location, propFullName, secret) {
+            var propValue = props[propName];
+            var propType = getPropType(propValue);
+            if (propType !== expectedType) {
+              var preciseType = getPreciseType(propValue);
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."));
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createAnyTypeChecker() {
+          return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+        }
+        function createArrayOfTypeChecker(typeChecker) {
+          function validate(props, propName, componentName, location, propFullName) {
+            if (typeof typeChecker !== "function") {
+              return new PropTypeError("Property `" + propFullName + "` of component `" + componentName + "` has invalid PropType notation inside arrayOf.");
+            }
+            var propValue = props[propName];
+            if (!Array.isArray(propValue)) {
+              var propType = getPropType(propValue);
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an array."));
+            }
+            for (var i2 = 0; i2 < propValue.length; i2++) {
+              var error = typeChecker(propValue, i2, componentName, location, propFullName + "[" + i2 + "]", ReactPropTypesSecret);
+              if (error instanceof Error) {
+                return error;
+              }
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createElementTypeChecker() {
+          function validate(props, propName, componentName, location, propFullName) {
+            var propValue = props[propName];
+            if (!isValidElement2(propValue)) {
+              var propType = getPropType(propValue);
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement."));
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createElementTypeTypeChecker() {
+          function validate(props, propName, componentName, location, propFullName) {
+            var propValue = props[propName];
+            if (!ReactIs.isValidElementType(propValue)) {
+              var propType = getPropType(propValue);
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement type."));
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createInstanceTypeChecker(expectedClass) {
+          function validate(props, propName, componentName, location, propFullName) {
+            if (!(props[propName] instanceof expectedClass)) {
+              var expectedClassName = expectedClass.name || ANONYMOUS;
+              var actualClassName = getClassName(props[propName]);
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + actualClassName + "` supplied to `" + componentName + "`, expected ") + ("instance of `" + expectedClassName + "`."));
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createEnumTypeChecker(expectedValues) {
+          if (!Array.isArray(expectedValues)) {
+            if (true) {
+              if (arguments.length > 1) {
+                printWarning("Invalid arguments supplied to oneOf, expected an array, got " + arguments.length + " arguments. A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).");
+              } else {
+                printWarning("Invalid argument supplied to oneOf, expected an array.");
+              }
+            }
+            return emptyFunctionThatReturnsNull;
+          }
+          function validate(props, propName, componentName, location, propFullName) {
+            var propValue = props[propName];
+            for (var i2 = 0; i2 < expectedValues.length; i2++) {
+              if (is(propValue, expectedValues[i2])) {
+                return null;
+              }
+            }
+            var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
+              var type = getPreciseType(value);
+              if (type === "symbol") {
+                return String(value);
+              }
+              return value;
+            });
+            return new PropTypeError("Invalid " + location + " `" + propFullName + "` of value `" + String(propValue) + "` " + ("supplied to `" + componentName + "`, expected one of " + valuesString + "."));
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createObjectOfTypeChecker(typeChecker) {
+          function validate(props, propName, componentName, location, propFullName) {
+            if (typeof typeChecker !== "function") {
+              return new PropTypeError("Property `" + propFullName + "` of component `" + componentName + "` has invalid PropType notation inside objectOf.");
+            }
+            var propValue = props[propName];
+            var propType = getPropType(propValue);
+            if (propType !== "object") {
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an object."));
+            }
+            for (var key in propValue) {
+              if (has(propValue, key)) {
+                var error = typeChecker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
+                if (error instanceof Error) {
+                  return error;
+                }
+              }
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createUnionTypeChecker(arrayOfTypeCheckers) {
+          if (!Array.isArray(arrayOfTypeCheckers)) {
+            true ? printWarning("Invalid argument supplied to oneOfType, expected an instance of array.") : void 0;
+            return emptyFunctionThatReturnsNull;
+          }
+          for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
+            var checker = arrayOfTypeCheckers[i2];
+            if (typeof checker !== "function") {
+              printWarning("Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i2 + ".");
+              return emptyFunctionThatReturnsNull;
+            }
+          }
+          function validate(props, propName, componentName, location, propFullName) {
+            for (var i3 = 0; i3 < arrayOfTypeCheckers.length; i3++) {
+              var checker2 = arrayOfTypeCheckers[i3];
+              if (checker2(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+                return null;
+              }
+            }
+            return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`."));
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createNodeChecker() {
+          function validate(props, propName, componentName, location, propFullName) {
+            if (!isNode2(props[propName])) {
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`, expected a ReactNode."));
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createShapeTypeChecker(shapeTypes) {
+          function validate(props, propName, componentName, location, propFullName) {
+            var propValue = props[propName];
+            var propType = getPropType(propValue);
+            if (propType !== "object") {
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
+            }
+            for (var key in shapeTypes) {
+              var checker = shapeTypes[key];
+              if (!checker) {
+                continue;
+              }
+              var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
+              if (error) {
+                return error;
+              }
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function createStrictShapeTypeChecker(shapeTypes) {
+          function validate(props, propName, componentName, location, propFullName) {
+            var propValue = props[propName];
+            var propType = getPropType(propValue);
+            if (propType !== "object") {
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
+            }
+            var allKeys = assign({}, props[propName], shapeTypes);
+            for (var key in allKeys) {
+              var checker = shapeTypes[key];
+              if (!checker) {
+                return new PropTypeError("Invalid " + location + " `" + propFullName + "` key `" + key + "` supplied to `" + componentName + "`.\nBad object: " + JSON.stringify(props[propName], null, "  ") + "\nValid keys: " + JSON.stringify(Object.keys(shapeTypes), null, "  "));
+              }
+              var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
+              if (error) {
+                return error;
+              }
+            }
+            return null;
+          }
+          return createChainableTypeChecker(validate);
+        }
+        function isNode2(propValue) {
+          switch (typeof propValue) {
+            case "number":
+            case "string":
+            case "undefined":
+              return true;
+            case "boolean":
+              return !propValue;
+            case "object":
+              if (Array.isArray(propValue)) {
+                return propValue.every(isNode2);
+              }
+              if (propValue === null || isValidElement2(propValue)) {
+                return true;
+              }
+              var iteratorFn = getIteratorFn(propValue);
+              if (iteratorFn) {
+                var iterator = iteratorFn.call(propValue);
+                var step;
+                if (iteratorFn !== propValue.entries) {
+                  while (!(step = iterator.next()).done) {
+                    if (!isNode2(step.value)) {
+                      return false;
+                    }
+                  }
+                } else {
+                  while (!(step = iterator.next()).done) {
+                    var entry = step.value;
+                    if (entry) {
+                      if (!isNode2(entry[1])) {
+                        return false;
+                      }
+                    }
+                  }
+                }
+              } else {
+                return false;
+              }
+              return true;
+            default:
+              return false;
+          }
+        }
+        function isSymbol(propType, propValue) {
+          if (propType === "symbol") {
+            return true;
+          }
+          if (!propValue) {
+            return false;
+          }
+          if (propValue["@@toStringTag"] === "Symbol") {
+            return true;
+          }
+          if (typeof Symbol === "function" && propValue instanceof Symbol) {
+            return true;
+          }
+          return false;
+        }
+        function getPropType(propValue) {
+          var propType = typeof propValue;
+          if (Array.isArray(propValue)) {
+            return "array";
+          }
+          if (propValue instanceof RegExp) {
+            return "object";
+          }
+          if (isSymbol(propType, propValue)) {
+            return "symbol";
+          }
+          return propType;
+        }
+        function getPreciseType(propValue) {
+          if (typeof propValue === "undefined" || propValue === null) {
+            return "" + propValue;
+          }
+          var propType = getPropType(propValue);
+          if (propType === "object") {
+            if (propValue instanceof Date) {
+              return "date";
+            } else if (propValue instanceof RegExp) {
+              return "regexp";
+            }
+          }
+          return propType;
+        }
+        function getPostfixForTypeWarning(value) {
+          var type = getPreciseType(value);
+          switch (type) {
+            case "array":
+            case "object":
+              return "an " + type;
+            case "boolean":
+            case "date":
+            case "regexp":
+              return "a " + type;
+            default:
+              return type;
+          }
+        }
+        function getClassName(propValue) {
+          if (!propValue.constructor || !propValue.constructor.name) {
+            return ANONYMOUS;
+          }
+          return propValue.constructor.name;
+        }
+        ReactPropTypes.checkPropTypes = checkPropTypes;
+        ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
+        ReactPropTypes.PropTypes = ReactPropTypes;
+        return ReactPropTypes;
+      };
+    }
+  });
+
+  // node_modules/prop-types/index.js
+  var require_prop_types = __commonJS({
+    "node_modules/prop-types/index.js"(exports, module) {
+      init_react_shim();
+      if (true) {
+        ReactIs = require_react_is();
+        throwOnDirectAccess = true;
+        module.exports = require_factoryWithTypeCheckers()(ReactIs.isElement, throwOnDirectAccess);
+      } else {
+        module.exports = null();
+      }
+      var ReactIs;
+      var throwOnDirectAccess;
+    }
+  });
+
+  // node_modules/lodash.once/index.js
+  var require_lodash = __commonJS({
+    "node_modules/lodash.once/index.js"(exports, module) {
+      init_react_shim();
+      var FUNC_ERROR_TEXT = "Expected a function";
+      var INFINITY = 1 / 0;
+      var MAX_INTEGER = 17976931348623157e292;
+      var NAN = 0 / 0;
+      var symbolTag = "[object Symbol]";
+      var reTrim = /^\s+|\s+$/g;
+      var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+      var reIsBinary = /^0b[01]+$/i;
+      var reIsOctal = /^0o[0-7]+$/i;
+      var freeParseInt = parseInt;
+      var objectProto = Object.prototype;
+      var objectToString = objectProto.toString;
+      function before(n2, func) {
+        var result;
+        if (typeof func != "function") {
+          throw new TypeError(FUNC_ERROR_TEXT);
+        }
+        n2 = toInteger(n2);
+        return function() {
+          if (--n2 > 0) {
+            result = func.apply(this, arguments);
+          }
+          if (n2 <= 1) {
+            func = void 0;
+          }
+          return result;
+        };
+      }
+      function once2(func) {
+        return before(2, func);
+      }
+      function isObject(value) {
+        var type = typeof value;
+        return !!value && (type == "object" || type == "function");
+      }
+      function isObjectLike(value) {
+        return !!value && typeof value == "object";
+      }
+      function isSymbol(value) {
+        return typeof value == "symbol" || isObjectLike(value) && objectToString.call(value) == symbolTag;
+      }
+      function toFinite(value) {
+        if (!value) {
+          return value === 0 ? value : 0;
+        }
+        value = toNumber(value);
+        if (value === INFINITY || value === -INFINITY) {
+          var sign = value < 0 ? -1 : 1;
+          return sign * MAX_INTEGER;
+        }
+        return value === value ? value : 0;
+      }
+      function toInteger(value) {
+        var result = toFinite(value), remainder = result % 1;
+        return result === result ? remainder ? result - remainder : result : 0;
+      }
+      function toNumber(value) {
+        if (typeof value == "number") {
+          return value;
+        }
+        if (isSymbol(value)) {
+          return NAN;
+        }
+        if (isObject(value)) {
+          var other = typeof value.valueOf == "function" ? value.valueOf() : value;
+          value = isObject(other) ? other + "" : other;
+        }
+        if (typeof value != "string") {
+          return value === 0 ? value : +value;
+        }
+        value = value.replace(reTrim, "");
+        var isBinary = reIsBinary.test(value);
+        return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+      }
+      module.exports = once2;
+    }
+  });
+
   // src/index.tsx
   init_react_shim();
   var ReactDOM = __toModule(require_react_dom());
@@ -22472,7 +23055,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
   var hamt_1 = createCommonjsModule(function(module) {
-    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj) {
+    var _typeof4 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj) {
       return typeof obj;
     } : function(obj) {
       return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
@@ -22490,7 +23073,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       };
     };
     var hash = hamt.hash = function(str) {
-      var type = typeof str === "undefined" ? "undefined" : _typeof(str);
+      var type = typeof str === "undefined" ? "undefined" : _typeof4(str);
       if (type === "number")
         return str;
       if (type !== "string")
@@ -29403,20 +29986,20 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     }
     let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(toPathname.length) === "/";
     let ariaCurrent = isActive ? ariaCurrentProp : void 0;
-    let className;
+    let className8;
     if (typeof classNameProp === "function") {
-      className = classNameProp({
+      className8 = classNameProp({
         isActive
       });
     } else {
-      className = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
+      className8 = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
     }
     let style = typeof styleProp === "function" ? styleProp({
       isActive
     }) : styleProp;
     return /* @__PURE__ */ (0, import_react4.createElement)(Link, _extends2({}, rest, {
       "aria-current": ariaCurrent,
-      className,
+      className: className8,
       ref,
       style,
       to
@@ -29532,17 +30115,17 @@ This is currently a DEV-only warning but will become a thrown exception in the n
 
   // assets/index.ts
   init_react_shim();
-  var SCOPE_ICON = "assets/icons/scope.svg";
-  var HAMBURGER_ICON = "assets/icons/hamburger.svg";
-  var BELL_ICON = "assets/icons/bell.svg";
-  var HEART_INACTIVE = "assets/icons/heart-inactive.svg";
-  var HOME_ICON = "assets/icons/home.svg";
-  var HOME_ICON_INACTIVE = "assets/icons/home-inactive.svg";
-  var TALK_ICON = "assets/icons/talk-balloon.svg";
-  var PERSON_ICON = "assets/icons/person.svg";
-  var LEFT_ARROW_ICON = "assets/icons/left-arrow.svg";
-  var UPLOAD_ICON = "assets/icons/upload.svg";
-  var THREE_DOT_ICON = "assets/icons/three-dot.svg";
+  var SCOPE_ICON = "/assets/icons/scope.svg";
+  var HAMBURGER_ICON = "/assets/icons/hamburger.svg";
+  var BELL_ICON = "/assets/icons/bell.svg";
+  var HEART_INACTIVE = "/assets/icons/heart-inactive.svg";
+  var HOME_ICON = "/assets/icons/home.svg";
+  var HOME_ICON_INACTIVE = "/assets/icons/home-inactive.svg";
+  var TALK_ICON = "/assets/icons/talk-balloon.svg";
+  var PERSON_ICON = "/assets/icons/person.svg";
+  var LEFT_ARROW_ICON = "/assets/icons/left-arrow.svg";
+  var UPLOAD_ICON = "/assets/icons/upload.svg";
+  var THREE_DOT_ICON = "/assets/icons/three-dot.svg";
 
   // src/components/Footer.tsx
   var Container = styled_components_browser_esm_default.div`
@@ -29578,10 +30161,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     d: "M8.8908 2.7214L8.57353 2.35913L8.38419 2.14293L8.38049 2.1387L8.38052 2.13868C7.14149 0.691426 5.28871 0.166569 3.64641 0.724944L8.8908 2.7214ZM8.8908 2.7214L9.26474 2.41796M8.8908 2.7214L9.26474 2.41796M9.26474 2.41796C9.46763 2.25332 9.66262 2.08292 9.84574 1.9229C9.91549 1.86195 9.98351 1.8025 10.0496 1.74546C10.2957 1.53303 10.5264 1.34332 10.7697 1.17991C13.2744 -0.501209 16.746 1.15499 17.3613 3.87571C17.7814 5.73983 17.2229 7.35965 15.9978 8.78039C14.9191 9.99632 13.7775 11.1584 12.5776 12.2621L12.5775 12.2621L12.5693 12.2699C11.8402 12.9717 11.0904 13.6429 10.3328 14.3211C9.95024 14.6635 9.56572 15.0077 9.18089 15.3585L9.17924 15.36C9.06998 15.4605 9.01143 15.4896 8.99127 15.4976C8.97302 15.4898 8.93074 15.4664 8.85819 15.4006C8.30129 14.8893 7.74382 14.384 7.18799 13.8802C5.98073 12.786 4.7812 11.6988 3.61199 10.5719C2.83549 9.80267 2.12938 8.96949 1.50155 8.08187L1.50167 8.08178M9.26474 2.41796L1.50167 8.08178M1.50167 8.08178L1.49434 8.07194M1.50167 8.08178L1.49434 8.07194M1.49434 8.07194C0.809366 7.15225 0.461489 6.03872 0.503387 4.90797C0.579018 3.0057 1.57381 1.43134 3.64611 0.725044L1.49434 8.07194ZM9.00203 15.5012C9.00207 15.5013 9.00094 15.5012 8.99856 15.5004C9.00082 15.5007 9.002 15.5011 9.00203 15.5012Z",
     stroke: "black"
   }));
-  function Footer({ className }) {
+  function Footer({ className: className8 }) {
     const [selectedItem, select] = (0, import_react5.useState)("home");
     return /* @__PURE__ */ React.createElement(Container, {
-      className
+      className: className8
     }, /* @__PURE__ */ React.createElement(LeftBlock, null, /* @__PURE__ */ React.createElement(IconBlock, {
       onClick: () => select("home"),
       selected: selectedItem === "home"
@@ -29643,9 +30226,9 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   align-items: center;
   gap: 20px;
 `;
-  function Navigation({ className }) {
+  function Navigation({ className: className8 }) {
     return /* @__PURE__ */ React.createElement(Container2, {
-      className
+      className: className8
     }, /* @__PURE__ */ React.createElement(Block, null, /* @__PURE__ */ React.createElement(SearchIcon, {
       src: SCOPE_ICON,
       alt: "scope"
@@ -29753,10 +30336,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     font-weight: bold;
   }
 `;
-  function TopProducts({ className = "" }) {
+  function TopProducts({ className: className8 = "" }) {
     const { topProducts } = useTopProducts();
     return /* @__PURE__ */ React.createElement(List2, {
-      className
+      className: className8
     }, topProducts.map(({ id, thumbnailImage, name }) => /* @__PURE__ */ React.createElement(Item, {
       key: id
     }, /* @__PURE__ */ React.createElement("img", {
@@ -29988,50 +30571,3292 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         setPopupOpen(false);
       }
     };
+    const handleClickReserve = () => {
+      navigate(`/${id}/reserve`);
+    };
     if (!product.images) {
-      return /* @__PURE__ */ React.createElement("p", null, "loading...");
+      return /* @__PURE__ */ import_react7.default.createElement("p", null, "loading...");
     }
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(NavigationContainer, null, /* @__PURE__ */ React.createElement(Navigation2, null, /* @__PURE__ */ React.createElement("button", {
+    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement(NavigationContainer, null, /* @__PURE__ */ import_react7.default.createElement(Navigation2, null, /* @__PURE__ */ import_react7.default.createElement("button", {
+      type: "button",
+      onClick: handleClickGoBack
+    }, /* @__PURE__ */ import_react7.default.createElement("img", {
+      src: LEFT_ARROW_ICON,
+      alt: "goback"
+    })), /* @__PURE__ */ import_react7.default.createElement(RightIcons, null, /* @__PURE__ */ import_react7.default.createElement("button", {
+      type: "button",
+      onClick: handleClickHome
+    }, /* @__PURE__ */ import_react7.default.createElement("img", {
+      src: HOME_ICON_INACTIVE,
+      alt: "home"
+    })), /* @__PURE__ */ import_react7.default.createElement("img", {
+      src: UPLOAD_ICON,
+      alt: "upload"
+    }), /* @__PURE__ */ import_react7.default.createElement("img", {
+      src: THREE_DOT_ICON,
+      alt: "three-dot"
+    })))), /* @__PURE__ */ import_react7.default.createElement(Container4, null, /* @__PURE__ */ import_react7.default.createElement(MainImage, {
+      src: images[0],
+      onClick: handleClickPopup
+    }), /* @__PURE__ */ import_react7.default.createElement(TitleBlock, null, /* @__PURE__ */ import_react7.default.createElement(Title4, null, name), /* @__PURE__ */ import_react7.default.createElement(Likes, null, /* @__PURE__ */ import_react7.default.createElement("img", {
+      src: HEART_INACTIVE,
+      alt: "heart"
+    }), /* @__PURE__ */ import_react7.default.createElement("span", null, 50))), /* @__PURE__ */ import_react7.default.createElement(SubBlock2, null, /* @__PURE__ */ import_react7.default.createElement("p", {
+      className: "price-block"
+    }, /* @__PURE__ */ import_react7.default.createElement("span", {
+      className: "deposit"
+    }, "\uBCF4\uC99D\uAE08", " ", deposit, "\uC6D0"), /* @__PURE__ */ import_react7.default.createElement("span", null, "|"), /* @__PURE__ */ import_react7.default.createElement("span", {
+      className: "price"
+    }, price, "\uC6D0/\uC77C")), /* @__PURE__ */ import_react7.default.createElement(Tags, null, tags.map((tag) => /* @__PURE__ */ import_react7.default.createElement("span", {
+      key: tag
+    }, tag)))), /* @__PURE__ */ import_react7.default.createElement(Description, null, description), /* @__PURE__ */ import_react7.default.createElement(FloatButtonContainer, null, /* @__PURE__ */ import_react7.default.createElement("button", {
+      type: "button",
+      onClick: handleClickReserve
+    }, "\uBE4C\uB9AC\uC5B4 \uD558\uAE30"))), /* @__PURE__ */ import_react7.default.createElement(Shade, {
+      active: popupOpen,
+      onClick: handleClickClosePopup
+    }, /* @__PURE__ */ import_react7.default.createElement("img", {
+      src: product.images[0],
+      alt: "shade"
+    })));
+  }
+
+  // src/components/ReservePage.tsx
+  init_react_shim();
+
+  // node_modules/react-calendar/dist/esm/index.js
+  init_react_shim();
+
+  // node_modules/react-calendar/dist/esm/Calendar.js
+  init_react_shim();
+  var import_react27 = __toModule(require_react());
+  var import_prop_types16 = __toModule(require_prop_types());
+
+  // node_modules/merge-class-names/dist/esm/index.js
+  init_react_shim();
+  function mergeClassNames() {
+    return Array.prototype.slice.call(arguments).reduce(function(classList, arg) {
+      return classList.concat(arg);
+    }, []).filter(function(arg) {
+      return typeof arg === "string";
+    }).join(" ");
+  }
+
+  // node_modules/react-calendar/dist/esm/Calendar/Navigation.js
+  init_react_shim();
+  var import_react8 = __toModule(require_react());
+  var import_prop_types2 = __toModule(require_prop_types());
+
+  // node_modules/get-user-locale/dist/esm/index.js
+  init_react_shim();
+  var import_lodash = __toModule(require_lodash());
+  function filterDuplicates(arr) {
+    return arr.filter(function(el, index2, self) {
+      return self.indexOf(el) === index2;
+    });
+  }
+  function fixLowercaseProperties(arr) {
+    return arr.map(function(el) {
+      if (!el || el.indexOf("-") === -1 || el.toLowerCase() !== el) {
+        return el;
+      }
+      var splitEl = el.split("-");
+      return "".concat(splitEl[0], "-").concat(splitEl[1].toUpperCase());
+    });
+  }
+  function getUserLocalesInternal() {
+    var languageList = [];
+    if (typeof window !== "undefined") {
+      if (window.navigator.languages) {
+        languageList = languageList.concat(window.navigator.languages);
+      }
+      if (window.navigator.language) {
+        languageList.push(window.navigator.language);
+      }
+      if (window.navigator.userLanguage) {
+        languageList.push(window.navigator.userLanguage);
+      }
+      if (window.navigator.browserLanguage) {
+        languageList.push(window.navigator.browserLanguage);
+      }
+      if (window.navigator.systemLanguage) {
+        languageList.push(window.navigator.systemLanguage);
+      }
+    }
+    languageList.push("en-US");
+    return fixLowercaseProperties(filterDuplicates(languageList));
+  }
+  var getUserLocales = (0, import_lodash.default)(getUserLocalesInternal);
+  function getUserLocaleInternal() {
+    return getUserLocales()[0];
+  }
+  var getUserLocale = (0, import_lodash.default)(getUserLocaleInternal);
+  var esm_default = getUserLocale;
+
+  // node_modules/react-calendar/dist/esm/shared/dates.js
+  init_react_shim();
+
+  // node_modules/@wojtekmaj/date-utils/dist/esm/index.js
+  init_react_shim();
+  function makeGetEdgeOfNeighbor(getPeriod, getEdgeOfPeriod, defaultOffset) {
+    return function makeGetEdgeOfNeighborInternal(date) {
+      var offset = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : defaultOffset;
+      var previousPeriod = getPeriod(date) + offset;
+      return getEdgeOfPeriod(previousPeriod);
+    };
+  }
+  function makeGetEnd(getBeginOfNextPeriod) {
+    return function makeGetEndInternal(date) {
+      return new Date(getBeginOfNextPeriod(date).getTime() - 1);
+    };
+  }
+  function makeGetRange(functions) {
+    return function makeGetRangeInternal(date) {
+      return functions.map(function(fn) {
+        return fn(date);
+      });
+    };
+  }
+  function getYear(date) {
+    if (date instanceof Date) {
+      return date.getFullYear();
+    }
+    if (typeof date === "number") {
+      return date;
+    }
+    var year = parseInt(date, 10);
+    if (typeof date === "string" && !isNaN(year)) {
+      return year;
+    }
+    throw new Error("Failed to get year from date: ".concat(date, "."));
+  }
+  function getMonth(date) {
+    if (date instanceof Date) {
+      return date.getMonth();
+    }
+    throw new Error("Failed to get month from date: ".concat(date, "."));
+  }
+  function getDate(date) {
+    if (date instanceof Date) {
+      return date.getDate();
+    }
+    throw new Error("Failed to get year from date: ".concat(date, "."));
+  }
+  function getCenturyStart(date) {
+    var year = getYear(date);
+    var centuryStartYear = year + (-year + 1) % 100;
+    var centuryStartDate = new Date();
+    centuryStartDate.setFullYear(centuryStartYear, 0, 1);
+    centuryStartDate.setHours(0, 0, 0, 0);
+    return centuryStartDate;
+  }
+  var getPreviousCenturyStart = makeGetEdgeOfNeighbor(getYear, getCenturyStart, -100);
+  var getNextCenturyStart = makeGetEdgeOfNeighbor(getYear, getCenturyStart, 100);
+  var getCenturyEnd = makeGetEnd(getNextCenturyStart);
+  var getPreviousCenturyEnd = makeGetEdgeOfNeighbor(getYear, getCenturyEnd, -100);
+  var getNextCenturyEnd = makeGetEdgeOfNeighbor(getYear, getCenturyEnd, 100);
+  var getCenturyRange = makeGetRange([getCenturyStart, getCenturyEnd]);
+  function getDecadeStart(date) {
+    var year = getYear(date);
+    var decadeStartYear = year + (-year + 1) % 10;
+    var decadeStartDate = new Date();
+    decadeStartDate.setFullYear(decadeStartYear, 0, 1);
+    decadeStartDate.setHours(0, 0, 0, 0);
+    return decadeStartDate;
+  }
+  var getPreviousDecadeStart = makeGetEdgeOfNeighbor(getYear, getDecadeStart, -10);
+  var getNextDecadeStart = makeGetEdgeOfNeighbor(getYear, getDecadeStart, 10);
+  var getDecadeEnd = makeGetEnd(getNextDecadeStart);
+  var getPreviousDecadeEnd = makeGetEdgeOfNeighbor(getYear, getDecadeEnd, -10);
+  var getNextDecadeEnd = makeGetEdgeOfNeighbor(getYear, getDecadeEnd, 10);
+  var getDecadeRange = makeGetRange([getDecadeStart, getDecadeEnd]);
+  function getYearStart(date) {
+    var year = getYear(date);
+    var yearStartDate = new Date();
+    yearStartDate.setFullYear(year, 0, 1);
+    yearStartDate.setHours(0, 0, 0, 0);
+    return yearStartDate;
+  }
+  var getPreviousYearStart = makeGetEdgeOfNeighbor(getYear, getYearStart, -1);
+  var getNextYearStart = makeGetEdgeOfNeighbor(getYear, getYearStart, 1);
+  var getYearEnd = makeGetEnd(getNextYearStart);
+  var getPreviousYearEnd = makeGetEdgeOfNeighbor(getYear, getYearEnd, -1);
+  var getNextYearEnd = makeGetEdgeOfNeighbor(getYear, getYearEnd, 1);
+  var getYearRange = makeGetRange([getYearStart, getYearEnd]);
+  function makeGetEdgeOfNeighborMonth(getEdgeOfPeriod, defaultOffset) {
+    return function makeGetEdgeOfNeighborMonthInternal(date) {
+      var offset = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : defaultOffset;
+      var year = getYear(date);
+      var month = getMonth(date) + offset;
+      var previousPeriod = new Date();
+      previousPeriod.setFullYear(year, month, 1);
+      previousPeriod.setHours(0, 0, 0, 0);
+      return getEdgeOfPeriod(previousPeriod);
+    };
+  }
+  function getMonthStart(date) {
+    var year = getYear(date);
+    var month = getMonth(date);
+    var monthStartDate = new Date();
+    monthStartDate.setFullYear(year, month, 1);
+    monthStartDate.setHours(0, 0, 0, 0);
+    return monthStartDate;
+  }
+  var getPreviousMonthStart = makeGetEdgeOfNeighborMonth(getMonthStart, -1);
+  var getNextMonthStart = makeGetEdgeOfNeighborMonth(getMonthStart, 1);
+  var getMonthEnd = makeGetEnd(getNextMonthStart);
+  var getPreviousMonthEnd = makeGetEdgeOfNeighborMonth(getMonthEnd, -1);
+  var getNextMonthEnd = makeGetEdgeOfNeighborMonth(getMonthEnd, 1);
+  var getMonthRange = makeGetRange([getMonthStart, getMonthEnd]);
+  function makeGetEdgeOfNeighborDay(getEdgeOfPeriod, defaultOffset) {
+    return function makeGetEdgeOfNeighborDayInternal(date) {
+      var offset = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : defaultOffset;
+      var year = getYear(date);
+      var month = getMonth(date);
+      var day = getDate(date) + offset;
+      var previousPeriod = new Date();
+      previousPeriod.setFullYear(year, month, day);
+      previousPeriod.setHours(0, 0, 0, 0);
+      return getEdgeOfPeriod(previousPeriod);
+    };
+  }
+  function getDayStart(date) {
+    var year = getYear(date);
+    var month = getMonth(date);
+    var day = getDate(date);
+    var dayStartDate = new Date();
+    dayStartDate.setFullYear(year, month, day);
+    dayStartDate.setHours(0, 0, 0, 0);
+    return dayStartDate;
+  }
+  var getPreviousDayStart = makeGetEdgeOfNeighborDay(getDayStart, -1);
+  var getNextDayStart = makeGetEdgeOfNeighborDay(getDayStart, 1);
+  var getDayEnd = makeGetEnd(getNextDayStart);
+  var getPreviousDayEnd = makeGetEdgeOfNeighborDay(getDayEnd, -1);
+  var getNextDayEnd = makeGetEdgeOfNeighborDay(getDayEnd, 1);
+  var getDayRange = makeGetRange([getDayStart, getDayEnd]);
+  function getDaysInMonth(date) {
+    return getDate(getMonthEnd(date));
+  }
+
+  // node_modules/react-calendar/dist/esm/shared/const.js
+  init_react_shim();
+  var _CALENDAR_TYPE_LOCALE;
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _unsupportedIterableToArray(o2, minLen) {
+    if (!o2)
+      return;
+    if (typeof o2 === "string")
+      return _arrayLikeToArray(o2, minLen);
+    var n2 = Object.prototype.toString.call(o2).slice(8, -1);
+    if (n2 === "Object" && o2.constructor)
+      n2 = o2.constructor.name;
+    if (n2 === "Map" || n2 === "Set")
+      return Array.from(o2);
+    if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2))
+      return _arrayLikeToArray(o2, minLen);
+  }
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
+      return Array.from(iter);
+  }
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr))
+      return _arrayLikeToArray(arr);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length)
+      len = arr.length;
+    for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) {
+      arr2[i2] = arr[i2];
+    }
+    return arr2;
+  }
+  function _defineProperty2(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  var CALENDAR_TYPES = {
+    ARABIC: "Arabic",
+    HEBREW: "Hebrew",
+    ISO_8601: "ISO 8601",
+    US: "US"
+  };
+  var CALENDAR_TYPE_LOCALES = (_CALENDAR_TYPE_LOCALE = {}, _defineProperty2(_CALENDAR_TYPE_LOCALE, CALENDAR_TYPES.US, ["en-CA", "en-US", "es-AR", "es-BO", "es-CL", "es-CO", "es-CR", "es-DO", "es-EC", "es-GT", "es-HN", "es-MX", "es-NI", "es-PA", "es-PE", "es-PR", "es-SV", "es-VE", "pt-BR"]), _defineProperty2(_CALENDAR_TYPE_LOCALE, CALENDAR_TYPES.ARABIC, [
+    "ar",
+    "ar-AE",
+    "ar-BH",
+    "ar-DZ",
+    "ar-EG",
+    "ar-IQ",
+    "ar-JO",
+    "ar-KW",
+    "ar-LY",
+    "ar-OM",
+    "ar-QA",
+    "ar-SA",
+    "ar-SD",
+    "ar-SY",
+    "ar-YE",
+    "dv",
+    "dv-MV",
+    "ps",
+    "ps-AR"
+  ]), _defineProperty2(_CALENDAR_TYPE_LOCALE, CALENDAR_TYPES.HEBREW, ["he", "he-IL"]), _CALENDAR_TYPE_LOCALE);
+  var WEEKDAYS = _toConsumableArray(Array(7)).map(function(el, index2) {
+    return index2;
+  });
+
+  // node_modules/react-calendar/dist/esm/shared/dateFormatter.js
+  init_react_shim();
+  var formatterCache = new Map();
+  function getFormatter(options) {
+    return function(locale, date) {
+      var localeWithDefault = locale || esm_default();
+      if (!formatterCache.has(localeWithDefault)) {
+        formatterCache.set(localeWithDefault, new Map());
+      }
+      var formatterCacheLocale = formatterCache.get(localeWithDefault);
+      if (!formatterCacheLocale.has(options)) {
+        formatterCacheLocale.set(options, new Intl.DateTimeFormat(localeWithDefault, options).format);
+      }
+      return formatterCacheLocale.get(options)(date);
+    };
+  }
+  function toSafeHour(date) {
+    var safeDate = new Date(date);
+    return new Date(safeDate.setHours(12));
+  }
+  function getSafeFormatter(options) {
+    return function(locale, date) {
+      return getFormatter(options)(locale, toSafeHour(date));
+    };
+  }
+  var formatDateOptions = {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric"
+  };
+  var formatDayOptions = {
+    day: "numeric"
+  };
+  var formatLongDateOptions = {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  };
+  var formatMonthOptions = {
+    month: "long"
+  };
+  var formatMonthYearOptions = {
+    month: "long",
+    year: "numeric"
+  };
+  var formatShortWeekdayOptions = {
+    weekday: "short"
+  };
+  var formatWeekdayOptions = {
+    weekday: "long"
+  };
+  var formatYearOptions = {
+    year: "numeric"
+  };
+  var formatDate = getSafeFormatter(formatDateOptions);
+  var formatDay = getSafeFormatter(formatDayOptions);
+  var formatLongDate = getSafeFormatter(formatLongDateOptions);
+  var formatMonth = getSafeFormatter(formatMonthOptions);
+  var formatMonthYear = getSafeFormatter(formatMonthYearOptions);
+  var formatShortWeekday = getSafeFormatter(formatShortWeekdayOptions);
+  var formatWeekday = getSafeFormatter(formatWeekdayOptions);
+  var formatYear = getSafeFormatter(formatYearOptions);
+
+  // node_modules/react-calendar/dist/esm/shared/dates.js
+  var SUNDAY = WEEKDAYS[0];
+  var FRIDAY = WEEKDAYS[5];
+  var SATURDAY = WEEKDAYS[6];
+  function getDayOfWeek(date) {
+    var calendarType = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : CALENDAR_TYPES.ISO_8601;
+    var weekday = date.getDay();
+    switch (calendarType) {
+      case CALENDAR_TYPES.ISO_8601:
+        return (weekday + 6) % 7;
+      case CALENDAR_TYPES.ARABIC:
+        return (weekday + 1) % 7;
+      case CALENDAR_TYPES.HEBREW:
+      case CALENDAR_TYPES.US:
+        return weekday;
+      default:
+        throw new Error("Unsupported calendar type.");
+    }
+  }
+  function getBeginOfCenturyYear(date) {
+    var beginOfCentury = getCenturyStart(date);
+    return getYear(beginOfCentury);
+  }
+  function getBeginOfDecadeYear(date) {
+    var beginOfDecade = getDecadeStart(date);
+    return getYear(beginOfDecade);
+  }
+  function getBeginOfWeek(date) {
+    var calendarType = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : CALENDAR_TYPES.ISO_8601;
+    var year = getYear(date);
+    var monthIndex = getMonth(date);
+    var day = date.getDate() - getDayOfWeek(date, calendarType);
+    return new Date(year, monthIndex, day);
+  }
+  function getWeekNumber(date) {
+    var calendarType = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : CALENDAR_TYPES.ISO_8601;
+    var calendarTypeForWeekNumber = calendarType === CALENDAR_TYPES.US ? CALENDAR_TYPES.US : CALENDAR_TYPES.ISO_8601;
+    var beginOfWeek = getBeginOfWeek(date, calendarType);
+    var year = getYear(date) + 1;
+    var dayInWeekOne;
+    var beginOfFirstWeek;
+    do {
+      dayInWeekOne = new Date(year, 0, calendarTypeForWeekNumber === CALENDAR_TYPES.ISO_8601 ? 4 : 1);
+      beginOfFirstWeek = getBeginOfWeek(dayInWeekOne, calendarType);
+      year -= 1;
+    } while (date < beginOfFirstWeek);
+    return Math.round((beginOfWeek - beginOfFirstWeek) / (864e5 * 7)) + 1;
+  }
+  function getBegin(rangeType, date) {
+    switch (rangeType) {
+      case "century":
+        return getCenturyStart(date);
+      case "decade":
+        return getDecadeStart(date);
+      case "year":
+        return getYearStart(date);
+      case "month":
+        return getMonthStart(date);
+      case "day":
+        return getDayStart(date);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  }
+  function getBeginPrevious(rangeType, date) {
+    switch (rangeType) {
+      case "century":
+        return getPreviousCenturyStart(date);
+      case "decade":
+        return getPreviousDecadeStart(date);
+      case "year":
+        return getPreviousYearStart(date);
+      case "month":
+        return getPreviousMonthStart(date);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  }
+  function getBeginNext(rangeType, date) {
+    switch (rangeType) {
+      case "century":
+        return getNextCenturyStart(date);
+      case "decade":
+        return getNextDecadeStart(date);
+      case "year":
+        return getNextYearStart(date);
+      case "month":
+        return getNextMonthStart(date);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  }
+  var getBeginPrevious2 = function getBeginPrevious22(rangeType, date) {
+    switch (rangeType) {
+      case "decade":
+        return getPreviousDecadeStart(date, -100);
+      case "year":
+        return getPreviousYearStart(date, -10);
+      case "month":
+        return getPreviousMonthStart(date, -12);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  };
+  var getBeginNext2 = function getBeginNext22(rangeType, date) {
+    switch (rangeType) {
+      case "decade":
+        return getNextDecadeStart(date, 100);
+      case "year":
+        return getNextYearStart(date, 10);
+      case "month":
+        return getNextMonthStart(date, 12);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  };
+  function getEnd(rangeType, date) {
+    switch (rangeType) {
+      case "century":
+        return getCenturyEnd(date);
+      case "decade":
+        return getDecadeEnd(date);
+      case "year":
+        return getYearEnd(date);
+      case "month":
+        return getMonthEnd(date);
+      case "day":
+        return getDayEnd(date);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  }
+  function getEndPrevious(rangeType, date) {
+    switch (rangeType) {
+      case "century":
+        return getPreviousCenturyEnd(date);
+      case "decade":
+        return getPreviousDecadeEnd(date);
+      case "year":
+        return getPreviousYearEnd(date);
+      case "month":
+        return getPreviousMonthEnd(date);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  }
+  var getEndPrevious2 = function getEndPrevious22(rangeType, date) {
+    switch (rangeType) {
+      case "decade":
+        return getPreviousDecadeEnd(date, -100);
+      case "year":
+        return getPreviousYearEnd(date, -10);
+      case "month":
+        return getPreviousMonthEnd(date, -12);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  };
+  function getRange(rangeType, date) {
+    switch (rangeType) {
+      case "century":
+        return getCenturyRange(date);
+      case "decade":
+        return getDecadeRange(date);
+      case "year":
+        return getYearRange(date);
+      case "month":
+        return getMonthRange(date);
+      case "day":
+        return getDayRange(date);
+      default:
+        throw new Error("Invalid rangeType: ".concat(rangeType));
+    }
+  }
+  function getValueRange(rangeType, date1, date2) {
+    var rawNextValue = [date1, date2].sort(function(a2, b2) {
+      return a2 - b2;
+    });
+    return [getBegin(rangeType, rawNextValue[0]), getEnd(rangeType, rawNextValue[1])];
+  }
+  function toYearLabel(locale) {
+    var formatYear2 = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : formatYear;
+    var dates = arguments.length > 2 ? arguments[2] : void 0;
+    return dates.map(function(date) {
+      return formatYear2(locale, date);
+    }).join(" \u2013 ");
+  }
+  function getCenturyLabel(locale, formatYear2, date) {
+    return toYearLabel(locale, formatYear2, getCenturyRange(date));
+  }
+  function getDecadeLabel(locale, formatYear2, date) {
+    return toYearLabel(locale, formatYear2, getDecadeRange(date));
+  }
+  function isWeekend(date) {
+    var calendarType = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : CALENDAR_TYPES.ISO_8601;
+    var weekday = date.getDay();
+    switch (calendarType) {
+      case CALENDAR_TYPES.ARABIC:
+      case CALENDAR_TYPES.HEBREW:
+        return weekday === FRIDAY || weekday === SATURDAY;
+      case CALENDAR_TYPES.ISO_8601:
+      case CALENDAR_TYPES.US:
+        return weekday === SATURDAY || weekday === SUNDAY;
+      default:
+        throw new Error("Unsupported calendar type.");
+    }
+  }
+
+  // node_modules/react-calendar/dist/esm/shared/propTypes.js
+  init_react_shim();
+  var import_prop_types = __toModule(require_prop_types());
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+    return _typeof = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(obj2) {
+      return typeof obj2;
+    } : function(obj2) {
+      return obj2 && typeof Symbol == "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+    }, _typeof(obj);
+  }
+  var calendarTypes = Object.values(CALENDAR_TYPES);
+  var allViews = ["century", "decade", "year", "month"];
+  var isCalendarType = import_prop_types.default.oneOf(calendarTypes);
+  var isClassName = import_prop_types.default.oneOfType([import_prop_types.default.string, import_prop_types.default.arrayOf(import_prop_types.default.string)]);
+  var isMinDate = function isMinDate2(props, propName, componentName) {
+    var minDate = props[propName];
+    if (!minDate) {
+      return null;
+    }
+    if (!(minDate instanceof Date)) {
+      return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
+    }
+    var maxDate = props.maxDate;
+    if (maxDate && minDate > maxDate) {
+      return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate), "` supplied to `").concat(componentName, "`, minDate cannot be larger than maxDate."));
+    }
+    return null;
+  };
+  var isMaxDate = function isMaxDate2(props, propName, componentName) {
+    var maxDate = props[propName];
+    if (!maxDate) {
+      return null;
+    }
+    if (!(maxDate instanceof Date)) {
+      return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
+    }
+    var minDate = props.minDate;
+    if (minDate && maxDate < minDate) {
+      return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, maxDate cannot be smaller than minDate."));
+    }
+    return null;
+  };
+  var isRef = import_prop_types.default.oneOfType([import_prop_types.default.func, import_prop_types.default.shape({
+    current: import_prop_types.default.any
+  })]);
+  var isValue = import_prop_types.default.oneOfType([import_prop_types.default.instanceOf(Date), import_prop_types.default.arrayOf(import_prop_types.default.instanceOf(Date))]);
+  var isViews = import_prop_types.default.arrayOf(import_prop_types.default.oneOf(allViews));
+  var isView = function isView2(props, propName, componentName) {
+    var view = props[propName];
+    var views = props.views;
+    var allowedViews = views || allViews;
+    if (view !== void 0 && allowedViews.indexOf(view) === -1) {
+      return new Error("Invalid prop `".concat(propName, "` of value `").concat(view, "` supplied to `").concat(componentName, "`, expected one of [").concat(allowedViews.map(function(a2) {
+        return '"'.concat(a2, '"');
+      }).join(", "), "]."));
+    }
+    return null;
+  };
+  isView.isRequired = function(props, propName, componentName) {
+    var view = props[propName];
+    if (!view) {
+      return new Error("The prop `".concat(propName, "` is marked as required in `").concat(componentName, "`, but its value is `").concat(view, "`."));
+    }
+    return isView(props, propName, componentName);
+  };
+  var tileGroupProps = {
+    activeStartDate: import_prop_types.default.instanceOf(Date).isRequired,
+    hover: import_prop_types.default.instanceOf(Date),
+    locale: import_prop_types.default.string,
+    maxDate: isMaxDate,
+    minDate: isMinDate,
+    onClick: import_prop_types.default.func,
+    onMouseOver: import_prop_types.default.func,
+    tileClassName: import_prop_types.default.oneOfType([import_prop_types.default.func, isClassName]),
+    tileContent: import_prop_types.default.oneOfType([import_prop_types.default.func, import_prop_types.default.node]),
+    value: isValue,
+    valueType: import_prop_types.default.string
+  };
+  var tileProps = {
+    activeStartDate: import_prop_types.default.instanceOf(Date).isRequired,
+    classes: import_prop_types.default.arrayOf(import_prop_types.default.string).isRequired,
+    date: import_prop_types.default.instanceOf(Date).isRequired,
+    locale: import_prop_types.default.string,
+    maxDate: isMaxDate,
+    minDate: isMinDate,
+    onClick: import_prop_types.default.func,
+    onMouseOver: import_prop_types.default.func,
+    style: import_prop_types.default.objectOf(import_prop_types.default.oneOfType([import_prop_types.default.string, import_prop_types.default.number])),
+    tileClassName: import_prop_types.default.oneOfType([import_prop_types.default.func, isClassName]),
+    tileContent: import_prop_types.default.oneOfType([import_prop_types.default.func, import_prop_types.default.node]),
+    tileDisabled: import_prop_types.default.func
+  };
+
+  // node_modules/react-calendar/dist/esm/Calendar/Navigation.js
+  var className = "react-calendar__navigation";
+  function Navigation3(_ref) {
+    var activeStartDate = _ref.activeStartDate, drillUp = _ref.drillUp, _ref$formatMonthYear = _ref.formatMonthYear, formatMonthYear2 = _ref$formatMonthYear === void 0 ? formatMonthYear : _ref$formatMonthYear, _ref$formatYear = _ref.formatYear, formatYear2 = _ref$formatYear === void 0 ? formatYear : _ref$formatYear, locale = _ref.locale, maxDate = _ref.maxDate, minDate = _ref.minDate, _ref$navigationAriaLa = _ref.navigationAriaLabel, navigationAriaLabel = _ref$navigationAriaLa === void 0 ? "" : _ref$navigationAriaLa, navigationAriaLive = _ref.navigationAriaLive, navigationLabel = _ref.navigationLabel, _ref$next2AriaLabel = _ref.next2AriaLabel, next2AriaLabel = _ref$next2AriaLabel === void 0 ? "" : _ref$next2AriaLabel, _ref$next2Label = _ref.next2Label, next2Label = _ref$next2Label === void 0 ? "\xBB" : _ref$next2Label, _ref$nextAriaLabel = _ref.nextAriaLabel, nextAriaLabel = _ref$nextAriaLabel === void 0 ? "" : _ref$nextAriaLabel, _ref$nextLabel = _ref.nextLabel, nextLabel = _ref$nextLabel === void 0 ? "\u203A" : _ref$nextLabel, _ref$prev2AriaLabel = _ref.prev2AriaLabel, prev2AriaLabel = _ref$prev2AriaLabel === void 0 ? "" : _ref$prev2AriaLabel, _ref$prev2Label = _ref.prev2Label, prev2Label = _ref$prev2Label === void 0 ? "\xAB" : _ref$prev2Label, _ref$prevAriaLabel = _ref.prevAriaLabel, prevAriaLabel = _ref$prevAriaLabel === void 0 ? "" : _ref$prevAriaLabel, _ref$prevLabel = _ref.prevLabel, prevLabel = _ref$prevLabel === void 0 ? "\u2039" : _ref$prevLabel, setActiveStartDate = _ref.setActiveStartDate, showDoubleView = _ref.showDoubleView, view = _ref.view, views = _ref.views;
+    var drillUpAvailable = views.indexOf(view) > 0;
+    var shouldShowPrevNext2Buttons = view !== "century";
+    var previousActiveStartDate = getBeginPrevious(view, activeStartDate);
+    var previousActiveStartDate2 = shouldShowPrevNext2Buttons && getBeginPrevious2(view, activeStartDate);
+    var nextActiveStartDate = getBeginNext(view, activeStartDate);
+    var nextActiveStartDate2 = shouldShowPrevNext2Buttons && getBeginNext2(view, activeStartDate);
+    var prevButtonDisabled = function() {
+      if (previousActiveStartDate.getFullYear() < 0) {
+        return true;
+      }
+      var previousActiveEndDate = getEndPrevious(view, activeStartDate);
+      return minDate && minDate >= previousActiveEndDate;
+    }();
+    var prev2ButtonDisabled = shouldShowPrevNext2Buttons && function() {
+      if (previousActiveStartDate2.getFullYear() < 0) {
+        return true;
+      }
+      var previousActiveEndDate = getEndPrevious2(view, activeStartDate);
+      return minDate && minDate >= previousActiveEndDate;
+    }();
+    var nextButtonDisabled = maxDate && maxDate < nextActiveStartDate;
+    var next2ButtonDisabled = shouldShowPrevNext2Buttons && maxDate && maxDate < nextActiveStartDate2;
+    function onClickPrevious() {
+      setActiveStartDate(previousActiveStartDate, "prev");
+    }
+    function onClickPrevious2() {
+      setActiveStartDate(previousActiveStartDate2, "prev2");
+    }
+    function onClickNext() {
+      setActiveStartDate(nextActiveStartDate, "next");
+    }
+    function onClickNext2() {
+      setActiveStartDate(nextActiveStartDate2, "next2");
+    }
+    function renderLabel(date) {
+      var label = function() {
+        switch (view) {
+          case "century":
+            return getCenturyLabel(locale, formatYear2, date);
+          case "decade":
+            return getDecadeLabel(locale, formatYear2, date);
+          case "year":
+            return formatYear2(locale, date);
+          case "month":
+            return formatMonthYear2(locale, date);
+          default:
+            throw new Error("Invalid view: ".concat(view, "."));
+        }
+      }();
+      return navigationLabel ? navigationLabel({
+        date,
+        label,
+        locale: locale || getUserLocale(),
+        view
+      }) : label;
+    }
+    function renderButton() {
+      var labelClassName = "".concat(className, "__label");
+      return /* @__PURE__ */ import_react8.default.createElement("button", {
+        "aria-label": navigationAriaLabel,
+        "aria-live": navigationAriaLive,
+        className: labelClassName,
+        disabled: !drillUpAvailable,
+        onClick: drillUp,
+        style: {
+          flexGrow: 1
+        },
+        type: "button"
+      }, /* @__PURE__ */ import_react8.default.createElement("span", {
+        className: "".concat(labelClassName, "__labelText ").concat(labelClassName, "__labelText--from")
+      }, renderLabel(activeStartDate)), showDoubleView && /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement("span", {
+        className: "".concat(labelClassName, "__divider")
+      }, " \u2013 "), /* @__PURE__ */ import_react8.default.createElement("span", {
+        className: "".concat(labelClassName, "__labelText ").concat(labelClassName, "__labelText--to")
+      }, renderLabel(nextActiveStartDate))));
+    }
+    return /* @__PURE__ */ import_react8.default.createElement("div", {
+      className
+    }, prev2Label !== null && shouldShowPrevNext2Buttons && /* @__PURE__ */ import_react8.default.createElement("button", {
+      "aria-label": prev2AriaLabel,
+      className: "".concat(className, "__arrow ").concat(className, "__prev2-button"),
+      disabled: prev2ButtonDisabled,
+      onClick: onClickPrevious2,
+      type: "button"
+    }, prev2Label), prevLabel !== null && /* @__PURE__ */ import_react8.default.createElement("button", {
+      "aria-label": prevAriaLabel,
+      className: "".concat(className, "__arrow ").concat(className, "__prev-button"),
+      disabled: prevButtonDisabled,
+      onClick: onClickPrevious,
+      type: "button"
+    }, prevLabel), renderButton(), nextLabel !== null && /* @__PURE__ */ import_react8.default.createElement("button", {
+      "aria-label": nextAriaLabel,
+      className: "".concat(className, "__arrow ").concat(className, "__next-button"),
+      disabled: nextButtonDisabled,
+      onClick: onClickNext,
+      type: "button"
+    }, nextLabel), next2Label !== null && shouldShowPrevNext2Buttons && /* @__PURE__ */ import_react8.default.createElement("button", {
+      "aria-label": next2AriaLabel,
+      className: "".concat(className, "__arrow ").concat(className, "__next2-button"),
+      disabled: next2ButtonDisabled,
+      onClick: onClickNext2,
+      type: "button"
+    }, next2Label));
+  }
+  Navigation3.propTypes = {
+    activeStartDate: import_prop_types2.default.instanceOf(Date).isRequired,
+    drillUp: import_prop_types2.default.func.isRequired,
+    formatMonthYear: import_prop_types2.default.func,
+    formatYear: import_prop_types2.default.func,
+    locale: import_prop_types2.default.string,
+    maxDate: import_prop_types2.default.instanceOf(Date),
+    minDate: import_prop_types2.default.instanceOf(Date),
+    navigationAriaLabel: import_prop_types2.default.string,
+    navigationAriaLive: import_prop_types2.default.string,
+    navigationLabel: import_prop_types2.default.func,
+    next2AriaLabel: import_prop_types2.default.string,
+    next2Label: import_prop_types2.default.node,
+    nextAriaLabel: import_prop_types2.default.string,
+    nextLabel: import_prop_types2.default.node,
+    prev2AriaLabel: import_prop_types2.default.string,
+    prev2Label: import_prop_types2.default.node,
+    prevAriaLabel: import_prop_types2.default.string,
+    prevLabel: import_prop_types2.default.node,
+    setActiveStartDate: import_prop_types2.default.func.isRequired,
+    showDoubleView: import_prop_types2.default.bool,
+    view: isView.isRequired,
+    views: isViews.isRequired
+  };
+
+  // node_modules/react-calendar/dist/esm/CenturyView.js
+  init_react_shim();
+  var import_react14 = __toModule(require_react());
+
+  // node_modules/react-calendar/dist/esm/CenturyView/Decades.js
+  init_react_shim();
+  var import_react13 = __toModule(require_react());
+
+  // node_modules/react-calendar/dist/esm/TileGroup.js
+  init_react_shim();
+  var import_react10 = __toModule(require_react());
+  var import_prop_types4 = __toModule(require_prop_types());
+
+  // node_modules/react-calendar/dist/esm/Flex.js
+  init_react_shim();
+  var import_react9 = __toModule(require_react());
+  var import_prop_types3 = __toModule(require_prop_types());
+  var _excluded3 = ["children", "className", "direction", "count", "offset", "style", "wrap"];
+  function _extends3() {
+    _extends3 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends3.apply(this, arguments);
+  }
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+        _defineProperty3(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty3(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _objectWithoutProperties(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose2(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose2(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  function toPercent(num) {
+    return "".concat(num, "%");
+  }
+  function Flex(_ref) {
+    var children = _ref.children, className8 = _ref.className, direction = _ref.direction, count = _ref.count, offset = _ref.offset, style = _ref.style, wrap = _ref.wrap, otherProps = _objectWithoutProperties(_ref, _excluded3);
+    return /* @__PURE__ */ import_react9.default.createElement("div", _extends3({
+      className: className8,
+      style: _objectSpread({
+        display: "flex",
+        flexDirection: direction,
+        flexWrap: wrap ? "wrap" : "no-wrap"
+      }, style)
+    }, otherProps), import_react9.default.Children.map(children, function(child, index2) {
+      return /* @__PURE__ */ import_react9.default.cloneElement(child, _objectSpread(_objectSpread({}, child.props), {}, {
+        style: {
+          flexBasis: toPercent(100 / count),
+          flexShrink: 0,
+          flexGrow: 0,
+          overflow: "hidden",
+          marginLeft: offset && index2 === 0 ? toPercent(100 * offset / count) : null
+        }
+      }));
+    }));
+  }
+  Flex.propTypes = {
+    children: import_prop_types3.default.node,
+    className: import_prop_types3.default.string,
+    count: import_prop_types3.default.number.isRequired,
+    direction: import_prop_types3.default.string,
+    offset: import_prop_types3.default.number,
+    style: import_prop_types3.default.objectOf(import_prop_types3.default.oneOfType([import_prop_types3.default.string, import_prop_types3.default.number])),
+    wrap: import_prop_types3.default.bool
+  };
+
+  // node_modules/react-calendar/dist/esm/shared/utils.js
+  init_react_shim();
+  function _toConsumableArray2(arr) {
+    return _arrayWithoutHoles2(arr) || _iterableToArray2(arr) || _unsupportedIterableToArray2(arr) || _nonIterableSpread2();
+  }
+  function _nonIterableSpread2() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _unsupportedIterableToArray2(o2, minLen) {
+    if (!o2)
+      return;
+    if (typeof o2 === "string")
+      return _arrayLikeToArray2(o2, minLen);
+    var n2 = Object.prototype.toString.call(o2).slice(8, -1);
+    if (n2 === "Object" && o2.constructor)
+      n2 = o2.constructor.name;
+    if (n2 === "Map" || n2 === "Set")
+      return Array.from(o2);
+    if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2))
+      return _arrayLikeToArray2(o2, minLen);
+  }
+  function _iterableToArray2(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
+      return Array.from(iter);
+  }
+  function _arrayWithoutHoles2(arr) {
+    if (Array.isArray(arr))
+      return _arrayLikeToArray2(arr);
+  }
+  function _arrayLikeToArray2(arr, len) {
+    if (len == null || len > arr.length)
+      len = arr.length;
+    for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) {
+      arr2[i2] = arr[i2];
+    }
+    return arr2;
+  }
+  function between(value, min, max) {
+    if (min && min > value) {
+      return min;
+    }
+    if (max && max < value) {
+      return max;
+    }
+    return value;
+  }
+  function isValueWithinRange(value, range) {
+    return range[0] <= value && range[1] >= value;
+  }
+  function isRangeWithinRange(greaterRange, smallerRange) {
+    return greaterRange[0] <= smallerRange[0] && greaterRange[1] >= smallerRange[1];
+  }
+  function doRangesOverlap(range1, range2) {
+    return isValueWithinRange(range1[0], range2) || isValueWithinRange(range1[1], range2);
+  }
+  function getRangeClassNames(valueRange, dateRange, baseClassName2) {
+    var isRange = doRangesOverlap(dateRange, valueRange);
+    var classes = [];
+    if (isRange) {
+      classes.push(baseClassName2);
+      var isRangeStart = isValueWithinRange(valueRange[0], dateRange);
+      var isRangeEnd = isValueWithinRange(valueRange[1], dateRange);
+      if (isRangeStart) {
+        classes.push("".concat(baseClassName2, "Start"));
+      }
+      if (isRangeEnd) {
+        classes.push("".concat(baseClassName2, "End"));
+      }
+      if (isRangeStart && isRangeEnd) {
+        classes.push("".concat(baseClassName2, "BothEnds"));
+      }
+    }
+    return classes;
+  }
+  function getTileClasses() {
+    var _ref = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, value = _ref.value, valueType = _ref.valueType, date = _ref.date, dateType = _ref.dateType, hover = _ref.hover;
+    var className8 = "react-calendar__tile";
+    var classes = [className8];
+    if (!date) {
+      return classes;
+    }
+    if (!Array.isArray(date) && !dateType) {
+      throw new Error("getTileClasses(): Unable to get tile activity classes because one or more required arguments were not passed.");
+    }
+    var now = new Date();
+    var dateRange = Array.isArray(date) ? date : getRange(dateType, date);
+    if (isValueWithinRange(now, dateRange)) {
+      classes.push("".concat(className8, "--now"));
+    }
+    if (!value) {
+      return classes;
+    }
+    if (!Array.isArray(value) && !valueType) {
+      throw new Error("getTileClasses(): Unable to get tile activity classes because one or more required arguments were not passed.");
+    }
+    var valueRange = Array.isArray(value) ? value : getRange(valueType, value);
+    if (isRangeWithinRange(valueRange, dateRange)) {
+      classes.push("".concat(className8, "--active"));
+    } else if (doRangesOverlap(valueRange, dateRange)) {
+      classes.push("".concat(className8, "--hasActive"));
+    }
+    var valueRangeClassNames = getRangeClassNames(valueRange, dateRange, "".concat(className8, "--range"));
+    classes.push.apply(classes, _toConsumableArray2(valueRangeClassNames));
+    var valueArray = [].concat(value);
+    if (hover && valueArray.length === 1) {
+      var hoverRange = hover > valueRange[0] ? [valueRange[0], hover] : [hover, valueRange[0]];
+      var hoverRangeClassNames = getRangeClassNames(hoverRange, dateRange, "".concat(className8, "--hover"));
+      classes.push.apply(classes, _toConsumableArray2(hoverRangeClassNames));
+    }
+    return classes;
+  }
+
+  // node_modules/react-calendar/dist/esm/TileGroup.js
+  var _excluded4 = ["className", "count", "dateTransform", "dateType", "end", "hover", "offset", "start", "step", "tile", "value", "valueType"];
+  function ownKeys2(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread2(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys2(Object(source), true).forEach(function(key) {
+        _defineProperty4(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys2(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty4(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends4() {
+    _extends4 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends4.apply(this, arguments);
+  }
+  function _objectWithoutProperties2(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose3(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose3(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  function TileGroup(_ref) {
+    var className8 = _ref.className, _ref$count = _ref.count, count = _ref$count === void 0 ? 3 : _ref$count, dateTransform = _ref.dateTransform, dateType = _ref.dateType, end = _ref.end, hover = _ref.hover, offset = _ref.offset, start = _ref.start, _ref$step = _ref.step, step = _ref$step === void 0 ? 1 : _ref$step, Tile2 = _ref.tile, value = _ref.value, valueType = _ref.valueType, tileProps2 = _objectWithoutProperties2(_ref, _excluded4);
+    var tiles = [];
+    for (var point = start; point <= end; point += step) {
+      var date = dateTransform(point);
+      tiles.push(/* @__PURE__ */ import_react10.default.createElement(Tile2, _extends4({
+        key: date.getTime(),
+        classes: getTileClasses({
+          value,
+          valueType,
+          date,
+          dateType,
+          hover
+        }),
+        date,
+        point
+      }, tileProps2)));
+    }
+    return /* @__PURE__ */ import_react10.default.createElement(Flex, {
+      className: className8,
+      count,
+      offset,
+      wrap: true
+    }, tiles);
+  }
+  TileGroup.propTypes = _objectSpread2(_objectSpread2({}, tileGroupProps), {}, {
+    activeStartDate: import_prop_types4.default.instanceOf(Date),
+    count: import_prop_types4.default.number,
+    dateTransform: import_prop_types4.default.func.isRequired,
+    dateType: import_prop_types4.default.string,
+    offset: import_prop_types4.default.number,
+    step: import_prop_types4.default.number,
+    tile: import_prop_types4.default.func.isRequired
+  });
+
+  // node_modules/react-calendar/dist/esm/CenturyView/Decade.js
+  init_react_shim();
+  var import_react12 = __toModule(require_react());
+  var import_prop_types6 = __toModule(require_prop_types());
+
+  // node_modules/react-calendar/dist/esm/Tile.js
+  init_react_shim();
+  var import_react11 = __toModule(require_react());
+  var import_prop_types5 = __toModule(require_prop_types());
+  function _typeof2(obj) {
+    "@babel/helpers - typeof";
+    return _typeof2 = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(obj2) {
+      return typeof obj2;
+    } : function(obj2) {
+      return obj2 && typeof Symbol == "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+    }, _typeof2(obj);
+  }
+  function ownKeys3(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread3(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys3(Object(source), true).forEach(function(key) {
+        _defineProperty5(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys3(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _defineProperties(target, props) {
+    for (var i2 = 0; i2 < props.length; i2++) {
+      var descriptor = props[i2];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor)
+        descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps)
+      _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps)
+      _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", { writable: false });
+    return Constructor;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
+    Object.defineProperty(subClass, "prototype", { writable: false });
+    if (superClass)
+      _setPrototypeOf(subClass, superClass);
+  }
+  function _setPrototypeOf(o2, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf3(o3, p2) {
+      o3.__proto__ = p2;
+      return o3;
+    };
+    return _setPrototypeOf(o2, p);
+  }
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived), result;
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof2(call) === "object" || typeof call === "function")) {
+      return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
+    }
+    return _assertThisInitialized(self);
+  }
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return self;
+  }
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct)
+      return false;
+    if (Reflect.construct.sham)
+      return false;
+    if (typeof Proxy === "function")
+      return true;
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+      }));
+      return true;
+    } catch (e2) {
+      return false;
+    }
+  }
+  function _getPrototypeOf(o2) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf3(o3) {
+      return o3.__proto__ || Object.getPrototypeOf(o3);
+    };
+    return _getPrototypeOf(o2);
+  }
+  function _defineProperty5(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function datesAreDifferent(date1, date2) {
+    return date1 && !date2 || !date1 && date2 || date1 && date2 && date1.getTime() !== date2.getTime();
+  }
+  function getValue(nextProps, prop) {
+    var activeStartDate = nextProps.activeStartDate, date = nextProps.date, view = nextProps.view;
+    return typeof prop === "function" ? prop({
+      activeStartDate,
+      date,
+      view
+    }) : prop;
+  }
+  var Tile = /* @__PURE__ */ function(_Component) {
+    _inherits(Tile2, _Component);
+    var _super = _createSuper(Tile2);
+    function Tile2() {
+      var _this;
+      _classCallCheck(this, Tile2);
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+      _this = _super.call.apply(_super, [this].concat(args));
+      _defineProperty5(_assertThisInitialized(_this), "state", {});
+      return _this;
+    }
+    _createClass(Tile2, [{
+      key: "render",
+      value: function render2() {
+        var _this$props = this.props, activeStartDate = _this$props.activeStartDate, children = _this$props.children, classes = _this$props.classes, date = _this$props.date, formatAbbr = _this$props.formatAbbr, locale = _this$props.locale, maxDate = _this$props.maxDate, maxDateTransform = _this$props.maxDateTransform, minDate = _this$props.minDate, minDateTransform = _this$props.minDateTransform, onClick = _this$props.onClick, onMouseOver = _this$props.onMouseOver, style = _this$props.style, tileDisabled = _this$props.tileDisabled, view = _this$props.view;
+        var _this$state = this.state, tileClassName = _this$state.tileClassName, tileContent = _this$state.tileContent;
+        return /* @__PURE__ */ import_react11.default.createElement("button", {
+          className: mergeClassNames(classes, tileClassName),
+          disabled: minDate && minDateTransform(minDate) > date || maxDate && maxDateTransform(maxDate) < date || tileDisabled && tileDisabled({
+            activeStartDate,
+            date,
+            view
+          }),
+          onClick: onClick && function(event) {
+            return onClick(date, event);
+          },
+          onFocus: onMouseOver && function() {
+            return onMouseOver(date);
+          },
+          onMouseOver: onMouseOver && function() {
+            return onMouseOver(date);
+          },
+          style,
+          type: "button"
+        }, formatAbbr ? /* @__PURE__ */ import_react11.default.createElement("abbr", {
+          "aria-label": formatAbbr(locale, date)
+        }, children) : children, tileContent);
+      }
+    }], [{
+      key: "getDerivedStateFromProps",
+      value: function getDerivedStateFromProps(nextProps, prevState) {
+        var activeStartDate = nextProps.activeStartDate, tileClassName = nextProps.tileClassName, tileContent = nextProps.tileContent;
+        var nextState = {};
+        if (tileClassName !== prevState.tileClassNameProps || datesAreDifferent(activeStartDate, prevState.activeStartDateProps)) {
+          nextState.tileClassName = getValue(nextProps, tileClassName);
+          nextState.tileClassNameProps = tileClassName;
+        }
+        if (tileContent !== prevState.tileContentProps || datesAreDifferent(activeStartDate, prevState.activeStartDateProps)) {
+          nextState.tileContent = getValue(nextProps, tileContent);
+          nextState.tileContentProps = tileContent;
+        }
+        nextState.activeStartDateProps = activeStartDate;
+        return nextState;
+      }
+    }]);
+    return Tile2;
+  }(import_react11.Component);
+  Tile.propTypes = _objectSpread3(_objectSpread3({}, tileProps), {}, {
+    children: import_prop_types5.default.node.isRequired,
+    formatAbbr: import_prop_types5.default.func,
+    maxDateTransform: import_prop_types5.default.func.isRequired,
+    minDateTransform: import_prop_types5.default.func.isRequired
+  });
+
+  // node_modules/react-calendar/dist/esm/CenturyView/Decade.js
+  var _excluded5 = ["classes", "formatYear"];
+  function ownKeys4(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread4(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys4(Object(source), true).forEach(function(key) {
+        _defineProperty6(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys4(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty6(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends5() {
+    _extends5 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends5.apply(this, arguments);
+  }
+  function _objectWithoutProperties3(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose4(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose4(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  var className2 = "react-calendar__century-view__decades__decade";
+  function Decade(_ref) {
+    var classes = _ref.classes, _ref$formatYear = _ref.formatYear, formatYear2 = _ref$formatYear === void 0 ? formatYear : _ref$formatYear, otherProps = _objectWithoutProperties3(_ref, _excluded5);
+    var date = otherProps.date, locale = otherProps.locale;
+    return /* @__PURE__ */ import_react12.default.createElement(Tile, _extends5({}, otherProps, {
+      classes: [].concat(classes, className2),
+      maxDateTransform: getDecadeEnd,
+      minDateTransform: getDecadeStart,
+      view: "century"
+    }), getDecadeLabel(locale, formatYear2, date));
+  }
+  Decade.propTypes = _objectSpread4(_objectSpread4({}, tileProps), {}, {
+    formatYear: import_prop_types6.default.func
+  });
+
+  // node_modules/react-calendar/dist/esm/CenturyView/Decades.js
+  function ownKeys5(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread5(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys5(Object(source), true).forEach(function(key) {
+        _defineProperty7(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys5(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty7(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends6() {
+    _extends6 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends6.apply(this, arguments);
+  }
+  function Decades(props) {
+    var activeStartDate = props.activeStartDate;
+    var start = getBeginOfCenturyYear(activeStartDate);
+    var end = start + 99;
+    return /* @__PURE__ */ import_react13.default.createElement(TileGroup, _extends6({}, props, {
+      className: "react-calendar__century-view__decades",
+      dateTransform: getDecadeStart,
+      dateType: "decade",
+      end,
+      start,
+      step: 10,
+      tile: Decade
+    }));
+  }
+  Decades.propTypes = _objectSpread5({}, tileGroupProps);
+
+  // node_modules/react-calendar/dist/esm/CenturyView.js
+  function CenturyView(props) {
+    function renderDecades() {
+      return /* @__PURE__ */ import_react14.default.createElement(Decades, props);
+    }
+    return /* @__PURE__ */ import_react14.default.createElement("div", {
+      className: "react-calendar__century-view"
+    }, renderDecades());
+  }
+
+  // node_modules/react-calendar/dist/esm/DecadeView.js
+  init_react_shim();
+  var import_react17 = __toModule(require_react());
+
+  // node_modules/react-calendar/dist/esm/DecadeView/Years.js
+  init_react_shim();
+  var import_react16 = __toModule(require_react());
+
+  // node_modules/react-calendar/dist/esm/DecadeView/Year.js
+  init_react_shim();
+  var import_react15 = __toModule(require_react());
+  var import_prop_types7 = __toModule(require_prop_types());
+  var _excluded6 = ["classes", "formatYear"];
+  function ownKeys6(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread6(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys6(Object(source), true).forEach(function(key) {
+        _defineProperty8(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys6(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty8(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends7() {
+    _extends7 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends7.apply(this, arguments);
+  }
+  function _objectWithoutProperties4(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose5(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose5(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  var className3 = "react-calendar__decade-view__years__year";
+  function Year(_ref) {
+    var classes = _ref.classes, _ref$formatYear = _ref.formatYear, formatYear2 = _ref$formatYear === void 0 ? formatYear : _ref$formatYear, otherProps = _objectWithoutProperties4(_ref, _excluded6);
+    var date = otherProps.date, locale = otherProps.locale;
+    return /* @__PURE__ */ import_react15.default.createElement(Tile, _extends7({}, otherProps, {
+      classes: [].concat(classes, className3),
+      maxDateTransform: getYearEnd,
+      minDateTransform: getYearStart,
+      view: "decade"
+    }), formatYear2(locale, date));
+  }
+  Year.propTypes = _objectSpread6(_objectSpread6({}, tileProps), {}, {
+    formatYear: import_prop_types7.default.func
+  });
+
+  // node_modules/react-calendar/dist/esm/DecadeView/Years.js
+  function ownKeys7(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread7(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys7(Object(source), true).forEach(function(key) {
+        _defineProperty9(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys7(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty9(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends8() {
+    _extends8 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends8.apply(this, arguments);
+  }
+  function Years(props) {
+    var activeStartDate = props.activeStartDate;
+    var start = getBeginOfDecadeYear(activeStartDate);
+    var end = start + 9;
+    return /* @__PURE__ */ import_react16.default.createElement(TileGroup, _extends8({}, props, {
+      className: "react-calendar__decade-view__years",
+      dateTransform: function dateTransform(year) {
+        var date = new Date();
+        date.setFullYear(year, 0, 1);
+        date.setHours(0, 0, 0, 0);
+        return date;
+      },
+      dateType: "year",
+      end,
+      start,
+      tile: Year
+    }));
+  }
+  Years.propTypes = _objectSpread7({}, tileGroupProps);
+
+  // node_modules/react-calendar/dist/esm/DecadeView.js
+  function DecadeView(props) {
+    function renderYears() {
+      return /* @__PURE__ */ import_react17.default.createElement(Years, props);
+    }
+    return /* @__PURE__ */ import_react17.default.createElement("div", {
+      className: "react-calendar__decade-view"
+    }, renderYears());
+  }
+
+  // node_modules/react-calendar/dist/esm/YearView.js
+  init_react_shim();
+  var import_react20 = __toModule(require_react());
+
+  // node_modules/react-calendar/dist/esm/YearView/Months.js
+  init_react_shim();
+  var import_react19 = __toModule(require_react());
+  var import_prop_types9 = __toModule(require_prop_types());
+
+  // node_modules/react-calendar/dist/esm/YearView/Month.js
+  init_react_shim();
+  var import_react18 = __toModule(require_react());
+  var import_prop_types8 = __toModule(require_prop_types());
+  var _excluded7 = ["classes", "formatMonth", "formatMonthYear"];
+  function ownKeys8(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread8(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys8(Object(source), true).forEach(function(key) {
+        _defineProperty10(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys8(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty10(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends9() {
+    _extends9 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends9.apply(this, arguments);
+  }
+  function _objectWithoutProperties5(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose6(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose6(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  var className4 = "react-calendar__year-view__months__month";
+  function Month(_ref) {
+    var classes = _ref.classes, _ref$formatMonth = _ref.formatMonth, formatMonth2 = _ref$formatMonth === void 0 ? formatMonth : _ref$formatMonth, _ref$formatMonthYear = _ref.formatMonthYear, formatMonthYear2 = _ref$formatMonthYear === void 0 ? formatMonthYear : _ref$formatMonthYear, otherProps = _objectWithoutProperties5(_ref, _excluded7);
+    var date = otherProps.date, locale = otherProps.locale;
+    return /* @__PURE__ */ import_react18.default.createElement(Tile, _extends9({}, otherProps, {
+      classes: [].concat(classes, className4),
+      formatAbbr: formatMonthYear2,
+      maxDateTransform: getMonthEnd,
+      minDateTransform: getMonthStart,
+      view: "year"
+    }), formatMonth2(locale, date));
+  }
+  Month.propTypes = _objectSpread8(_objectSpread8({}, tileProps), {}, {
+    formatMonth: import_prop_types8.default.func,
+    formatMonthYear: import_prop_types8.default.func
+  });
+
+  // node_modules/react-calendar/dist/esm/YearView/Months.js
+  function ownKeys9(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread9(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys9(Object(source), true).forEach(function(key) {
+        _defineProperty11(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys9(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty11(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends10() {
+    _extends10 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends10.apply(this, arguments);
+  }
+  function Months(props) {
+    var activeStartDate = props.activeStartDate;
+    var start = 0;
+    var end = 11;
+    var year = getYear(activeStartDate);
+    return /* @__PURE__ */ import_react19.default.createElement(TileGroup, _extends10({}, props, {
+      className: "react-calendar__year-view__months",
+      dateTransform: function dateTransform(monthIndex) {
+        var date = new Date();
+        date.setFullYear(year, monthIndex, 1);
+        date.setHours(0, 0, 0, 0);
+        return date;
+      },
+      dateType: "month",
+      end,
+      start,
+      tile: Month
+    }));
+  }
+  Months.propTypes = _objectSpread9(_objectSpread9({}, tileGroupProps), {}, {
+    locale: import_prop_types9.default.string
+  });
+
+  // node_modules/react-calendar/dist/esm/YearView.js
+  function YearView(props) {
+    function renderMonths() {
+      return /* @__PURE__ */ import_react20.default.createElement(Months, props);
+    }
+    return /* @__PURE__ */ import_react20.default.createElement("div", {
+      className: "react-calendar__year-view"
+    }, renderMonths());
+  }
+
+  // node_modules/react-calendar/dist/esm/MonthView.js
+  init_react_shim();
+  var import_react26 = __toModule(require_react());
+  var import_prop_types15 = __toModule(require_prop_types());
+
+  // node_modules/react-calendar/dist/esm/MonthView/Days.js
+  init_react_shim();
+  var import_react22 = __toModule(require_react());
+  var import_prop_types11 = __toModule(require_prop_types());
+
+  // node_modules/react-calendar/dist/esm/MonthView/Day.js
+  init_react_shim();
+  var import_react21 = __toModule(require_react());
+  var import_prop_types10 = __toModule(require_prop_types());
+  var _excluded8 = ["formatDay", "formatLongDate", "calendarType", "classes", "currentMonthIndex"];
+  function ownKeys10(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread10(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys10(Object(source), true).forEach(function(key) {
+        _defineProperty12(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys10(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty12(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends11() {
+    _extends11 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends11.apply(this, arguments);
+  }
+  function _objectWithoutProperties6(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose7(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose7(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  var className5 = "react-calendar__month-view__days__day";
+  function Day(_ref) {
+    var _ref$formatDay = _ref.formatDay, formatDay2 = _ref$formatDay === void 0 ? formatDay : _ref$formatDay, _ref$formatLongDate = _ref.formatLongDate, formatLongDate2 = _ref$formatLongDate === void 0 ? formatLongDate : _ref$formatLongDate, calendarType = _ref.calendarType, classes = _ref.classes, currentMonthIndex = _ref.currentMonthIndex, otherProps = _objectWithoutProperties6(_ref, _excluded8);
+    var date = otherProps.date, locale = otherProps.locale;
+    return /* @__PURE__ */ import_react21.default.createElement(Tile, _extends11({}, otherProps, {
+      classes: [].concat(classes, className5, isWeekend(date, calendarType) ? "".concat(className5, "--weekend") : null, date.getMonth() !== currentMonthIndex ? "".concat(className5, "--neighboringMonth") : null),
+      formatAbbr: formatLongDate2,
+      maxDateTransform: getDayEnd,
+      minDateTransform: getDayStart,
+      view: "month"
+    }), formatDay2(locale, date));
+  }
+  Day.propTypes = _objectSpread10(_objectSpread10({}, tileProps), {}, {
+    currentMonthIndex: import_prop_types10.default.number.isRequired,
+    formatDay: import_prop_types10.default.func,
+    formatLongDate: import_prop_types10.default.func
+  });
+
+  // node_modules/react-calendar/dist/esm/MonthView/Days.js
+  var _excluded9 = ["showFixedNumberOfWeeks", "showNeighboringMonth"];
+  function ownKeys11(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread11(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys11(Object(source), true).forEach(function(key) {
+        _defineProperty13(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys11(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty13(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends12() {
+    _extends12 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends12.apply(this, arguments);
+  }
+  function _objectWithoutProperties7(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose8(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose8(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  function Days(props) {
+    var activeStartDate = props.activeStartDate, calendarType = props.calendarType;
+    var showFixedNumberOfWeeks = props.showFixedNumberOfWeeks, showNeighboringMonth = props.showNeighboringMonth, otherProps = _objectWithoutProperties7(props, _excluded9);
+    var year = getYear(activeStartDate);
+    var monthIndex = getMonth(activeStartDate);
+    var hasFixedNumberOfWeeks = showFixedNumberOfWeeks || showNeighboringMonth;
+    var dayOfWeek = getDayOfWeek(activeStartDate, calendarType);
+    var offset = hasFixedNumberOfWeeks ? 0 : dayOfWeek;
+    var start = (hasFixedNumberOfWeeks ? -dayOfWeek : 0) + 1;
+    var end = function() {
+      if (showFixedNumberOfWeeks) {
+        return start + 6 * 7 - 1;
+      }
+      var daysInMonth = getDaysInMonth(activeStartDate);
+      if (showNeighboringMonth) {
+        var activeEndDate = new Date();
+        activeEndDate.setFullYear(year, monthIndex, daysInMonth);
+        activeEndDate.setHours(0, 0, 0, 0);
+        var daysUntilEndOfTheWeek = 7 - getDayOfWeek(activeEndDate, calendarType) - 1;
+        return daysInMonth + daysUntilEndOfTheWeek;
+      }
+      return daysInMonth;
+    }();
+    return /* @__PURE__ */ import_react22.default.createElement(TileGroup, _extends12({}, otherProps, {
+      className: "react-calendar__month-view__days",
+      count: 7,
+      currentMonthIndex: monthIndex,
+      dateTransform: function dateTransform(day) {
+        var date = new Date();
+        date.setFullYear(year, monthIndex, day);
+        date.setHours(0, 0, 0, 0);
+        return date;
+      },
+      dateType: "day",
+      end,
+      offset,
+      start,
+      tile: Day
+    }));
+  }
+  Days.propTypes = _objectSpread11({
+    calendarType: isCalendarType.isRequired,
+    showFixedNumberOfWeeks: import_prop_types11.default.bool,
+    showNeighboringMonth: import_prop_types11.default.bool
+  }, tileGroupProps);
+
+  // node_modules/react-calendar/dist/esm/MonthView/Weekdays.js
+  init_react_shim();
+  var import_react23 = __toModule(require_react());
+  var import_prop_types12 = __toModule(require_prop_types());
+  var className6 = "react-calendar__month-view__weekdays";
+  function Weekdays(props) {
+    var calendarType = props.calendarType, _props$formatShortWee = props.formatShortWeekday, formatShortWeekday2 = _props$formatShortWee === void 0 ? formatShortWeekday : _props$formatShortWee, locale = props.locale, onMouseLeave = props.onMouseLeave;
+    var anyDate = new Date();
+    var beginOfMonth = getMonthStart(anyDate);
+    var year = getYear(beginOfMonth);
+    var monthIndex = getMonth(beginOfMonth);
+    var weekdays = [];
+    for (var weekday = 1; weekday <= 7; weekday += 1) {
+      var weekdayDate = new Date(year, monthIndex, weekday - getDayOfWeek(beginOfMonth, calendarType));
+      var abbr = formatWeekday(locale, weekdayDate);
+      weekdays.push(/* @__PURE__ */ import_react23.default.createElement("div", {
+        key: weekday,
+        className: "".concat(className6, "__weekday")
+      }, /* @__PURE__ */ import_react23.default.createElement("abbr", {
+        "aria-label": abbr,
+        title: abbr
+      }, formatShortWeekday2(locale, weekdayDate).replace(".", ""))));
+    }
+    return /* @__PURE__ */ import_react23.default.createElement(Flex, {
+      className: className6,
+      count: 7,
+      onFocus: onMouseLeave,
+      onMouseOver: onMouseLeave
+    }, weekdays);
+  }
+  Weekdays.propTypes = {
+    calendarType: isCalendarType.isRequired,
+    formatShortWeekday: import_prop_types12.default.func,
+    locale: import_prop_types12.default.string,
+    onMouseLeave: import_prop_types12.default.func
+  };
+
+  // node_modules/react-calendar/dist/esm/MonthView/WeekNumbers.js
+  init_react_shim();
+  var import_react25 = __toModule(require_react());
+  var import_prop_types14 = __toModule(require_prop_types());
+
+  // node_modules/react-calendar/dist/esm/MonthView/WeekNumber.js
+  init_react_shim();
+  var import_react24 = __toModule(require_react());
+  var import_prop_types13 = __toModule(require_prop_types());
+  var _excluded10 = ["date", "onClickWeekNumber", "weekNumber"];
+  function _extends13() {
+    _extends13 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends13.apply(this, arguments);
+  }
+  function ownKeys12(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread12(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys12(Object(source), true).forEach(function(key) {
+        _defineProperty14(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys12(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty14(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _objectWithoutProperties8(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose9(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose9(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  var className7 = "react-calendar__tile";
+  function WeekNumber(_ref) {
+    var date = _ref.date, onClickWeekNumber = _ref.onClickWeekNumber, weekNumber = _ref.weekNumber, otherProps = _objectWithoutProperties8(_ref, _excluded10);
+    var props = _objectSpread12({
+      className: className7
+    }, otherProps);
+    var children = /* @__PURE__ */ import_react24.default.createElement("span", null, weekNumber);
+    return onClickWeekNumber ? /* @__PURE__ */ import_react24.default.createElement("button", _extends13({}, props, {
+      onClick: function onClick(event) {
+        return onClickWeekNumber(weekNumber, date, event);
+      },
+      type: "button"
+    }), children) : /* @__PURE__ */ import_react24.default.createElement("div", props, children);
+  }
+  WeekNumber.propTypes = {
+    date: import_prop_types13.default.instanceOf(Date).isRequired,
+    onClickWeekNumber: import_prop_types13.default.func,
+    weekNumber: import_prop_types13.default.node.isRequired
+  };
+
+  // node_modules/react-calendar/dist/esm/MonthView/WeekNumbers.js
+  function WeekNumbers(props) {
+    var activeStartDate = props.activeStartDate, calendarType = props.calendarType, onClickWeekNumber = props.onClickWeekNumber, onMouseLeave = props.onMouseLeave, showFixedNumberOfWeeks = props.showFixedNumberOfWeeks;
+    var numberOfWeeks = function() {
+      if (showFixedNumberOfWeeks) {
+        return 6;
+      }
+      var numberOfDays = getDaysInMonth(activeStartDate);
+      var startWeekday = getDayOfWeek(activeStartDate, calendarType);
+      var days = numberOfDays - (7 - startWeekday);
+      return 1 + Math.ceil(days / 7);
+    }();
+    var dates = function() {
+      var year = getYear(activeStartDate);
+      var monthIndex = getMonth(activeStartDate);
+      var day = getDate(activeStartDate);
+      var result = [];
+      for (var index2 = 0; index2 < numberOfWeeks; index2 += 1) {
+        result.push(getBeginOfWeek(new Date(year, monthIndex, day + index2 * 7), calendarType));
+      }
+      return result;
+    }();
+    var weekNumbers = dates.map(function(date) {
+      return getWeekNumber(date, calendarType);
+    });
+    return /* @__PURE__ */ import_react25.default.createElement(Flex, {
+      className: "react-calendar__month-view__weekNumbers",
+      count: numberOfWeeks,
+      direction: "column",
+      onFocus: onMouseLeave,
+      onMouseOver: onMouseLeave,
+      style: {
+        flexBasis: "calc(100% * (1 / 8)",
+        flexShrink: 0
+      }
+    }, weekNumbers.map(function(weekNumber, weekIndex) {
+      return /* @__PURE__ */ import_react25.default.createElement(WeekNumber, {
+        key: weekNumber,
+        date: dates[weekIndex],
+        onClickWeekNumber,
+        weekNumber
+      });
+    }));
+  }
+  WeekNumbers.propTypes = {
+    activeStartDate: import_prop_types14.default.instanceOf(Date).isRequired,
+    calendarType: isCalendarType.isRequired,
+    onClickWeekNumber: import_prop_types14.default.func,
+    onMouseLeave: import_prop_types14.default.func,
+    showFixedNumberOfWeeks: import_prop_types14.default.bool
+  };
+
+  // node_modules/react-calendar/dist/esm/MonthView.js
+  var _excluded11 = ["calendarType", "formatShortWeekday", "onClickWeekNumber", "showWeekNumbers"];
+  function _extends14() {
+    _extends14 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends14.apply(this, arguments);
+  }
+  function _objectWithoutProperties9(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose10(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose10(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  function getCalendarTypeFromLocale(locale) {
+    return Object.keys(CALENDAR_TYPE_LOCALES).find(function(calendarType) {
+      return CALENDAR_TYPE_LOCALES[calendarType].includes(locale);
+    }) || CALENDAR_TYPES.ISO_8601;
+  }
+  function MonthView(props) {
+    var activeStartDate = props.activeStartDate, locale = props.locale, onMouseLeave = props.onMouseLeave, showFixedNumberOfWeeks = props.showFixedNumberOfWeeks;
+    var _props$calendarType = props.calendarType, calendarType = _props$calendarType === void 0 ? getCalendarTypeFromLocale(locale) : _props$calendarType, formatShortWeekday2 = props.formatShortWeekday, onClickWeekNumber = props.onClickWeekNumber, showWeekNumbers = props.showWeekNumbers, childProps = _objectWithoutProperties9(props, _excluded11);
+    function renderWeekdays() {
+      return /* @__PURE__ */ import_react26.default.createElement(Weekdays, {
+        calendarType,
+        formatShortWeekday: formatShortWeekday2,
+        locale,
+        onMouseLeave
+      });
+    }
+    function renderWeekNumbers() {
+      if (!showWeekNumbers) {
+        return null;
+      }
+      return /* @__PURE__ */ import_react26.default.createElement(WeekNumbers, {
+        activeStartDate,
+        calendarType,
+        onClickWeekNumber,
+        onMouseLeave,
+        showFixedNumberOfWeeks
+      });
+    }
+    function renderDays() {
+      return /* @__PURE__ */ import_react26.default.createElement(Days, _extends14({
+        calendarType
+      }, childProps));
+    }
+    var className8 = "react-calendar__month-view";
+    return /* @__PURE__ */ import_react26.default.createElement("div", {
+      className: mergeClassNames(className8, showWeekNumbers ? "".concat(className8, "--weekNumbers") : "")
+    }, /* @__PURE__ */ import_react26.default.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "flex-end"
+      }
+    }, renderWeekNumbers(), /* @__PURE__ */ import_react26.default.createElement("div", {
+      style: {
+        flexGrow: 1,
+        width: "100%"
+      }
+    }, renderWeekdays(), renderDays())));
+  }
+  MonthView.propTypes = {
+    activeStartDate: import_prop_types15.default.instanceOf(Date).isRequired,
+    calendarType: isCalendarType,
+    formatShortWeekday: import_prop_types15.default.func,
+    locale: import_prop_types15.default.string,
+    onClickWeekNumber: import_prop_types15.default.func,
+    onMouseLeave: import_prop_types15.default.func,
+    showFixedNumberOfWeeks: import_prop_types15.default.bool,
+    showWeekNumbers: import_prop_types15.default.bool
+  };
+
+  // node_modules/react-calendar/dist/esm/Calendar.js
+  var _excluded12 = ["activeStartDate", "defaultActiveStartDate", "defaultValue", "defaultView", "maxDetail", "minDetail", "value", "view"];
+  function _extends15() {
+    _extends15 = Object.assign || function(target) {
+      for (var i2 = 1; i2 < arguments.length; i2++) {
+        var source = arguments[i2];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends15.apply(this, arguments);
+  }
+  function _typeof3(obj) {
+    "@babel/helpers - typeof";
+    return _typeof3 = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(obj2) {
+      return typeof obj2;
+    } : function(obj2) {
+      return obj2 && typeof Symbol == "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+    }, _typeof3(obj);
+  }
+  function _classCallCheck2(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _defineProperties2(target, props) {
+    for (var i2 = 0; i2 < props.length; i2++) {
+      var descriptor = props[i2];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor)
+        descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  function _createClass2(Constructor, protoProps, staticProps) {
+    if (protoProps)
+      _defineProperties2(Constructor.prototype, protoProps);
+    if (staticProps)
+      _defineProperties2(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", { writable: false });
+    return Constructor;
+  }
+  function _inherits2(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
+    Object.defineProperty(subClass, "prototype", { writable: false });
+    if (superClass)
+      _setPrototypeOf2(subClass, superClass);
+  }
+  function _setPrototypeOf2(o2, p) {
+    _setPrototypeOf2 = Object.setPrototypeOf || function _setPrototypeOf3(o3, p2) {
+      o3.__proto__ = p2;
+      return o3;
+    };
+    return _setPrototypeOf2(o2, p);
+  }
+  function _createSuper2(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct2();
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf2(Derived), result;
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf2(this).constructor;
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+      return _possibleConstructorReturn2(this, result);
+    };
+  }
+  function _possibleConstructorReturn2(self, call) {
+    if (call && (_typeof3(call) === "object" || typeof call === "function")) {
+      return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
+    }
+    return _assertThisInitialized2(self);
+  }
+  function _assertThisInitialized2(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return self;
+  }
+  function _isNativeReflectConstruct2() {
+    if (typeof Reflect === "undefined" || !Reflect.construct)
+      return false;
+    if (Reflect.construct.sham)
+      return false;
+    if (typeof Proxy === "function")
+      return true;
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+      }));
+      return true;
+    } catch (e2) {
+      return false;
+    }
+  }
+  function _getPrototypeOf2(o2) {
+    _getPrototypeOf2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf3(o3) {
+      return o3.__proto__ || Object.getPrototypeOf(o3);
+    };
+    return _getPrototypeOf2(o2);
+  }
+  function ownKeys13(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread13(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2] != null ? arguments[i2] : {};
+      i2 % 2 ? ownKeys13(Object(source), true).forEach(function(key) {
+        _defineProperty15(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys13(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _defineProperty15(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _objectWithoutProperties10(source, excluded) {
+    if (source == null)
+      return {};
+    var target = _objectWithoutPropertiesLoose11(source, excluded);
+    var key, i2;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+        key = sourceSymbolKeys[i2];
+        if (excluded.indexOf(key) >= 0)
+          continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key))
+          continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  function _objectWithoutPropertiesLoose11(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i2;
+    for (i2 = 0; i2 < sourceKeys.length; i2++) {
+      key = sourceKeys[i2];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  function _toConsumableArray3(arr) {
+    return _arrayWithoutHoles3(arr) || _iterableToArray3(arr) || _unsupportedIterableToArray3(arr) || _nonIterableSpread3();
+  }
+  function _nonIterableSpread3() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _unsupportedIterableToArray3(o2, minLen) {
+    if (!o2)
+      return;
+    if (typeof o2 === "string")
+      return _arrayLikeToArray3(o2, minLen);
+    var n2 = Object.prototype.toString.call(o2).slice(8, -1);
+    if (n2 === "Object" && o2.constructor)
+      n2 = o2.constructor.name;
+    if (n2 === "Map" || n2 === "Set")
+      return Array.from(o2);
+    if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2))
+      return _arrayLikeToArray3(o2, minLen);
+  }
+  function _iterableToArray3(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
+      return Array.from(iter);
+  }
+  function _arrayWithoutHoles3(arr) {
+    if (Array.isArray(arr))
+      return _arrayLikeToArray3(arr);
+  }
+  function _arrayLikeToArray3(arr, len) {
+    if (len == null || len > arr.length)
+      len = arr.length;
+    for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) {
+      arr2[i2] = arr[i2];
+    }
+    return arr2;
+  }
+  var defaultMinDate = new Date();
+  defaultMinDate.setFullYear(1, 0, 1);
+  defaultMinDate.setHours(0, 0, 0, 0);
+  var defaultMaxDate = new Date(864e13);
+  var baseClassName = "react-calendar";
+  var allViews2 = ["century", "decade", "year", "month"];
+  var allValueTypes = [].concat(_toConsumableArray3(allViews2.slice(1)), ["day"]);
+  function toDate(value) {
+    if (value instanceof Date) {
+      return value;
+    }
+    return new Date(value);
+  }
+  function getLimitedViews(minDetail, maxDetail) {
+    return allViews2.slice(allViews2.indexOf(minDetail), allViews2.indexOf(maxDetail) + 1);
+  }
+  function isViewAllowed(view, minDetail, maxDetail) {
+    var views = getLimitedViews(minDetail, maxDetail);
+    return views.indexOf(view) !== -1;
+  }
+  function getView(view, minDetail, maxDetail) {
+    if (isViewAllowed(view, minDetail, maxDetail)) {
+      return view;
+    }
+    return maxDetail;
+  }
+  function getValueType(maxDetail) {
+    return allValueTypes[allViews2.indexOf(maxDetail)];
+  }
+  function getValue2(value, index2) {
+    if (!value) {
+      return null;
+    }
+    var rawValue = Array.isArray(value) && value.length === 2 ? value[index2] : value;
+    if (!rawValue) {
+      return null;
+    }
+    var valueDate = toDate(rawValue);
+    if (isNaN(valueDate.getTime())) {
+      throw new Error("Invalid date: ".concat(value));
+    }
+    return valueDate;
+  }
+  function getDetailValue(_ref, index2) {
+    var value = _ref.value, minDate = _ref.minDate, maxDate = _ref.maxDate, maxDetail = _ref.maxDetail;
+    var valuePiece = getValue2(value, index2);
+    if (!valuePiece) {
+      return null;
+    }
+    var valueType = getValueType(maxDetail);
+    var detailValueFrom = [getBegin, getEnd][index2](valueType, valuePiece);
+    return between(detailValueFrom, minDate, maxDate);
+  }
+  var getDetailValueFrom = function getDetailValueFrom2(args) {
+    return getDetailValue(args, 0);
+  };
+  var getDetailValueTo = function getDetailValueTo2(args) {
+    return getDetailValue(args, 1);
+  };
+  var getDetailValueArray = function getDetailValueArray2(args) {
+    var value = args.value;
+    if (Array.isArray(value)) {
+      return value;
+    }
+    return [getDetailValueFrom, getDetailValueTo].map(function(fn) {
+      return fn(args);
+    });
+  };
+  function getActiveStartDate(props) {
+    var maxDate = props.maxDate, maxDetail = props.maxDetail, minDate = props.minDate, minDetail = props.minDetail, value = props.value, view = props.view;
+    var rangeType = getView(view, minDetail, maxDetail);
+    var valueFrom = getDetailValueFrom({
+      value,
+      minDate,
+      maxDate,
+      maxDetail
+    }) || new Date();
+    return getBegin(rangeType, valueFrom);
+  }
+  function getInitialActiveStartDate(props) {
+    var activeStartDate = props.activeStartDate, defaultActiveStartDate = props.defaultActiveStartDate, defaultValue = props.defaultValue, defaultView = props.defaultView, maxDetail = props.maxDetail, minDetail = props.minDetail, value = props.value, view = props.view, otherProps = _objectWithoutProperties10(props, _excluded12);
+    var rangeType = getView(view, minDetail, maxDetail);
+    var valueFrom = activeStartDate || defaultActiveStartDate;
+    if (valueFrom) {
+      return getBegin(rangeType, valueFrom);
+    }
+    return getActiveStartDate(_objectSpread13({
+      maxDetail,
+      minDetail,
+      value: value || defaultValue,
+      view: view || defaultView
+    }, otherProps));
+  }
+  var getIsSingleValue = function getIsSingleValue2(value) {
+    return value && [].concat(value).length === 1;
+  };
+  var Calendar = /* @__PURE__ */ function(_Component) {
+    _inherits2(Calendar2, _Component);
+    var _super = _createSuper2(Calendar2);
+    function Calendar2() {
+      var _this;
+      _classCallCheck2(this, Calendar2);
+      for (var _len = arguments.length, _args = new Array(_len), _key = 0; _key < _len; _key++) {
+        _args[_key] = arguments[_key];
+      }
+      _this = _super.call.apply(_super, [this].concat(_args));
+      _defineProperty15(_assertThisInitialized2(_this), "state", {
+        activeStartDate: _this.props.defaultActiveStartDate,
+        value: _this.props.defaultValue,
+        view: _this.props.defaultView
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "setStateAndCallCallbacks", function(nextState, event, callback) {
+        var _assertThisInitialize = _assertThisInitialized2(_this), previousActiveStartDate = _assertThisInitialize.activeStartDate, previousView = _assertThisInitialize.view;
+        var _this$props = _this.props, allowPartialRange = _this$props.allowPartialRange, onActiveStartDateChange = _this$props.onActiveStartDateChange, onChange = _this$props.onChange, onViewChange = _this$props.onViewChange, selectRange = _this$props.selectRange;
+        var prevArgs = {
+          activeStartDate: previousActiveStartDate,
+          view: previousView
+        };
+        _this.setState(nextState, function() {
+          var args = {
+            action: nextState.action,
+            activeStartDate: nextState.activeStartDate || _this.activeStartDate,
+            value: nextState.value || _this.value,
+            view: nextState.view || _this.view
+          };
+          function shouldUpdate(key) {
+            return key in nextState && (_typeof3(nextState[key]) !== _typeof3(prevArgs[key]) || (nextState[key] instanceof Date ? nextState[key].getTime() !== prevArgs[key].getTime() : nextState[key] !== prevArgs[key]));
+          }
+          if (shouldUpdate("activeStartDate")) {
+            if (onActiveStartDateChange)
+              onActiveStartDateChange(args);
+          }
+          if (shouldUpdate("view")) {
+            if (onViewChange)
+              onViewChange(args);
+          }
+          if (shouldUpdate("value")) {
+            if (onChange) {
+              if (selectRange) {
+                var isSingleValue = getIsSingleValue(nextState.value);
+                if (!isSingleValue) {
+                  onChange(nextState.value, event);
+                } else if (allowPartialRange) {
+                  onChange([nextState.value], event);
+                }
+              } else {
+                onChange(nextState.value, event);
+              }
+            }
+          }
+          if (callback)
+            callback(args);
+        });
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "setActiveStartDate", function(nextActiveStartDate, action) {
+        _this.setStateAndCallCallbacks({
+          action,
+          activeStartDate: nextActiveStartDate
+        });
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "drillDown", function(nextActiveStartDate, event) {
+        if (!_this.drillDownAvailable) {
+          return;
+        }
+        _this.onClickTile(nextActiveStartDate, event);
+        var _assertThisInitialize2 = _assertThisInitialized2(_this), view = _assertThisInitialize2.view, views = _assertThisInitialize2.views;
+        var onDrillDown = _this.props.onDrillDown;
+        var nextView = views[views.indexOf(view) + 1];
+        _this.setStateAndCallCallbacks({
+          action: "drillDown",
+          activeStartDate: nextActiveStartDate,
+          view: nextView
+        }, void 0, onDrillDown);
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "drillUp", function() {
+        if (!_this.drillUpAvailable) {
+          return;
+        }
+        var _assertThisInitialize3 = _assertThisInitialized2(_this), activeStartDate = _assertThisInitialize3.activeStartDate, view = _assertThisInitialize3.view, views = _assertThisInitialize3.views;
+        var onDrillUp = _this.props.onDrillUp;
+        var nextView = views[views.indexOf(view) - 1];
+        var nextActiveStartDate = getBegin(nextView, activeStartDate);
+        _this.setStateAndCallCallbacks({
+          action: "drillUp",
+          activeStartDate: nextActiveStartDate,
+          view: nextView
+        }, void 0, onDrillUp);
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "onChange", function(value, event) {
+        var selectRange = _this.props.selectRange;
+        _this.onClickTile(value, event);
+        var nextValue;
+        if (selectRange) {
+          var _assertThisInitialize4 = _assertThisInitialized2(_this), previousValue = _assertThisInitialize4.value, valueType = _assertThisInitialize4.valueType;
+          if (!getIsSingleValue(previousValue)) {
+            nextValue = getBegin(valueType, value);
+          } else {
+            nextValue = getValueRange(valueType, previousValue, value);
+          }
+        } else {
+          nextValue = _this.getProcessedValue(value);
+        }
+        var nextActiveStartDate = getActiveStartDate(_objectSpread13(_objectSpread13({}, _this.props), {}, {
+          value: nextValue
+        }));
+        event.persist();
+        _this.setStateAndCallCallbacks({
+          action: "onChange",
+          activeStartDate: nextActiveStartDate,
+          value: nextValue
+        }, event);
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "onClickTile", function(value, event) {
+        var _assertThisInitialize5 = _assertThisInitialized2(_this), view = _assertThisInitialize5.view;
+        var _this$props2 = _this.props, onClickDay = _this$props2.onClickDay, onClickDecade = _this$props2.onClickDecade, onClickMonth = _this$props2.onClickMonth, onClickYear = _this$props2.onClickYear;
+        var callback = function() {
+          switch (view) {
+            case "century":
+              return onClickDecade;
+            case "decade":
+              return onClickYear;
+            case "year":
+              return onClickMonth;
+            case "month":
+              return onClickDay;
+            default:
+              throw new Error("Invalid view: ".concat(view, "."));
+          }
+        }();
+        if (callback)
+          callback(value, event);
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "onMouseOver", function(value) {
+        _this.setState(function(prevState) {
+          if (prevState.hover && prevState.hover.getTime() === value.getTime()) {
+            return null;
+          }
+          return {
+            hover: value
+          };
+        });
+      });
+      _defineProperty15(_assertThisInitialized2(_this), "onMouseLeave", function() {
+        _this.setState({
+          hover: null
+        });
+      });
+      return _this;
+    }
+    _createClass2(Calendar2, [{
+      key: "activeStartDate",
+      get: function get() {
+        var activeStartDateProps = this.props.activeStartDate;
+        var activeStartDateState = this.state.activeStartDate;
+        return activeStartDateProps || activeStartDateState || getInitialActiveStartDate(this.props);
+      }
+    }, {
+      key: "value",
+      get: function get() {
+        var _this$props3 = this.props, selectRange = _this$props3.selectRange, valueProps = _this$props3.value;
+        var valueState = this.state.value;
+        if (selectRange && getIsSingleValue(valueState)) {
+          return valueState;
+        }
+        return valueProps !== void 0 ? valueProps : valueState;
+      }
+    }, {
+      key: "valueType",
+      get: function get() {
+        var maxDetail = this.props.maxDetail;
+        return getValueType(maxDetail);
+      }
+    }, {
+      key: "view",
+      get: function get() {
+        var _this$props4 = this.props, minDetail = _this$props4.minDetail, maxDetail = _this$props4.maxDetail, viewProps = _this$props4.view;
+        var viewState = this.state.view;
+        return getView(viewProps || viewState, minDetail, maxDetail);
+      }
+    }, {
+      key: "views",
+      get: function get() {
+        var _this$props5 = this.props, minDetail = _this$props5.minDetail, maxDetail = _this$props5.maxDetail;
+        return getLimitedViews(minDetail, maxDetail);
+      }
+    }, {
+      key: "hover",
+      get: function get() {
+        var selectRange = this.props.selectRange;
+        var hover = this.state.hover;
+        return selectRange ? hover : null;
+      }
+    }, {
+      key: "drillDownAvailable",
+      get: function get() {
+        var view = this.view, views = this.views;
+        return views.indexOf(view) < views.length - 1;
+      }
+    }, {
+      key: "drillUpAvailable",
+      get: function get() {
+        var view = this.view, views = this.views;
+        return views.indexOf(view) > 0;
+      }
+    }, {
+      key: "getProcessedValue",
+      value: function getProcessedValue(value) {
+        var _this$props6 = this.props, minDate = _this$props6.minDate, maxDate = _this$props6.maxDate, maxDetail = _this$props6.maxDetail, returnValue = _this$props6.returnValue;
+        var processFunction = function() {
+          switch (returnValue) {
+            case "start":
+              return getDetailValueFrom;
+            case "end":
+              return getDetailValueTo;
+            case "range":
+              return getDetailValueArray;
+            default:
+              throw new Error("Invalid returnValue.");
+          }
+        }();
+        return processFunction({
+          value,
+          minDate,
+          maxDate,
+          maxDetail
+        });
+      }
+    }, {
+      key: "renderContent",
+      value: function renderContent(next) {
+        var currentActiveStartDate = this.activeStartDate, onMouseOver = this.onMouseOver, valueType = this.valueType, value = this.value, view = this.view;
+        var _this$props7 = this.props, calendarType = _this$props7.calendarType, locale = _this$props7.locale, maxDate = _this$props7.maxDate, minDate = _this$props7.minDate, selectRange = _this$props7.selectRange, tileClassName = _this$props7.tileClassName, tileContent = _this$props7.tileContent, tileDisabled = _this$props7.tileDisabled;
+        var hover = this.hover;
+        var activeStartDate = next ? getBeginNext(view, currentActiveStartDate) : getBegin(view, currentActiveStartDate);
+        var onClick = this.drillDownAvailable ? this.drillDown : this.onChange;
+        var commonProps = {
+          activeStartDate,
+          hover,
+          locale,
+          maxDate,
+          minDate,
+          onClick,
+          onMouseOver: selectRange ? onMouseOver : null,
+          tileClassName,
+          tileContent,
+          tileDisabled,
+          value,
+          valueType
+        };
+        switch (view) {
+          case "century": {
+            var formatYear2 = this.props.formatYear;
+            return /* @__PURE__ */ import_react27.default.createElement(CenturyView, _extends15({
+              formatYear: formatYear2
+            }, commonProps));
+          }
+          case "decade": {
+            var _formatYear = this.props.formatYear;
+            return /* @__PURE__ */ import_react27.default.createElement(DecadeView, _extends15({
+              formatYear: _formatYear
+            }, commonProps));
+          }
+          case "year": {
+            var _this$props8 = this.props, formatMonth2 = _this$props8.formatMonth, formatMonthYear2 = _this$props8.formatMonthYear;
+            return /* @__PURE__ */ import_react27.default.createElement(YearView, _extends15({
+              formatMonth: formatMonth2,
+              formatMonthYear: formatMonthYear2
+            }, commonProps));
+          }
+          case "month": {
+            var _this$props9 = this.props, formatDay2 = _this$props9.formatDay, formatLongDate2 = _this$props9.formatLongDate, formatShortWeekday2 = _this$props9.formatShortWeekday, onClickWeekNumber = _this$props9.onClickWeekNumber, showDoubleView = _this$props9.showDoubleView, showFixedNumberOfWeeks = _this$props9.showFixedNumberOfWeeks, showNeighboringMonth = _this$props9.showNeighboringMonth, showWeekNumbers = _this$props9.showWeekNumbers;
+            var onMouseLeave = this.onMouseLeave;
+            return /* @__PURE__ */ import_react27.default.createElement(MonthView, _extends15({
+              calendarType,
+              formatDay: formatDay2,
+              formatLongDate: formatLongDate2,
+              formatShortWeekday: formatShortWeekday2,
+              onClickWeekNumber,
+              onMouseLeave: selectRange ? onMouseLeave : null,
+              showFixedNumberOfWeeks: typeof showFixedNumberOfWeeks !== "undefined" ? showFixedNumberOfWeeks : showDoubleView,
+              showNeighboringMonth,
+              showWeekNumbers
+            }, commonProps));
+          }
+          default:
+            throw new Error("Invalid view: ".concat(view, "."));
+        }
+      }
+    }, {
+      key: "renderNavigation",
+      value: function renderNavigation() {
+        var showNavigation = this.props.showNavigation;
+        if (!showNavigation) {
+          return null;
+        }
+        var activeStartDate = this.activeStartDate, view = this.view, views = this.views;
+        var _this$props10 = this.props, formatMonthYear2 = _this$props10.formatMonthYear, formatYear2 = _this$props10.formatYear, locale = _this$props10.locale, maxDate = _this$props10.maxDate, minDate = _this$props10.minDate, navigationAriaLabel = _this$props10.navigationAriaLabel, navigationAriaLive = _this$props10.navigationAriaLive, navigationLabel = _this$props10.navigationLabel, next2AriaLabel = _this$props10.next2AriaLabel, next2Label = _this$props10.next2Label, nextAriaLabel = _this$props10.nextAriaLabel, nextLabel = _this$props10.nextLabel, prev2AriaLabel = _this$props10.prev2AriaLabel, prev2Label = _this$props10.prev2Label, prevAriaLabel = _this$props10.prevAriaLabel, prevLabel = _this$props10.prevLabel, showDoubleView = _this$props10.showDoubleView;
+        return /* @__PURE__ */ import_react27.default.createElement(Navigation3, {
+          activeStartDate,
+          drillUp: this.drillUp,
+          formatMonthYear: formatMonthYear2,
+          formatYear: formatYear2,
+          locale,
+          maxDate,
+          minDate,
+          navigationAriaLabel,
+          navigationAriaLive,
+          navigationLabel,
+          next2AriaLabel,
+          next2Label,
+          nextAriaLabel,
+          nextLabel,
+          prev2AriaLabel,
+          prev2Label,
+          prevAriaLabel,
+          prevLabel,
+          setActiveStartDate: this.setActiveStartDate,
+          showDoubleView,
+          view,
+          views
+        });
+      }
+    }, {
+      key: "render",
+      value: function render2() {
+        var _this$props11 = this.props, className8 = _this$props11.className, inputRef = _this$props11.inputRef, selectRange = _this$props11.selectRange, showDoubleView = _this$props11.showDoubleView;
+        var onMouseLeave = this.onMouseLeave, value = this.value;
+        var valueArray = [].concat(value);
+        return /* @__PURE__ */ import_react27.default.createElement("div", {
+          className: mergeClassNames(baseClassName, selectRange && valueArray.length === 1 && "".concat(baseClassName, "--selectRange"), showDoubleView && "".concat(baseClassName, "--doubleView"), className8),
+          ref: inputRef
+        }, this.renderNavigation(), /* @__PURE__ */ import_react27.default.createElement("div", {
+          className: "".concat(baseClassName, "__viewContainer"),
+          onBlur: selectRange ? onMouseLeave : null,
+          onMouseLeave: selectRange ? onMouseLeave : null
+        }, this.renderContent(), showDoubleView && this.renderContent(true)));
+      }
+    }]);
+    return Calendar2;
+  }(import_react27.Component);
+  Calendar.defaultProps = {
+    maxDate: defaultMaxDate,
+    maxDetail: "month",
+    minDate: defaultMinDate,
+    minDetail: "century",
+    returnValue: "start",
+    showNavigation: true,
+    showNeighboringMonth: true
+  };
+  var isActiveStartDate = import_prop_types16.default.instanceOf(Date);
+  var isLooseValue = import_prop_types16.default.oneOfType([import_prop_types16.default.string, isValue]);
+  Calendar.propTypes = {
+    activeStartDate: isActiveStartDate,
+    allowPartialRange: import_prop_types16.default.bool,
+    calendarType: isCalendarType,
+    className: isClassName,
+    defaultActiveStartDate: isActiveStartDate,
+    defaultValue: isLooseValue,
+    defaultView: isView,
+    formatDay: import_prop_types16.default.func,
+    formatLongDate: import_prop_types16.default.func,
+    formatMonth: import_prop_types16.default.func,
+    formatMonthYear: import_prop_types16.default.func,
+    formatShortWeekday: import_prop_types16.default.func,
+    formatYear: import_prop_types16.default.func,
+    inputRef: isRef,
+    locale: import_prop_types16.default.string,
+    maxDate: isMaxDate,
+    maxDetail: import_prop_types16.default.oneOf(allViews2),
+    minDate: isMinDate,
+    minDetail: import_prop_types16.default.oneOf(allViews2),
+    navigationAriaLabel: import_prop_types16.default.string,
+    navigationAriaLive: import_prop_types16.default.oneOf(["off", "polite", "assertive"]),
+    navigationLabel: import_prop_types16.default.func,
+    next2AriaLabel: import_prop_types16.default.string,
+    next2Label: import_prop_types16.default.node,
+    nextAriaLabel: import_prop_types16.default.string,
+    nextLabel: import_prop_types16.default.node,
+    onActiveStartDateChange: import_prop_types16.default.func,
+    onChange: import_prop_types16.default.func,
+    onClickDay: import_prop_types16.default.func,
+    onClickDecade: import_prop_types16.default.func,
+    onClickMonth: import_prop_types16.default.func,
+    onClickWeekNumber: import_prop_types16.default.func,
+    onClickYear: import_prop_types16.default.func,
+    onDrillDown: import_prop_types16.default.func,
+    onDrillUp: import_prop_types16.default.func,
+    onViewChange: import_prop_types16.default.func,
+    prev2AriaLabel: import_prop_types16.default.string,
+    prev2Label: import_prop_types16.default.node,
+    prevAriaLabel: import_prop_types16.default.string,
+    prevLabel: import_prop_types16.default.node,
+    returnValue: import_prop_types16.default.oneOf(["start", "end", "range"]),
+    selectRange: import_prop_types16.default.bool,
+    showDoubleView: import_prop_types16.default.bool,
+    showFixedNumberOfWeeks: import_prop_types16.default.bool,
+    showNavigation: import_prop_types16.default.bool,
+    showNeighboringMonth: import_prop_types16.default.bool,
+    showWeekNumbers: import_prop_types16.default.bool,
+    tileClassName: import_prop_types16.default.oneOfType([import_prop_types16.default.func, isClassName]),
+    tileContent: import_prop_types16.default.oneOfType([import_prop_types16.default.func, import_prop_types16.default.node]),
+    tileDisabled: import_prop_types16.default.func,
+    value: isLooseValue,
+    view: isView
+  };
+
+  // node_modules/react-calendar/dist/esm/index.js
+  var esm_default2 = Calendar;
+
+  // src/components/ReservePage.tsx
+  var import_react28 = __toModule(require_react());
+  var Navigation4 = styled_components_browser_esm_default.nav`
+  padding: 19px 16px;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    background: none;
+    border: none;
+  }
+`;
+  var Wrapper = styled_components_browser_esm_default.div`
+  .react-calendar__month-view__weekdays__weekday {
+    margin-bottom: 8px;
+    text-align: center;
+
+    abbr {
+      text-decoration: none;
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+
+  .react-calendar__month-view__days__day {
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    background: white;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  
+  .react-calendar__tile--range, .react-calendar__tile--hover {
+    background-color: #ff5800;
+    background-clip: content-box;
+    color: white;
+  }
+
+  .react-calendar__tile--rangeStart {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+
+  .react-calendar__tile--hoverEnd {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+
+  .react-calendar__tile--hoverStart {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .react-calendar__tile--rangeEnd {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+`;
+  function formatDate2(date) {
+    if (!date) {
+      return "";
+    }
+    const toTwoDigits = (num) => num.toString().padStart(2, "0");
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}\uB144 ${toTwoDigits(month)}\uC6D4 ${toTwoDigits(day)}\uC77C`;
+  }
+  function differenceInDays(former, latter) {
+    if (former === null || latter === null) {
+      return 0;
+    }
+    return latter.getDate() - former.getDate();
+  }
+  function ReservePage() {
+    const [duration, setDuration] = (0, import_react28.useState)([
+      null,
+      null
+    ]);
+    const { product } = useProduct();
+    const navigate = useNavigate();
+    const handleClickGoBack = () => {
+      navigate(-1);
+    };
+    const handleClickHome = () => {
+      navigate("/");
+    };
+    const handleChange = (range) => {
+      setDuration(range);
+    };
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Navigation4, null, /* @__PURE__ */ React.createElement("button", {
       type: "button",
       onClick: handleClickGoBack
     }, /* @__PURE__ */ React.createElement("img", {
       src: LEFT_ARROW_ICON,
       alt: "goback"
-    })), /* @__PURE__ */ React.createElement(RightIcons, null, /* @__PURE__ */ React.createElement("button", {
+    })), /* @__PURE__ */ React.createElement("button", {
       type: "button",
       onClick: handleClickHome
     }, /* @__PURE__ */ React.createElement("img", {
       src: HOME_ICON_INACTIVE,
       alt: "home"
-    })), /* @__PURE__ */ React.createElement("img", {
-      src: UPLOAD_ICON,
-      alt: "upload"
-    }), /* @__PURE__ */ React.createElement("img", {
-      src: THREE_DOT_ICON,
-      alt: "three-dot"
-    })))), /* @__PURE__ */ React.createElement(Container4, null, /* @__PURE__ */ React.createElement(MainImage, {
-      src: images[0],
-      onClick: handleClickPopup
-    }), /* @__PURE__ */ React.createElement(TitleBlock, null, /* @__PURE__ */ React.createElement(Title4, null, name), /* @__PURE__ */ React.createElement(Likes, null, /* @__PURE__ */ React.createElement("img", {
-      src: HEART_INACTIVE,
-      alt: "heart"
-    }), /* @__PURE__ */ React.createElement("span", null, 50))), /* @__PURE__ */ React.createElement(SubBlock2, null, /* @__PURE__ */ React.createElement("p", {
-      className: "price-block"
-    }, /* @__PURE__ */ React.createElement("span", {
-      className: "deposit"
-    }, "\uBCF4\uC99D\uAE08", " ", deposit, "\uC6D0"), /* @__PURE__ */ React.createElement("span", null, "|"), /* @__PURE__ */ React.createElement("span", {
-      className: "price"
-    }, price, "\uC6D0/\uC77C")), /* @__PURE__ */ React.createElement(Tags, null, tags.map((tag) => /* @__PURE__ */ React.createElement("span", {
-      key: tag
-    }, tag)))), /* @__PURE__ */ React.createElement(Description, null, description), /* @__PURE__ */ React.createElement(FloatButtonContainer, null, /* @__PURE__ */ React.createElement("button", {
+    }))), /* @__PURE__ */ React.createElement("h1", null, product.name), /* @__PURE__ */ React.createElement("p", null, "\uC0AC\uC6A9\uC790 101"), /* @__PURE__ */ React.createElement(Wrapper, null, /* @__PURE__ */ React.createElement(esm_default2, {
+      showNeighboringMonth: false,
+      returnValue: "range",
+      onChange: handleChange,
+      formatDay: (locale, date) => date.getDate().toString(),
+      selectRange: true
+    })), /* @__PURE__ */ React.createElement("p", null, "\uC2DC\uC791\uC77C", " ", formatDate2(duration[0])), /* @__PURE__ */ React.createElement("p", null, "\uBC18\uB0A9\uC77C", " ", formatDate2(duration[1])), /* @__PURE__ */ React.createElement("h2", null, "\uBE4C\uB9AC\uC5B4 \uAE30\uAC04"), /* @__PURE__ */ React.createElement("p", null, differenceInDays(duration[0], duration[1]), "\uC77C"), /* @__PURE__ */ React.createElement("p", null, "\uC2DC\uC791\uC77C:", formatDate2(duration[0])), /* @__PURE__ */ React.createElement("p", null, "\uC885\uB8CC\uC77C:", formatDate2(duration[1])), /* @__PURE__ */ React.createElement("p", null, "\uC608\uC0C1\uAE08\uC561:", product.price * differenceInDays(duration[0], duration[1]), "\uC6D0"), /* @__PURE__ */ React.createElement("button", {
       type: "button"
-    }, "\uBE4C\uB9AC\uC5B4 \uD558\uAE30"))), /* @__PURE__ */ React.createElement(Shade, {
-      active: popupOpen,
-      onClick: handleClickClosePopup
-    }, /* @__PURE__ */ React.createElement("img", {
-      src: product.images[0],
-      alt: "shade"
-    })));
+    }, "\uC608\uC57D\uD558\uAE30"));
   }
 
   // src/components/Main.tsx
@@ -30047,6 +33872,9 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     }, /* @__PURE__ */ React.createElement(Routes, null, /* @__PURE__ */ React.createElement(Route, {
       path: "/",
       element: /* @__PURE__ */ React.createElement(ProductListPage, null)
+    }), /* @__PURE__ */ React.createElement(Route, {
+      path: "/:id/reserve",
+      element: /* @__PURE__ */ React.createElement(ReservePage, null)
     }), /* @__PURE__ */ React.createElement(Route, {
       path: "/:id",
       element: /* @__PURE__ */ React.createElement(ProductItemPage, null)
