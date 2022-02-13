@@ -33868,7 +33868,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
 `;
   function Main() {
     return /* @__PURE__ */ React.createElement(Layout, null, /* @__PURE__ */ React.createElement(BrowserRouter, {
-      basename: "/villiar-front"
+      basename: "/"
     }, /* @__PURE__ */ React.createElement(Routes, null, /* @__PURE__ */ React.createElement(Route, {
       path: "/",
       element: /* @__PURE__ */ React.createElement(ProductListPage, null)
